@@ -21,7 +21,8 @@ Contributions, bug reports, and feature requests are all welcome.
 
 If you're new to open source, look for issues tagged [`good first issue`](https://github.com/Narezzurri/OpenVPN-Config-Helper/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22) 
 
-# Legal Disclaimer
-This tool is designed for educational and administrative purposes only. It is intended to help users manage OpenVPN configurations they are legally authorized to use.
+# Legal Statement
+
+This tool is designed for educational and administrative purposes only. It is intended to help users manage OpenVPN configurations they are legally authorized to use.We guarantee that we will not steal any information from the configuration files.
 
 Users are solely responsible for ensuring their use of this software and any associated VPN services complies with all applicable local laws and regulations. The author assumes no liability for any misuse of this tool.
