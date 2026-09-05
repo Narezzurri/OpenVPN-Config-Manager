@@ -74,6 +74,7 @@ add_custom_target (
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 	COMMAND ${CMAKE_COMMAND} -E echo "Building NSIS installer..."
 	COMMAND makensis "${CMAKE_BINARY_DIR}/Setup.nsi"
+	VERBATIM 
 )
 
 # install (

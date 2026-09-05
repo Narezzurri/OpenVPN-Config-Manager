@@ -1,7 +1,9 @@
 ﻿!define NAME "OpenVPN Config Manager"
 !define UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}"
 
+!addincludedir "@CMAKE_SOURCE_DIR@"
 !include "MUI2.nsh"
+!include "lib.nsh"
 
 Name "${NAME}"
 OutFile "OpenVPNConfigManagerSetup-@PROJECT_VERSION@.exe"
@@ -52,7 +54,10 @@ CreateDirectory "$SMPROGRAMS\${NAME}"
 CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Checker.lnk" $INSTDIR\Checker.exe
 CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Authenticator.lnk" $INSTDIR\Auth.exe
 CreateShortCut "$SMPROGRAMS\${NAME}\Uninstall.lnk" $INSTDIR\Uninstall.exe
-; Register in the Control Panel
+; Add to PATH
+Push "$INSTDIR"
+Call AddToPath
+; Uninstall information
 SetRegView 32
 WriteRegStr "HKLM" "${UNINST_KEY}" "DisplayName" "${NAME}"
 WriteRegStr "HKLM" "${UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
@@ -62,10 +67,14 @@ WriteRegStr "HKLM" "${UNINST_KEY}" "HelpLink" "https://github.com/Narezzurri/Ope
 SectionEnd
 
 Section "uninstall"
-; Program files
+; Program files & Sample files
 RMDir /r "$INSTDIR"
+; Start Menu
 RMDir /r "$SMPROGRAMS\${NAME}"
-; Regedit
+; Add to PATH
+Push "$INSTDIR"
+Call un.RemoveFromPath
+; Uninstall information
 SetRegView 32
 DeleteRegKey "HKLM" "${UNINST_KEY}"
 SectionEnd
