@@ -1,3 +1,7 @@
+/**
+ * OpenVPN Config Manager - Authenticator utility
+ * Copyright (c) 2026 Narezzurri - MIT License
+*/
 #include	<iostream>
 #include	<fstream>
 #include	<sstream>

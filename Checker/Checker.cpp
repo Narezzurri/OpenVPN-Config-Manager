@@ -1,3 +1,7 @@
+/**
+ * OpenVPN Config Manager - Checker utility
+ * Copyright (c) 2026 Narezzurri - MIT License
+*/
 #include	"resource.h"
 #include	<windows.h>
 #include	<iostream>
