@@ -23,6 +23,10 @@ If you're new to open source, look for issues tagged [`good first issue`](https:
 
 # Legal Statement
 
-This tool is designed for educational and administrative purposes only. It is intended to help users manage OpenVPN configurations they are legally authorized to use.We guarantee that we will not steal any information from the configuration files.
+This tool is designed for educational and administrative purposes only. It is intended to help users manage OpenVPN configurations they are legally authorized to use.We guarantee that we will not collect,transmit or upload any information from the configuration files to any remote server.
 
 Users are solely responsible for ensuring their use of this software and any associated VPN services complies with all applicable local laws and regulations. The author assumes no liability for any misuse of this tool.
+
+#### Third-Party Components
+
+- **inih** - an `.ini` file parser by Ben Hoyt,used under the terms of the **BSD 3-Clause License**.

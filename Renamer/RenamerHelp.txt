@@ -5,14 +5,7 @@ Function
 	Rename files in bulk under configured rules.
 
 Usage 
-	Renamer [config.ini] file1 file2 ... 
+	Renamer [file1 file2 ...] config.ini file3 file4 ... 
+	Ps: Only the first .ini file will be loaded as a config.
 
 Grammar 
-
-One section supported : [Replace]
-Rules :
-	pattern = target
-Function :
-	Replace every matched pattern with target.
-Ps :
-	Replaced patterns will be totally skipped,so borders are accepted.

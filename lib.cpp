@@ -62,7 +62,7 @@ vector<string> Search (string filename, vector<string> &ans)
 
 int HelpDetected (int argc, const char* argv[])
 {
-	if (argc == 1)
+	if (argc <= 1)
 		return 1;
 	for (int i = 1; i < argc; i++)
 	{

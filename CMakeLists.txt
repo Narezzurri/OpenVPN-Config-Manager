@@ -1,19 +1,22 @@
 cmake_minimum_required (VERSION 3.12)
 
 # Component list
-set (EXES CHECKER AUTH)
-set (APPLIST "OCM.Checker;OCM.Auth")
-set (SETUP_DEPEND ${CMAKE_BINARY_DIR}/Setup.nsi Checker Auth)
+set (EXES CHECKER AUTH RENAMER)
+set (APPLIST "OCM.Checker;OCM.Auth;OCM.Renamer")
+set (SETUP_DEPEND ${CMAKE_BINARY_DIR}/Setup.nsi Checker Auth Renamer)
 # Target name
 set (CHECKER_NAME "Checker")
 set (AUTH_NAME "Auth")
+set (RENAMER_NAME "Renamer")
 # Full name
 set (CHECKER_DIR "Checker")
 set (AUTH_DIR "Authenticator")
+set (RENAMER_DIR "Renamer")
 # Version
 set (VERSION "2.2.0")
 set (CHECKER_VER "1.3.0")
 set (AUTH_VER "1.0.0")
+set (RENAMER_VER "1.0.0")
 # C++ version
 set (CMAKE_CXX_STANDARD 23)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -44,11 +47,13 @@ foreach (EXE ${EXES})
 	set (APP_NAME "${OBJ}")
 	set (APP_FULLNAME "${${EXE}_DIR}")
 	split ("${${EXE}_VER}" APP_VERSION_MAJOR APP_VERSION_MINOR APP_VERSION_PATCH)
-	configure_file (resource.rc.in "${CMAKE_CURRENT_BINARY_DIR}/${OBJ}/resource.rc" @ONLY)
+	configure_file (${CMAKE_CURRENT_SOURCE_DIR}/resource.rc.in "${CMAKE_CURRENT_BINARY_DIR}/${OBJ}/resource.rc" @ONLY)
 	target_sources ("${OBJ}" PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/${OBJ}/resource.rc")
 	# library
 	target_link_libraries ("${OBJ}" lib)
 endforeach ()
+target_sources ("Renamer" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Renamer/ini.c")
+target_sources ("Renamer" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Renamer/cpp/INIReader.cpp")
 
 # Test
 
