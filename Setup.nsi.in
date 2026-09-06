@@ -13,9 +13,9 @@ OutFile "OpenVPNConfigManagerSetup-@PROJECT_VERSION@.exe"
 InstallDir "$PROGRAMFILES32\${NAME}" 
 RequestExecutionLevel "admin"
 
-; Installer Page
 !define MUI_ICON "@CMAKE_CURRENT_SOURCE_DIR@/resource/InstallerLight.ico"
 !define MUI_UNICON "@CMAKE_CURRENT_SOURCE_DIR@/resource/UninstallerLight.ico"
+; Installer Page
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "@CMAKE_CURRENT_SOURCE_DIR@/LICENSE"
 !insertmacro MUI_PAGE_DIRECTORY
@@ -23,7 +23,6 @@ ShowInstDetails show
 !insertmacro MUI_PAGE_INSTFILES
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !insertmacro MUI_PAGE_FINISH
-
 ; Uninstaller Page
 !insertmacro MUI_UNPAGE_WELCOME
 !define MUI_UNCONFIRMPAGE_TEXT_TOP "This wizard will completely uninstall ${NAME} and all of its components from this computer."
@@ -39,61 +38,61 @@ ShowUnInstDetails show
 !insertmacro MUI_LANGUAGE "English"
 
 Section "install"
-; Program files
-SetOutPath "$INSTDIR"
-File "Checker.exe"
-File "Auth.exe"
-File "@CMAKE_CURRENT_SOURCE_DIR@\LICENSE"
-File "@CMAKE_CURRENT_SOURCE_DIR@\NOTICE"
-WriteUninstaller "Uninstall.exe"
-; Sample files
-SetOutPath "$INSTDIR\Samples"
-File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample1.ovpn"
-File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample2.ovpn"
-File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample3.ovpn"
-File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample4.ovpn"
-; Start Menu
-CreateDirectory "$SMPROGRAMS\${NAME}"
-CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Checker.lnk" $INSTDIR\Checker.exe
-CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Authenticator.lnk" $INSTDIR\Auth.exe
-CreateShortCut "$SMPROGRAMS\${NAME}\Uninstall.lnk" $INSTDIR\Uninstall.exe
-; Add to PATH
-Push "$INSTDIR"
-Call AddToPath
-; Add to right-click menu
-SetRegView 64
-WriteRegStr "HKCR" "${DIRMENU_KEY}" "MUIVerb" "OpenVPN Config Manager"
-WriteRegStr "HKCR" "${DIRMENU_KEY}" "SubCommands" "@APPLIST@"
-!macro Register APP APP_NAME
-	WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}" "" "${APP_NAME}"
-	WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}" "Icon" "$INSTDIR\${APP}.exe"
-	WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}\command" "" "$INSTDIR\${APP}.exe %V\*.ovpn"
-!macroend
-!insertmacro Register "Checker" "Checker"
-!insertmacro Register "Auth" "Authenticator"
-; Uninstall information
-SetRegView 64
-WriteRegStr "HKLM" "${UNINST_KEY}" "DisplayName" "${NAME}"
-WriteRegStr "HKLM" "${UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
-WriteRegStr "HKLM" "${UNINST_KEY}" "DisplayVersion" "@PROJECT_VERSION@"
-WriteRegStr "HKLM" "${UNINST_KEY}" "Publisher" "Narezzurri"
-WriteRegStr "HKLM" "${UNINST_KEY}" "HelpLink" "https://github.com/Narezzurri/OpenVPN-Config-Manager"
+	; Program files
+	SetOutPath "$INSTDIR"
+	File "Checker.exe"
+	File "Auth.exe"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\LICENSE"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\NOTICE"
+	WriteUninstaller "Uninstall.exe"
+	; Sample files
+	SetOutPath "$INSTDIR\Samples"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample1.ovpn"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample2.ovpn"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample3.ovpn"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample4.ovpn"
+	; Start Menu
+	CreateDirectory "$SMPROGRAMS\${NAME}"
+	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Checker.lnk" "$INSTDIR\Checker.exe"
+	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Authenticator.lnk" "$INSTDIR\Auth.exe"
+	CreateShortCut "$SMPROGRAMS\${NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+	; Add to PATH
+	Push "$INSTDIR"
+	Call AddToPath
+	; Add to right-click menu for directories
+	SetRegView 64
+	WriteRegStr "HKCR" "${DIRMENU_KEY}" "MUIVerb" "OpenVPN Config Manager"
+	WriteRegStr "HKCR" "${DIRMENU_KEY}" "SubCommands" "@APPLIST@"
+	!macro Register APP APP_NAME
+		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}" "" "${APP_NAME}"
+		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}" "Icon" "$INSTDIR\${APP}.exe"
+		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}\command" "" "$INSTDIR\${APP}.exe %V\*.ovpn"
+	!macroend
+	!insertmacro Register "Checker" "Checker"
+	!insertmacro Register "Auth" "Authenticator"
+	; Uninstall information
+	SetRegView 64
+	WriteRegStr "HKLM" "${UNINST_KEY}" "DisplayName" "${NAME}"
+	WriteRegStr "HKLM" "${UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
+	WriteRegStr "HKLM" "${UNINST_KEY}" "DisplayVersion" "@PROJECT_VERSION@"
+	WriteRegStr "HKLM" "${UNINST_KEY}" "Publisher" "Narezzurri"
+	WriteRegStr "HKLM" "${UNINST_KEY}" "HelpLink" "https://github.com/Narezzurri/OpenVPN-Config-Manager"
 SectionEnd
 
 Section "uninstall"
-; Program files & Sample files
-RMDir /r "$INSTDIR"
-; Start Menu
-RMDir /r "$SMPROGRAMS\${NAME}"
-; Remove from PATH
-Push "$INSTDIR"
-Call un.RemoveFromPath
-; Remove from right-click menu
-SetRegView 64
-DeleteRegKey HKCR "${DIRMENU_KEY}"
-DeleteRegKey HKLM "${CMDMENU_KEY}\OCM.Checker"
-DeleteRegKey HKLM "${CMDMENU_KEY}\OCM.Auth"
-; Uninstall information
-SetRegView 64
-DeleteRegKey "HKLM" "${UNINST_KEY}"
+	; Program files & Sample files
+	RMDir /r "$INSTDIR"
+	; Start Menu
+	RMDir /r "$SMPROGRAMS\${NAME}"
+	; Remove from PATH
+	Push "$INSTDIR"
+	Call un.RemoveFromPath
+	; Remove from right-click menu for directories
+	SetRegView 64
+	DeleteRegKey HKCR "${DIRMENU_KEY}"
+	DeleteRegKey HKLM "${CMDMENU_KEY}\OCM.Checker"
+	DeleteRegKey HKLM "${CMDMENU_KEY}\OCM.Auth"
+	; Uninstall information
+	SetRegView 64
+	DeleteRegKey "HKLM" "${UNINST_KEY}"
 SectionEnd

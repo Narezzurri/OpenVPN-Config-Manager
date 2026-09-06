@@ -1,5 +1,9 @@
+cmake_minimum_required (VERSION 3.12)
+
+# Component list
 set (EXES CHECKER AUTH)
 set (APPLIST "OCM.Checker;OCM.Auth")
+set (SETUP_DEPEND ${CMAKE_BINARY_DIR}/Setup.nsi Checker Auth)
 # Target name
 set (CHECKER_NAME "Checker")
 set (AUTH_NAME "Auth")
@@ -7,13 +11,14 @@ set (AUTH_NAME "Auth")
 set (CHECKER_DIR "Checker")
 set (AUTH_DIR "Authenticator")
 # Version
-set (VERSION "2.1.0")
+set (VERSION "2.2.0")
 set (CHECKER_VER "1.3.0")
 set (AUTH_VER "1.0.0")
 # C++ version
 set (CMAKE_CXX_STANDARD 23)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Functions
 function (split VERSION MAJOR MINOR PATCH)
 	string (REPLACE "." ";" VERSION "${VERSION}")
 	list (GET VERSION 0 major)
@@ -24,11 +29,11 @@ function (split VERSION MAJOR MINOR PATCH)
 	set (${PATCH} ${patch} PARENT_SCOPE)
 endfunction ()
 
-cmake_minimum_required (VERSION 3.12)
 project (OpenVPN-Config-Manager VERSION "${VERSION}" LANGUAGES CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
 
-include_directories (.)
+# Construction
 
+include_directories (.)
 add_library (lib STATIC lib.cpp)
 
 foreach (EXE ${EXES})
@@ -71,11 +76,11 @@ configure_file ("Setup.nsi.in" "Setup.nsi" @ONLY)
 add_custom_target (
 	build
 	COMMENT "Creating NSIS installer"
-	DEPENDS ${CMAKE_BINARY_DIR}/Setup.nsi Checker Authenticator
+	DEPENDS ${SETUP_DEPEND}
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-	COMMAND ${CMAKE_COMMAND} -E echo "Building NSIS installer..."
+	COMMAND ${CMAKE_COMMAND} -E echo "Start Building NSIS installer..."
 	COMMAND makensis "${CMAKE_BINARY_DIR}/Setup.nsi"
-	VERBATIM 
+	COMMAND ${CMAKE_COMMAND} -E echo "Done."
 )
 
 # install (
