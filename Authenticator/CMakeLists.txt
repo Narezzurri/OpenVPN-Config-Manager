@@ -1,13 +1,13 @@
 cmake_minimum_required (VERSION 3.12)
 
-set (DIR "Authenticator")
 set (NAME "Auth")
-set (VERSION "1.1.0")
+set (VERSION "1.0.0")
+set (DIR "Authenticator")
 # C++ version
 set (CMAKE_CXX_STANDARD 23)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project (OpenVPN-Config-Authenticator VERSION "${VERSION}" LANGUAGES CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
+project (OpenVPN-Config-${DIR} VERSION "${VERSION}" LANGUAGES CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
 
 # Build
 

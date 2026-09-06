@@ -24,7 +24,7 @@ int main (int argc, const char* argv[])
 	if (HelpDetected (argc, argv))
 	{
 		cout << endl << string {
-			#embed	"CheckerHelp.txt"
+			#embed	"Help.txt"
 		} << endl;
 #ifndef		DEBUG
 		getchar ();

@@ -1,16 +1,17 @@
 cmake_minimum_required (VERSION 3.12)
 
-set (VERSION "2.2.0")
 # Target list
+set (SUBDIR Checker Authenticator)
 set (APPLIST "OCM.Checker;OCM.Auth")
 set (SETUP_DEPEND ${CMAKE_BINARY_DIR}/Setup.nsi Checker Auth)
-# C++ version
+# Version
+set (VERSION "2.2.0")
 set (CMAKE_CXX_STANDARD 23)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project (OpenVPN-Config-Manager VERSION "${VERSION}" LANGUAGES CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
 
-# Test
+# Debug
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	enable_testing ()
@@ -27,8 +28,9 @@ configure_file ("resource.rc.in.in" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc.in"
 
 # Targets
 
-add_subdirectory ("Checker")
-add_subdirectory ("Authenticator")
+foreach (DIR ${SUBDIR})
+	add_subdirectory ("${DIR}")
+endforeach ()
 
 # Install package
 
