@@ -21,12 +21,14 @@ endif ()
 
 # Dependances
 
-include_directories (.)
-add_library ("lib" STATIC "lib.cpp")
 set (AT "@")
 configure_file ("resource.rc.in.in" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc.in" @ONLY)
 
 # Targets
+
+include_directories (".")
+
+add_subdirectory ("lib")
 
 foreach (DIR ${SUBDIR})
 	add_subdirectory ("${DIR}")
