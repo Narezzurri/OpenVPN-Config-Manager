@@ -1,11 +1,11 @@
 #include	"resource.h"
 #include	<windows.h>
 
-LIGHTICON	ICON	"../resource/@APP_NAME@Light.ico"
-DARKICON	ICON	"../resource/@APP_NAME@Dark.ico"
+LIGHTICON	ICON	"@CMAKE_CURRENT_SOURCE_DIR@/resource/@AT@NAME@AT@Light.ico"
+DARKICON	ICON	"@CMAKE_CURRENT_SOURCE_DIR@/resource/@AT@NAME@AT@Dark.ico"
 
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION		@APP_VERSION_MAJOR@,@APP_VERSION_MINOR@,@APP_VERSION_PATCH@,0
+FILEVERSION		@AT@PROJECT_VERSION_MAJOR@AT@,@AT@PROJECT_VERSION_MINOR@AT@,@AT@PROJECT_VERSION_PATCH@AT@,0
 PRODUCTVERSION	@PROJECT_VERSION_MAJOR@,@PROJECT_VERSION_MINOR@,@PROJECT_VERSION_PATCH@,0
 FILEOS			VOS_NT_WINDOWS32
 FILETYPE		VFT_APP
@@ -16,14 +16,14 @@ FILETYPE		VFT_APP
 		{
 			VALUE	"Comments",			""
 			VALUE	"CompanyName",		"Narezzurri"
-			VALUE	"FileDescription",	"OpenVPN Config @APP_FULLNAME@"
-			VALUE	"FileVersion",		"@APP_VERSION_MAJOR@.@APP_VERSION_MINOR@.@APP_VERSION_PATCH@"
-			VALUE	"InternalName",		"@APP_NAME@"
+			VALUE	"FileDescription",	"OpenVPN Config @AT@DIR@AT@"
+			VALUE	"FileVersion",		"@AT@PROJECT_VERSION_MAJOR@AT@.@AT@PROJECT_VERSION_MINOR@AT@.@AT@PROJECT_VERSION_PATCH@AT@"
+			VALUE	"InternalName",		"@AT@PROJECT_NAME@AT@"
 			VALUE	"LegalCopyright",	"Copyright (C) 2026 Narezzurri. All rights reserved."
 			VALUE	"LegalTrademarks",	""
-			VALUE	"OriginalFilename",	"@OUTPUT_NAME@"
+			VALUE	"OriginalFilename",	"@AT@NAME@AT@"
 			VALUE	"ProductName",		"OpenVPN Config Manager"
-			VALUE	"ProductVersion",	"@PROJECT_VERSION@"
+			VALUE	"ProductVersion",	"@AT@PROJECT_VERSION@AT@"
 		}
 	}
 	BLOCK "VarFileInfo"
