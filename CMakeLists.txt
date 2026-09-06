@@ -60,14 +60,14 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	add_test (NAME Checker_Help1 COMMAND Checker --help)
 	add_test (NAME Checker_Help2 COMMAND Checker /help)
 	add_test (NAME Checker_Help3 COMMAND Checker /?)
-	add_test (NAME Checker_Function COMMAND Checker Samples/Sample1.ovpn Samples/Sample2.ovpn Samples/Sample3.ovpn Samples/Sample4.ovpn /w 0.8 /t 2 1 /n 2)
-	add_test (NAME Checker_Wildcard COMMAND Checker Samples/*.ovpn /w 0.8 /t 2 1 /n 2)
+	add_test (NAME Checker_Function COMMAND Checker Templates/Template1.ovpn Templates/Template2.ovpn Templates/Template3.ovpn Templates/Template4.ovpn /w 0.8 /t 2 1 /n 2)
+	add_test (NAME Checker_Wildcard COMMAND Checker Templates/*.ovpn /w 0.8 /t 2 1 /n 2)
 	# Authenticator
 	add_test (NAME Auth_Help1 COMMAND Auth --help)
 	add_test (NAME Auth_Help2 COMMAND Auth /help)
 	add_test (NAME Auth_Help3 COMMAND Auth /?)
-	add_test (NAME Auth_Function COMMAND Auth Samples/Sample1.ovpn Samples/Sample2.ovpn Samples/Sample3.ovpn Samples/Sample4.ovpn)
-	add_test (NAME Auth_Wildcard COMMAND Auth Samples/*.ovpn)
+	add_test (NAME Auth_Function COMMAND Auth Templates/Template1.ovpn Templates/Template2.ovpn Templates/Template3.ovpn Templates/Template4.ovpn)
+	add_test (NAME Auth_Wildcard COMMAND Auth Templates/*.ovpn)
 endif ()
 
 # Install package

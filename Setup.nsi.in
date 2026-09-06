@@ -45,12 +45,12 @@ Section "install"
 	File "@CMAKE_CURRENT_SOURCE_DIR@\LICENSE"
 	File "@CMAKE_CURRENT_SOURCE_DIR@\NOTICE"
 	WriteUninstaller "Uninstall.exe"
-	; Sample files
-	SetOutPath "$INSTDIR\Samples"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample1.ovpn"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample2.ovpn"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample3.ovpn"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample4.ovpn"
+	; Template files
+	SetOutPath "$INSTDIR\Templates"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\Templates\Template1.ovpn"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\Templates\Template2.ovpn"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\Templates\Template3.ovpn"
+	File "@CMAKE_CURRENT_SOURCE_DIR@\Templates\Template4.ovpn"
 	; Start Menu
 	CreateDirectory "$SMPROGRAMS\${NAME}"
 	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Checker.lnk" "$INSTDIR\Checker.exe"
@@ -80,7 +80,7 @@ Section "install"
 SectionEnd
 
 Section "uninstall"
-	; Program files & Sample files
+	; Program files & Template files
 	RMDir /r "$INSTDIR"
 	; Start Menu
 	RMDir /r "$SMPROGRAMS\${NAME}"

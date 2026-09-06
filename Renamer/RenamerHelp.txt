@@ -1,0 +1,18 @@
+OpenVPN Config Checker v1.0.0 (c) 2026 Narezzurri - MIT Licence 
+Repository: https://github.com/Narezzurri/OpenVPN-Config-Helper 
+
+Function 
+	Rename files in bulk under configured rules.
+
+Usage 
+	Renamer [config.ini] file1 file2 ... 
+
+Grammar 
+
+One section supported : [Replace]
+Rules :
+	pattern = target
+Function :
+	Replace every matched pattern with target.
+Ps :
+	Replaced patterns will be totally skipped,so borders are accepted.
