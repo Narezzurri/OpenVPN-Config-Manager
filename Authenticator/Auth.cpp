@@ -1,3 +1,7 @@
+/**
+ * OpenVPN Config Manager - Authenticator utility
+ * Copyright (c) 2026 Narezzurri - MIT License
+*/
 #include	<iostream>
 #include	<fstream>
 #include	<sstream>
@@ -14,7 +18,7 @@ int main (int argc, const char* argv[])
 	if (HelpDetected (argc, argv))
 	{
 		cout << endl << string {
-			#embed	"AuthHelp.txt"
+			#embed	"Help.txt"
 		} << endl;
 #ifndef		DEBUG
 		getchar ();

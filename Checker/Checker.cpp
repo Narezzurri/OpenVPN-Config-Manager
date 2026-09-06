@@ -1,3 +1,7 @@
+/**
+ * OpenVPN Config Manager - Checker utility
+ * Copyright (c) 2026 Narezzurri - MIT License
+*/
 #include	"resource.h"
 #include	<windows.h>
 #include	<iostream>
@@ -20,7 +24,7 @@ int main (int argc, const char* argv[])
 	if (HelpDetected (argc, argv))
 	{
 		cout << endl << string {
-			#embed	"CheckerHelp.txt"
+			#embed	"Help.txt"
 		} << endl;
 #ifndef		DEBUG
 		getchar ();
