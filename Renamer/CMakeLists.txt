@@ -16,7 +16,7 @@ add_library ("ini" STATIC "ini.c" "cpp/INIReader.cpp")
 configure_file ("${CMAKE_BINARY_DIR}/resource.rc.in" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc" @ONLY)
 add_executable ("${NAME}" "${NAME}.cpp" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc")
 set_target_properties ("${NAME}" PROPERTIES VERSION "${VERSION}")
-target_link_libraries ("${NAME}" PRIVATE "lib")
+target_link_libraries ("${NAME}" PRIVATE "lib" "ini")
 
 # Test
 
