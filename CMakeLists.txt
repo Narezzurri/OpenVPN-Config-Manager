@@ -48,7 +48,7 @@ add_custom_command (
 
 add_custom_target (
 	build
-	DEPENDS ${SETUP_DEPEND}
+	DEPENDS OpenVPNConfigManagerSetup-${VERSION}.exe
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 	COMMENT "Creating NSIS installer"
 )
