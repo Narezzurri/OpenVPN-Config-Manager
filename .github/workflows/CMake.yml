@@ -35,6 +35,7 @@ jobs:
       run: make -C build build
       
     - name: Install OCM
+      working-directory: build
       run: |
         $path = Get-ChildItem -Filter "OpenVPNConfigManagerSetup-*.exe" | Select-Object -First 1
         if (-not $path)
