@@ -38,12 +38,25 @@ endforeach ()
 # Install package
 
 configure_file ("Setup.nsi.in" "Setup.nsi" @ONLY)
-add_custom_target (
-	build
-	COMMENT "Creating NSIS installer"
+add_custom_command (
+	OUTPUT OpenVPNConfigManagerSetup-${VERSION}.exe
 	DEPENDS ${SETUP_DEPEND}
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-	COMMAND ${CMAKE_COMMAND} -E echo "Start Building NSIS installer..."
+	COMMENT "Generating NSIS installer"
 	COMMAND makensis "${CMAKE_BINARY_DIR}/Setup.nsi"
-	COMMAND ${CMAKE_COMMAND} -E echo "Done."
+)
+
+add_custom_target (
+	build
+	DEPENDS ${SETUP_DEPEND}
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+	COMMENT "Creating NSIS installer"
+)
+
+add_custom_target (
+	deploy
+	DEPENDS OpenVPNConfigManagerSetup-${VERSION}.exe
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+	COMMENT "Deploying ${PROJECT_NAME}"
+	COMMAND ./OpenVPNConfigManagerSetup-${VERSION}.exe /S
 )
