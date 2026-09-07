@@ -3,6 +3,7 @@ name: CMake
 on:
   push:
     branch:
+      - main
   release:
     types: [ published,edited ]
   pull_request:
@@ -48,9 +49,7 @@ jobs:
           Write-Error "Package not found."
           exit 1
         }
-        echo $setup
-        $setup.FullName "/S"
-        # Start-Process -FilePath $setup.FullName -ArgumentList "/S" -Wait
+        Start-Process -FilePath $setup.FullName -ArgumentList "/S" -Wait
 
     - name: Test
       working-directory: C:\Program Files (x86)\OpenVPN Config Manager
