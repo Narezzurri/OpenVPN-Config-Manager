@@ -35,7 +35,15 @@ jobs:
       run: make -C build build
       
     - name: Install OCM
-      run: build/OpenVPNConfigManagerSetup-*.exe /S
+      run: |
+        $path = Get-ChildItem -Filter "OpenVPNConfigManagerSetup-*.exe" | Select-Object -First 1
+        if (-not $path)
+        {
+          Write-Error "Package not found."
+          exit 1
+        }
+        echo $path
+        build/$path /S
 
     - name: Test
       working-directory: C:\Program Files (x86)\OpenVPN Config Manager
