@@ -40,8 +40,8 @@ ShowUnInstDetails show
 Section "install"
 	; Program files
 	SetOutPath "$INSTDIR"
-	File "Checker.exe"
-	File "Auth.exe"
+	File "Checker\Checker.exe"
+	File "Authenticator\Auth.exe"
 	File "@CMAKE_CURRENT_SOURCE_DIR@\LICENSE"
 	File "@CMAKE_CURRENT_SOURCE_DIR@\NOTICE"
 	WriteUninstaller "Uninstall.exe"
