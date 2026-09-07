@@ -28,7 +28,8 @@ configure_file ("resource.rc.in.in" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc.in"
 
 include_directories (".")
 
-add_subdirectory ("lib")
+add_subdirectory ("inih")
+add_subdirectory ("stdlib")
 
 foreach (DIR ${SUBDIR})
 	add_subdirectory ("${DIR}")

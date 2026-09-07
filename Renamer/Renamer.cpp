@@ -8,6 +8,7 @@
 #include	<regex>
 #include	"lib.h"
 using namespace std;
+using pss = pair<string,string>;
 
 int main (int argc, const char* argv[])
 {
@@ -32,13 +33,94 @@ int main (int argc, const char* argv[])
 #endif
 		return 1;
 	}
-	vector<string> vec (argc);
-	for (int i = 2; i < argc; i++)
-		vec[i] = argv[i];
-	vector<string> keys = rule.Keys("Replace");
-	for (auto pattern : keys)
+	string pattern = get_ini (rule, "Template", "pattern");
+	string target = get_ini (rule, "Template", "target");
+	if (pattern.empty())
 	{
-		string target = rule.Get("Replace", pattern, "");
+		fputs ("Miss or invalid pattern in the config file.\n", stderr);
+		return 1;
+	}
+	if (target.empty())
+	{
+		fputs ("Miss or invalid target in the config file.\n", stderr);
+		return 1;
+	}
+	map<string,int> mp;
+	if (int flag = string2re (rule, pattern, mp, pattern); flag)
+	{
+		if (flag == INVALID_VARIABLE_NAME)
+		{
+			fputs ("Invalid variable name in pattern.\n", stderr);
+			return 1;
+		}
+		else if (flag == MISSING_VARIABLE_BRACKETS)
+		{
+			fputs ("Missing variable brackets in pattern.\n", stderr);
+			return 1;
+		}
+		else if (flag == DUPLICATE_VARIABLE_NAME)
+		{
+			fputs ("Duplicate variable name in pattern.\n", stderr);
+			return 1;
+		}
+		else
+		{
+			cerr << "Unknown error occured when converting pattern.Code: " << hex << flag << endl;
+			return 1;
+		}
+	}
+	regex repattern ('^' + pattern + '$');
+	vector<string> files;
+	for (int i = 2; i < argc; i++)
+		Search (argv[i], files);
+	smatch match;
+	vector<pss> ans;
+	for (auto name : files)
+	{
+		auto [_, filename] = parse_filepath (name);
+		if (regex_match (filename, match, repattern))
+		{
+			for (int i = 1; i <= 3; i++)
+				cout << match[i] << endl;
+			ans.emplace_back(name, "");
+			if (int flag = re2string (rule, target, match, mp, ans.back().second); flag)
+			{
+				ans.pop_back();
+				if (flag == INVALID_VARIABLE_NAME)
+				{
+					fputs ("Invalid variable name in target.\n", stderr);
+					return 1;
+				}
+				else if (flag == MISSING_VARIABLE_BRACKETS)
+				{
+					fputs ("Missing variable brackets in target.\n", stderr);
+					return 1;
+				}
+				else if (flag == DUPLICATE_VARIABLE_NAME)
+				{
+					fputs ("Duplicate variable name in target.\n", stderr);
+					return 1;
+				}
+				else
+				{
+					cerr << "Unknown error occured when converting target.Code: " << hex << flag << endl;
+					return 1;
+				}
+			}
+		}
+	}
+	cout << ans.size() << " file(s) matched." << endl;
+	for (auto [raw, nw] : ans)
+		cout << quote (raw) << " -> " << quote (nw) << endl;
+	cout << "Confirm to rename?(Y/N):";
+	if (toupper (getchar ()) != 'Y')
+		puts ("Canceled.");
+	else
+	{
+		int cnt = 0;
+		for (auto [raw, nw] : ans)
+			cnt += !system (("move " + raw + ' ' + parse_filepath (raw).first + '\\' + nw).c_str());
+		cout << cnt << " file(s) renamed." << endl;
 	}
 	return 0;
 }

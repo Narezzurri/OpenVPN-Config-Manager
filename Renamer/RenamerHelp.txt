@@ -6,6 +6,7 @@ Function
 
 Usage 
 	Renamer [file1 file2 ...] config.ini file3 file4 ... 
-	Ps: Only the first .ini file will be loaded as a config.
+	Ps: Only the first config file (*.ini) will be loaded as a config.
 
 Grammar 
+	

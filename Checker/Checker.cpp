@@ -67,7 +67,7 @@ int main (int argc, const char* argv[])
 			Sleep (sec_per_wait * 1000);
 		string filename = files[i];
 		cerr << filename << " : ";
-		if (extract (filename, '.') != ".ovpn")
+		if (extract_suffix (filename, '.') != ".ovpn")
 			fputs ("Unsupported file type.\n", stderr);
 		else
 		{
@@ -86,7 +86,7 @@ int main (int argc, const char* argv[])
 					ping += " -n " + to_string (ping_cnt);
 				else
 					ping += " -t";
-				if (string s = extract (filename, '\\'); !s.empty())
+				if (string s = extract_suffix (filename, '\\'); !s.empty())
 					filename = s.substr(1);
 				string cmd = "start " + quote (filename) + " cmd /c " + quote (ping);
 				if (!~T)

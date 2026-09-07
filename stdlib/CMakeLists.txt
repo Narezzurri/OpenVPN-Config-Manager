@@ -7,6 +7,7 @@ set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project (OpenVPN-Config-Library VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
 
-add_library (lib SHARED "lib.cpp" "ini.c" "cpp/INIReader.cpp")
-target_include_directories (lib PUBLIC "." "cpp")
-set_target_properties (lib PROPERTIES VERSION "${VERSION}" OUTPUT_NAME "rary")
+add_library (stdlib SHARED "lib.cpp")
+target_include_directories (stdlib PUBLIC ".")
+set_target_properties (stdlib PROPERTIES VERSION "${VERSION}" SOVERSION "${PROJECT_VERSION_MAJOR}" PREFIX "" OUTPUT_NAME "stdlib")
+target_link_libraries (stdlib PUBLIC "inih")
