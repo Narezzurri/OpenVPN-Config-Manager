@@ -9,26 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  debug:
-    runs-on: windows-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v7.0.1
-
-    - name: Configure CMake
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles"
-
-    - name: Build
-      run: cmake --build build
-
-    - name: Test
-      working-directory: build
-      run: ctest
-
   build:
     runs-on: windows-latest
-    if: github.event_name == 'release'
 
     steps:
     - name: Checkout code
@@ -51,9 +33,13 @@ jobs:
 
     - name: Create an installation package
       run: make -C build build
+      
+    - name: Install OCM
+      run: build/OpenVPNConfigManagerSetup-*.exe /S
 
-    - name: List build directory
-      run: dir build
+    - name: Test
+      working-directory: C:\Program Files (x86)\OpenVPN Config Manager
+      run: ctest
 
     - name: Upload Release Artifacts
       uses: actions/upload-artifact@v4
@@ -63,6 +49,7 @@ jobs:
 
     - name: Upload to Release
       uses: svenstaro/upload-release-action@v2
+      if: github.event_name == 'release'
       with:
         file: build/*.exe
         overwrite: true
