@@ -25,8 +25,13 @@ jobs:
     - name: Verify NSIS
       run: makensis -VERSION
 
-    - name: Configure CMake
+    - name: Configure CMake of Build
+      if: github.event_name == 'release'
       run: cmake -B build -DCMAKE_BUILD_TYPE=Build -G "MinGW Makefiles"
+
+    - name: Configure CMake of Debug
+      if: github.event_name != 'release'
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles"
 
     - name: Build
       run: cmake --build build
@@ -37,14 +42,15 @@ jobs:
     - name: Install OCM
       working-directory: build
       run: |
-        $path = Get-ChildItem -Filter "OpenVPNConfigManagerSetup-*.exe" | Select-Object -First 1
-        if (-not $path)
+        $setup = Get-ChildItem -Filter "OpenVPNConfigManagerSetup-*.exe" | Select-Object -First 1
+        if (-not $setup)
         {
           Write-Error "Package not found."
           exit 1
         }
-        echo $path
-        build/$path /S
+        echo $setup
+        $setup.FullName /S
+        # Start-Process -FilePath $setup.FullName -ArgumentList "/S" -Wait
 
     - name: Test
       working-directory: C:\Program Files (x86)\OpenVPN Config Manager
