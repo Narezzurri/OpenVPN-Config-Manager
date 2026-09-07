@@ -52,8 +52,8 @@ jobs:
         Start-Process -FilePath $setup.FullName -ArgumentList "/S" -Wait
 
     - name: Test
-      working-directory: C:\Program Files (x86)\OpenVPN Config Manager
-      run: ctest
+      working-directory: C:\Program Files (x86)\OpenVPN Config Manager\build
+      run: ctest -C Debug --output-on-failure --verbose
 
     - name: Upload Release Artifacts
       uses: actions/upload-artifact@v4
