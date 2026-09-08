@@ -22,9 +22,6 @@ jobs:
     - name: Deploy NSIS
       run: echo "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-    - name: Verify NSIS
-      run: makensis -VERSION
-
     - name: Configure CMake of Build
       if: github.event_name == 'release'
       run: cmake -B build -DCMAKE_BUILD_TYPE=Build -G "MinGW Makefiles"
