@@ -9,7 +9,7 @@ Usage
 	Ps: Only the first config file (*.ini) will be loaded as a config.
 
 Grammar 
-	See also : Template\Template.ini
+	See also : Templates\Template.ini
 	All the key and values should be angle-bracketed and case sensitive.
 	Section [Template] :
 		pattern : the pattern string to match filename with angle-bracketed variables.
