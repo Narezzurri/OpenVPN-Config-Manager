@@ -16,7 +16,7 @@ int main (int argc, const char* argv[])
 	if (HelpDetected (argc, argv))
 	{
 		cout << endl << string {
-			#embed	"RenamerHelp.txt"
+			#embed	"Help.txt"
 		} << endl;
 #ifndef		DEBUG
 		getchar ();
