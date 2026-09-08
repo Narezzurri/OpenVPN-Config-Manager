@@ -146,16 +146,14 @@ int string2re (const INIReader& rule, string s, map<string,int> &mp, string& ans
 					string type = get_ini (rule, "Map." + varname, "");
 					if (type == "string")
 						ans += "([^<]+)";
-					else if (type == "keep")
-						ans += "([^<]+)";
 					else if (type == "alpha")
 						ans += "([A-Za-z]+)";
-					else if (type == "int")
+					else if (type == "digit")
 						ans += "(\\d+)";
 					else if (type == "float")
 						ans += "(\\d+\\.\\d+)";
 					else
-						ans += "([^<]+)";
+						return INVALID_VARIABLE_TYPE;
 					mp[varname] = ++cnt;
 				}
 			}
@@ -234,6 +232,9 @@ int parse_error (int error_code, string name, FILE* err)
 			break;
 		case DUPLICATE_VARIABLE_NAME:
 			fputs (("Duplicate variable name in " + name + ".\n").c_str(), err);
+			break;
+		case INVALID_VARIABLE_TYPE:
+			fputs (("Invalid variable type in" + name + ".\n").c_str(), err);
 			break;
 		default:
 			cerr << ("Unknown error occured when converting " + name + ".Code: ").c_str() << hex << error_code << endl;

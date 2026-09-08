@@ -2,6 +2,7 @@
 #define		INVALID_VARIABLE_NAME		0x01
 #define		MISSING_VARIABLE_BRACKETS	0x02
 #define		DUPLICATE_VARIABLE_NAME		0x03
+#define		INVALID_VARIABLE_TYPE		0x04
 #include	"INIReader.h"
 #include	<string>
 #include	<regex>
