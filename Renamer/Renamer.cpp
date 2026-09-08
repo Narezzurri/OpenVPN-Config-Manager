@@ -59,8 +59,6 @@ int main (int argc, const char* argv[])
 		auto [_, filename] = parse_filepath (name);
 		if (regex_match (filename, match, repattern))
 		{
-			for (int i = 1; i <= 3; i++)
-				cout << match[i] << endl;
 			ans.emplace_back(name, "");
 			if (parse_error (re2string (rule, target, match, mp, ans.back().second), "target", stderr))
 			{
