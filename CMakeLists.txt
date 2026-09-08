@@ -40,6 +40,7 @@ configure_file ("resource.rc.in.in" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc.in"
 
 # Targets
 
+set (TEMPLATES ${CMAKE_SOURCE_DIR}/Templates)
 include_directories (".")
 
 add_subdirectory ("inih")

@@ -73,9 +73,11 @@ int main (int argc, const char* argv[])
 	for (auto [raw, nw] : ans)
 		cout << quote (raw) << " -> " << quote (nw) << endl;
 	cout << "Confirm to rename?(Y/N):";
+#ifndef		DEBUG
 	if (toupper (getchar ()) != 'Y')
 		puts ("Canceled.");
 	else
+#endif
 	{
 		int cnt = 0;
 		for (auto [raw, nw] : ans)
