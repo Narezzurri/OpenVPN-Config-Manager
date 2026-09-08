@@ -9,4 +9,18 @@ Usage
 	Ps: Only the first config file (*.ini) will be loaded as a config.
 
 Grammar 
-	
+	See also : Template\Template.ini
+	All the key and values should be angle-bracketed and case sensitive.
+	Section [Template] :
+		pattern : the pattern string to match filename with angle-bracketed variables.
+		target : the target string to match filename with angle-bracketed variables.
+	Section [Map.VariableName] :
+		Null Key : 
+			Define the type of current variable.
+			These values are legal :
+				string : Capture all characters.
+				alpha : Caputure all letters with upper and lower case.
+				digit : Capture all digits.
+				float : Capture all float numbers,that is,digits separated by one dot.
+		Additionally,use <key> = <value> to replace the variable with <value> if the value is <key>.
+		If the variable value is not matched,it will keep intact.
