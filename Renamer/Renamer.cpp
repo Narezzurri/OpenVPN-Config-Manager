@@ -46,29 +46,8 @@ int main (int argc, const char* argv[])
 		return 1;
 	}
 	map<string,int> mp;
-	if (int flag = string2re (rule, pattern, mp, pattern); flag)
-	{
-		if (flag == INVALID_VARIABLE_NAME)
-		{
-			fputs ("Invalid variable name in pattern.\n", stderr);
-			return 1;
-		}
-		else if (flag == MISSING_VARIABLE_BRACKETS)
-		{
-			fputs ("Missing variable brackets in pattern.\n", stderr);
-			return 1;
-		}
-		else if (flag == DUPLICATE_VARIABLE_NAME)
-		{
-			fputs ("Duplicate variable name in pattern.\n", stderr);
-			return 1;
-		}
-		else
-		{
-			cerr << "Unknown error occured when converting pattern.Code: " << hex << flag << endl;
-			return 1;
-		}
-	}
+	if (parse_error (string2re (rule, pattern, mp, pattern), "pattern", stderr))
+		return 1;
 	regex repattern ('^' + pattern + '$');
 	vector<string> files;
 	for (int i = 2; i < argc; i++)
@@ -83,29 +62,10 @@ int main (int argc, const char* argv[])
 			for (int i = 1; i <= 3; i++)
 				cout << match[i] << endl;
 			ans.emplace_back(name, "");
-			if (int flag = re2string (rule, target, match, mp, ans.back().second); flag)
+			if (parse_error (re2string (rule, target, match, mp, ans.back().second), "target", stderr))
 			{
 				ans.pop_back();
-				if (flag == INVALID_VARIABLE_NAME)
-				{
-					fputs ("Invalid variable name in target.\n", stderr);
-					return 1;
-				}
-				else if (flag == MISSING_VARIABLE_BRACKETS)
-				{
-					fputs ("Missing variable brackets in target.\n", stderr);
-					return 1;
-				}
-				else if (flag == DUPLICATE_VARIABLE_NAME)
-				{
-					fputs ("Duplicate variable name in target.\n", stderr);
-					return 1;
-				}
-				else
-				{
-					cerr << "Unknown error occured when converting target.Code: " << hex << flag << endl;
-					return 1;
-				}
+				return 1;
 			}
 		}
 	}

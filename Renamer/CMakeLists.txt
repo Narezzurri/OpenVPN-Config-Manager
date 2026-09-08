@@ -13,6 +13,7 @@ project (OpenVPN-Config-${DIR} VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_URL
 # Build
 
 configure_file ("${CMAKE_BINARY_DIR}/resource.rc.in" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc" @ONLY)
+configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/Template.ini" "${CMAKE_CURRENT_BINARY_DIR}/Template.ini" COPYONLY)
 add_executable ("${NAME}" "${NAME}.cpp" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc")
 set_target_properties ("${NAME}" PROPERTIES VERSION "${VERSION}")
 target_link_libraries ("${NAME}" PRIVATE "stdlib")

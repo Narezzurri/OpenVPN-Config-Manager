@@ -219,3 +219,25 @@ int re2string (const INIReader& rule, string s, const smatch& match, map<string,
 	}
 	return 0;
 }
+
+int parse_error (int error_code, string name, FILE* err)
+{
+	switch (error_code)
+	{
+		case 0:
+			return 0;
+		case INVALID_VARIABLE_NAME:
+			fputs (("Invalid variable name in " + name + ".\n").c_str(), err);
+			break;
+		case MISSING_VARIABLE_BRACKETS:
+			fputs (("Missing variable brackets in " + name + ".\n").c_str(), err);
+			break;
+		case DUPLICATE_VARIABLE_NAME:
+			fputs (("Duplicate variable name in " + name + ".\n").c_str(), err);
+			break;
+		default:
+			cerr << ("Unknown error occured when converting " + name + ".Code: ").c_str() << hex << error_code << endl;
+			break;
+	}
+	return 1;
+}
