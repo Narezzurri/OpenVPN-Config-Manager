@@ -55,11 +55,17 @@ jobs:
       working-directory: build
       run: ctest -C Debug --output-on-failure --verbose
 
+    - name: Create attachments
+      working-directory: build
+      if: github.event_name == 'release'
+      run : |
+        make zip
+
     - name: Upload to Release
       uses: svenstaro/upload-release-action@v2
-      # if: github.event_name == 'release'
+      if: github.event_name == 'release'
       with:
-        file: build/*.exe
+        file: build/*.{exe,zip}
         overwrite: true
         file_glob: true
         draft: false
