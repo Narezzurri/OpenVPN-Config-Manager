@@ -1,5 +1,8 @@
 name: CMake
 
+permissions:
+  read-all
+
 on:
   push:
     branch:
@@ -67,6 +70,8 @@ jobs:
 
     - name: Upload to Release
       uses: svenstaro/upload-release-action@v2
+      permissions:
+        contents: write
       if: github.event_name == 'release'
       with:
         file: build/*.{exe,zip}
