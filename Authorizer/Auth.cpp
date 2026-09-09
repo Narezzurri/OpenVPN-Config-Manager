@@ -10,7 +10,7 @@
 using namespace std;
 
 vector<string> files;
-string content = "auth.txt";
+string credential = "auth.txt";
 
 int main (int argc, const char* argv[])
 {
@@ -35,7 +35,7 @@ int main (int argc, const char* argv[])
 			string arg = argv[i] + 1;
 			if (arg == "c" || arg == "credit")
 			{
-				content = argv[++nxt];
+				credential = argv[++nxt];
 				return 1;
 			}
 			else
@@ -89,18 +89,33 @@ int main (int argc, const char* argv[])
 		line.emplace_back(cfg);
 		for (auto s : line)
 		{
+			int sharp = s.find_first_of('#');
+			string comment;
+			if (sharp != string::npos)
+			{
+				comment = s.substr(sharp);
+				s = s.substr(0, sharp);
+			}
 			int pos = 0;
 			int end = s.find_first_of('#');
 			if (end == string::npos)
 				end = s.length() - 1;
-			while (pos < end && s.substr(0, end).find("auth-user-pass", pos) != string::npos)
+			while (pos < end && s.find("auth-user-pass", pos) != string::npos)
 			{
-				int idx = s.substr(0, end).find("auth-user-pass", pos) + 14;
-				s.insert(idx, ' ' + content);
-				pos = idx + content.length() + 1;
-				end += content.length() + 1;
+				int idx = s.find("auth-user-pass", pos) + 14;
+				if (idx != s.length() && isalnum (s[idx]))
+				{
+					pos = idx;
+					continue;
+				}
+				int nxt = s.find(credential, idx);
+				if (int pos = s.find_first_not_of(' ', nxt); pos == string::npos || pos < nxt)
+					s.insert(idx, ' ' + credential);
+				pos = idx + credential.length() + 1;
+				end += credential.length() + 1;
 			}
 			fileout.write(s.data(), s.length());
+			fileout.write(comment.data(), comment.length());
 			fileout.flush();
 		}
 		fileout.close();
