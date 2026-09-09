@@ -29,7 +29,6 @@ project (OpenVPN-Config-Manager VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_UR
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	enable_testing ()
-	set (CTEST_TIMEOUT 10)
 	add_compile_definitions (DEBUG)
 endif ()
 
@@ -40,7 +39,8 @@ configure_file ("resource.rc.in.in" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc.in"
 
 # Targets
 
-set (TEMPLATES ${CMAKE_SOURCE_DIR}\\Templates)
+set (TEMPLATES ${CMAKE_SOURCE_DIR}/Templates)
+set (OVPNS us-1.udp.ovpn uk-2.udp.ovpn ca-3.tcp.ovpn jp-4.tcp.ovpn)
 include_directories (".")
 
 add_subdirectory ("inih")
