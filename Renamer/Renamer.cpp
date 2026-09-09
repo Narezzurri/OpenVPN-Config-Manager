@@ -83,7 +83,7 @@ int main (int argc, const char* argv[])
 		cout << succeed.size() << " file(s) renamed." << endl;
 #ifdef		DEBUG
 		int error = 0;
-		for (auto [raw, nw] : succeed) if (error |= system (("move " + parse_filepath (raw).first + '\\' + nw + ' ' + raw).c_str()))
+		for (auto [raw, nw] : succeed) if (error |= system (("move " + parse_filepath (raw).first + '\\' + nw + ' ' + raw + " > nul").c_str()))
 			cerr << "Roll back failed: " << quote (raw) << " -> " << quote (nw) << endl;
 		return error;
 #endif
