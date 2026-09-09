@@ -11,9 +11,9 @@ using db = double;
 using pss = pair<string,string>;
 
 /** @brief Read a non-negative integer from [s] and store it in [ans] */
-int get_int (const char *s, int &ans);
+int get_int (string s, int &ans);
 /** @brief Read a non-negative decimal fraction from [s] and store it in [ans] */
-int get_float (const char *s, db &ans);
+int get_float (string s, db &ans);
 /** @brief Wrap a string with quotes */
 string quote (string s);
 /** @brief Extract a substring from [s] up to the last occurrence of [c] (included) */
