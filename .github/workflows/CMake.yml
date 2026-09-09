@@ -1,7 +1,6 @@
 name: CMake
 
-permissions:
-  read-all
+permissions: read-all
 
 on:
   push:
