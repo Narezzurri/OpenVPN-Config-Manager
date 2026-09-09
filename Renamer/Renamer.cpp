@@ -23,7 +23,18 @@ int main (int argc, const char* argv[])
 #endif
 		return 0;
 	}
-	INIReader rule (argv[1]);
+	int config = 0;
+	for (int i = 1; i < argc; i++) if (extract_suffix (argv[i], '.') == ".ini")
+	{
+		config = i;
+		break;
+	}
+	if (!config)
+	{
+		fputs ("No config assigned.\n", stderr);
+		return 1;
+	}
+	INIReader rule (argv[config]);
 	if (rule.ParseError() < 0)
 	{
 		cerr << "Unable to load config file: " << argv[1] << endl;
@@ -50,7 +61,7 @@ int main (int argc, const char* argv[])
 		return 1;
 	regex repattern ('^' + pattern + '$');
 	vector<string> files;
-	for (int i = 2; i < argc; i++)
+	for (int i = 1; i < argc; i++) if (i != config)
 		Search (argv[i], files);
 	smatch match;
 	vector<pss> ans;
