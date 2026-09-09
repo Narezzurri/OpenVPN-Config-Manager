@@ -7,13 +7,15 @@ Function
 Usage 
 	Renamer [file1 file2 ...] config.ini file3 file4 ... 
 	Ps: Only the first config file (*.ini) will be loaded as a config.
+		If you want to rename the config file as well,pass it twice.
 
 Grammar 
 	See also : Templates\Template.ini
 	All the key and values should be angle-bracketed and case sensitive.
 	Section [Template] :
-		pattern : the pattern string to match filename with angle-bracketed variables.
-		target : the target string to match filename with angle-bracketed variables.
+		pattern : the pattern string to match filename.
+		target : the target string to match filename.
+		Variables are recognized with angle-bracket.
 	Section [Map.VariableName] :
 		Null Key : 
 			Define the type of current variable.

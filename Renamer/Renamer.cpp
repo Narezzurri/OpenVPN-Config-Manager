@@ -23,21 +23,27 @@ int main (int argc, const char* argv[])
 #endif
 		return 0;
 	}
-	int config = 0;
-	for (int i = 1; i < argc; i++) if (extract_suffix (argv[i], '.') == ".ini")
+	vector<string> files;
+	for (int i = 1; i < argc; i++)
+		Search (argv[i], files);
+	int config = -1;
+	for (int i = 0; i < files.size(); i++) if (extract_suffix (files[i], '.') == ".ini")
 	{
 		config = i;
 		break;
 	}
-	if (!config)
+	if (!~config)
 	{
 		fputs ("No config assigned.\n", stderr);
+#ifndef		DEBUG
+		getchar ();
+#endif
 		return 1;
 	}
-	INIReader rule (argv[config]);
+	INIReader rule (files[config]);
 	if (rule.ParseError() < 0)
 	{
-		cerr << "Unable to load config file: " << argv[1] << endl;
+		cerr << "Fail to load config file: " << files[config] << endl;
 		cerr << "Error message: " << rule.ParseErrorMessage() << endl;
 #ifndef		DEBUG
 		getchar ();
@@ -49,31 +55,42 @@ int main (int argc, const char* argv[])
 	if (pattern.empty())
 	{
 		fputs ("Miss or invalid pattern in the config file.\n", stderr);
+#ifndef		DEBUG
+		getchar ();
+#endif
 		return 1;
 	}
 	if (target.empty())
 	{
 		fputs ("Miss or invalid target in the config file.\n", stderr);
+#ifndef		DEBUG
+		getchar ();
+#endif
 		return 1;
 	}
 	map<string,int> mp;
 	if (parse_error (string2re (rule, pattern, mp, pattern), "pattern", stderr))
+	{
+#ifndef		DEBUG
+		getchar ();
+#endif
 		return 1;
+	}
 	regex repattern ('^' + pattern + '$');
-	vector<string> files;
-	for (int i = 1; i < argc; i++) if (i != config)
-		Search (argv[i], files);
 	smatch match;
 	vector<pss> ans;
-	for (auto name : files)
+	for (int i = 0; i < files.size(); i++) if (i != config)
 	{
-		auto [_, filename] = parse_filepath (name);
+		string filename = parse_filepath (files[i]).second;
 		if (regex_match (filename, match, repattern))
 		{
-			ans.emplace_back(name, "");
+			ans.emplace_back(files[i], "");
 			if (parse_error (re2string (rule, target, match, mp, ans.back().second), "target", stderr))
 			{
 				ans.pop_back();
+#ifndef		DEBUG
+				getchar ();
+#endif
 				return 1;
 			}
 		}
@@ -99,5 +116,6 @@ int main (int argc, const char* argv[])
 		return error;
 #endif
 	}
+	getchar ();
 	return 0;
 }
