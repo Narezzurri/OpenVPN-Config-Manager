@@ -51,7 +51,6 @@ int main (int argc, const char* argv[])
 		else
 			cerr << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip." << endl;
 	} ();
-	puts ("a");
 	int cnt = 0;
 	for (int i = 1; i < argc; i++) if (!mark[i])
 		Search (argv[i], files);
