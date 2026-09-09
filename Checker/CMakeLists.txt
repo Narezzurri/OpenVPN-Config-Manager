@@ -19,9 +19,10 @@ target_link_libraries ("${NAME}" PRIVATE "stdlib")
 # Test
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_test (NAME Checker-Help1 COMMAND Checker --help)
-	add_test (NAME Checker-Help2 COMMAND Checker /help)
-	add_test (NAME Checker-Help3 COMMAND Checker /?)
+	add_test (NAME Checker-Help1 COMMAND Checker)
+	add_test (NAME Checker-Help2 COMMAND Checker --help)
+	add_test (NAME Checker-Help3 COMMAND Checker /help)
+	add_test (NAME Checker-Help4 COMMAND Checker /?)
 	add_test (NAME Checker-Function COMMAND Checker ${TEMPLATES}\\us-1.udp.ovpn ${TEMPLATES}\\uk-2.udp.ovpn ${TEMPLATES}\\ca-3.tcp.ovpn ${TEMPLATES}\\jp-4.tcp.ovpn /w 0.8 /t 2 1 /n 2)
 	add_test (NAME Checker-Wildcard COMMAND Checker ${TEMPLATES}\\*.ovpn /w 0.8 /t 2 1 /n 2)
 	add_test (NAME Checker-Bug202609090913 COMMAND Checker ${TEMPLATES}\\*.ovpn /t 2 /n 2)

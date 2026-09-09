@@ -19,9 +19,10 @@ target_link_libraries ("${NAME}" PRIVATE "stdlib")
 # Test
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_test (NAME Auth-Help1 COMMAND Auth --help)
-	add_test (NAME Auth-Help2 COMMAND Auth /help)
-	add_test (NAME Auth-Help3 COMMAND Auth /?)
+	add_test (NAME Auth-Help1 COMMAND Auth)
+	add_test (NAME Auth-Help2 COMMAND Auth --help)
+	add_test (NAME Auth-Help3 COMMAND Auth /help)
+	add_test (NAME Auth-Help4 COMMAND Auth /?)
 	add_test (NAME Auth-Function COMMAND Auth ${TEMPLATES}\\us-1.udp.ovpn ${TEMPLATES}\\/uk-2.udp.ovpn ${TEMPLATES}\\ca-3.tcp.ovpn ${TEMPLATES}\\jp-4.tcp.ovpn)
 	add_test (NAME Auth-Wildcard COMMAND Auth ${TEMPLATES}\\*.ovpn)
 endif ()
