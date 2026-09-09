@@ -21,7 +21,7 @@ target_link_libraries ("${NAME}" PRIVATE "inih")
 
 # Test
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	# set (TESTS Renamer-Help1 Renamer-Help2 Renamer-Help3 Renamer-Help4 Renamer-Function Renamer-Wildcard)
 	# configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/Renamer-Help.bat.in" "${CMAKE_CURRENT_BINARY_DIR}/Renamer-Help.bat" COPYONLY)
 	# configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/Renamer.bat.in" "${CMAKE_CURRENT_BINARY_DIR}/Renamer.bat" COPYONLY)

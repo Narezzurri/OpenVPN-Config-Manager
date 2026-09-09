@@ -18,7 +18,7 @@ target_link_libraries ("${NAME}" PRIVATE "stdlib")
 
 # Test
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	# set (TESTS Checker-Help1 Checker-Help2 Checker-Help3 Checker-Help4 Checker-Function Checker-Wildcard Checker-Bug202609090913)
 	# configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/Checker-Help.bat.in" "${CMAKE_CURRENT_BINARY_DIR}/Checker-Help.bat" COPYONLY)
 	# configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/Checker.bat.in" "${CMAKE_CURRENT_BINARY_DIR}/Checker.bat" COPYONLY)

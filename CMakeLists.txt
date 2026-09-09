@@ -25,9 +25,9 @@ set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project (OpenVPN-Config-Manager VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
 
-# Debug
+# Test
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	enable_testing ()
 	add_compile_definitions (DEBUG)
 endif ()
