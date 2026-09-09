@@ -77,10 +77,16 @@ int main (int argc, const char* argv[])
 	else
 #endif
 	{
-		int cnt = 0;
-		for (auto [raw, nw] : ans)
-			cnt += !system (("move " + raw + ' ' + parse_filepath (raw).first + '\\' + nw).c_str());
-		cout << cnt << " file(s) renamed." << endl;
+		vector<pss> succeed;
+		for (auto [raw, nw] : ans) if (!system (("move " + raw + ' ' + parse_filepath (raw).first + '\\' + nw).c_str()))
+			succeed.emplace_back(raw, nw);
+		cout << succeed.size() << " file(s) renamed." << endl;
+#ifdef		DEBUG
+		int error = 0;
+		for (auto [raw, nw] : succeed) if (error |= system (("move " + parse_filepath (raw).first + '\\' + nw + ' ' + raw).c_str()))
+			cerr << "Roll back failed: " << quote (raw) << " -> " << quote (nw) << endl;
+		return error;
+#endif
 	}
 	return 0;
 }
