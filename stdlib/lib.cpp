@@ -10,18 +10,20 @@
 #include	"lib.h"
 using namespace std;
 
-int get_int (const char *s, int &ans)
+int get_int (string s, int &ans)
 {
-	for (int i = 0; s[i]; i++) if (!isdigit (s[i]))
-		return 1;
-	return stringstream (s) >> ans && ans >= 0;
+	for (auto i : s) if (!isdigit (i))
+		return 0;
+	int input;
+	return stringstream (s) >> input && input >= 0 && (ans = input) >= 0;
 }
 
-int get_float (const char *s, db &ans)
+int get_float (string s, db &ans)
 {
-	for (int i = 0; s[i]; i++) if (!isdigit (s[i]) && s[i] != '.')
-		return 1;
-	return stringstream (s) >> ans && ans >= 0;
+	for (auto i : s) if (!isdigit (i) && i != '.')
+		return 0;
+	db input;
+	return stringstream (s) >> input && input >= 0 && (ans = input) >= 0;
 }
 
 string quote (string s)

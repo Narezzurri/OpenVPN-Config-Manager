@@ -12,7 +12,7 @@ Options
 
 If there are multiple arguments of the same type,only the last one matters.
 
-/t period [time] 
+/t period [time] or /time period [time] 
 
     period:
         The number of valid files to process at once.
@@ -26,13 +26,13 @@ If there are multiple arguments of the same type,only the last one matters.
         If reserved,it'll reset whether it was already assigned.
         Default is 1.0 
 
-/w timeout 
+/w timeout or /wait timeout 
 
     timeout:
         The timeout[s] for every ping.
         Default is 1.0 
 
-/n count 
+/n count or /number count 
 
     count:
         The number of ping(s) per file.

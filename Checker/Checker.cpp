@@ -36,11 +36,16 @@ int main (int argc, const char* argv[])
 	{
 		mark[i] = 1;
 		int nxt = i;
-		if (i == argc - 1 || [&] () -> bool
+		if (i <= argc - 1 && [&] () -> bool
 		{
 			string arg = argv[i] + 1;
 			if (arg == "t" || arg == "time")
-				return get_int (argv[++nxt], T) && get_float (argv[++nxt], sec_per_wait);
+			{
+				int succeed = get_int (argv[++nxt], T);
+				if (nxt == argc - 1 || !get_float (argv[++nxt], sec_per_wait))
+					nxt--;
+				return succeed;
+			}
 			else if (arg == "w" || arg == "wait")
 				return get_float (argv[++nxt], ping_timeout);
 			else if (arg == "n" || arg == "number")
