@@ -52,6 +52,13 @@ jobs:
       working-directory: build
       run: ctest -C Debug --output-on-failure --verbose
 
+    - name: Upload Release Artifacts
+      uses: actions/upload-artifact@v4
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        name: OpenVPN-Config-Manager-Release
+        path: build/OpenVPNConfigManagerSetup-*.exe
+
     - name: Create attachments
       working-directory: build
       if: github.event_name == 'release'
