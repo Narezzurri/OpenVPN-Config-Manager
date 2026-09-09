@@ -1,4 +1,4 @@
-OpenVPN Config Authenticator v1.0.0 (c) 2026 Narezzurri - MIT Licence 
+OpenVPN Config Authorizer v1.0.0 (c) 2026 Narezzurri - MIT Licence 
 Repository: https://github.com/Narezzurri/OpenVPN-Config-Helper 
 
 Function 

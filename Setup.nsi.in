@@ -45,7 +45,7 @@ Section "install"
 	; Start Menu
 	CreateDirectory "$SMPROGRAMS\${NAME}"
 	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Checker.lnk" "$INSTDIR\Checker.exe"
-	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Authenticator.lnk" "$INSTDIR\Auth.exe"
+	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Authorizer.lnk" "$INSTDIR\Auth.exe"
 	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Renamer.lnk" "$INSTDIR\Renamer.exe"
 	CreateShortCut "$SMPROGRAMS\${NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
 	; Add to PATH
@@ -61,7 +61,7 @@ Section "install"
 		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}\command" "" "$INSTDIR\${APP}.exe %V\*"
 	!macroend
 	!insertmacro Register "Checker" "Checker"
-	!insertmacro Register "Auth" "Authenticator"
+	!insertmacro Register "Auth" "Authorizer"
 	!insertmacro Register "Renamer" "Renamer"
 	; Uninstall information
 	SetRegView 64

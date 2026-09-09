@@ -1,5 +1,5 @@
 /**
- * OpenVPN Config Manager - Authenticator utility
+ * OpenVPN Config Manager - Authorizer utility
  * Copyright (c) 2026 Narezzurri - MIT License
 */
 #include	<iostream>

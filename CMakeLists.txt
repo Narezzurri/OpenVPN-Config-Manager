@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.12)
 
 # Target list
-set (SUBDIR Checker Authenticator Renamer)
+set (SUBDIR Checker Authorizer Renamer)
 set (APPLIST "OCM.Checker;OCM.Auth;OCM.Renamer")
 set (ALL_DEPENDS 
 	# Library
