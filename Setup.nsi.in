@@ -58,7 +58,7 @@ Section "install"
 	!macro Register APP APP_NAME
 		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}" "" "${APP_NAME}"
 		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}" "Icon" "$INSTDIR\${APP}.exe"
-		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}\command" "" "$INSTDIR\${APP}.exe %V\*.ovpn"
+		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}\command" "" "$INSTDIR\${APP}.exe %V\*"
 	!macroend
 	!insertmacro Register "Checker" "Checker"
 	!insertmacro Register "Auth" "Authenticator"

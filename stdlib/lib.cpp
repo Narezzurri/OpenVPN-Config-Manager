@@ -200,12 +200,7 @@ int re2string (const INIReader& rule, string s, const smatch& match, map<string,
 				if (varname.empty() || !mp.count(varname))
 					return INVALID_VARIABLE_NAME;
 				else
-				{
-					if (string type = get_ini (rule, "Map." + varname, ""); type.empty() || type == "keep")
-						ans += match[mp[varname]];
-					else
-						ans += get_ini (rule, "Map." + varname, match[mp[varname]]);
-				}
+					ans += get_ini (rule, "Map." + varname, match[mp[varname]], match[mp[varname]]);
 			}
 		}
 		else if (invar)

@@ -117,5 +117,6 @@ int main (int argc, const char* argv[])
 #endif
 	}
 	getchar ();
+	getchar ();
 	return 0;
 }
