@@ -23,6 +23,8 @@ If you're new to open source, look for issues tagged [`good first issue`](https:
 
 # Legal Statement
 
-This tool is designed for educational and administrative purposes only. It is intended to help users manage OpenVPN configurations they are legally authorized to use.We guarantee that we will not steal any information from the configuration files.
+This tool is designed for educational and administrative purposes only. It is intended to help users manage OpenVPN configurations they are legally authorized to use.We guarantee that we will not collect,transmit or upload any information from the configuration files to any remote server.
 
 Users are solely responsible for ensuring their use of this software and any associated VPN services complies with all applicable local laws and regulations. The author assumes no liability for any misuse of this tool.
+
+For details on third-party components and their licenses, please refer to the [`NOTICE`](NOTICE) file.

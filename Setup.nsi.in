@@ -40,21 +40,13 @@ ShowUnInstDetails show
 Section "install"
 	; Program files
 	SetOutPath "$INSTDIR"
-	File "Checker\Checker.exe"
-	File "Authenticator\Auth.exe"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\LICENSE"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\NOTICE"
+	File /r "@CMAKE_INSTALL_PREFIX@\*.*"
 	WriteUninstaller "Uninstall.exe"
-	; Sample files
-	SetOutPath "$INSTDIR\Samples"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample1.ovpn"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample2.ovpn"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample3.ovpn"
-	File "@CMAKE_CURRENT_SOURCE_DIR@\Samples\Sample4.ovpn"
 	; Start Menu
 	CreateDirectory "$SMPROGRAMS\${NAME}"
 	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Checker.lnk" "$INSTDIR\Checker.exe"
 	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Authenticator.lnk" "$INSTDIR\Auth.exe"
+	CreateShortCut "$SMPROGRAMS\${NAME}\OpenVPN Config Renamer.lnk" "$INSTDIR\Renamer.exe"
 	CreateShortCut "$SMPROGRAMS\${NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
 	; Add to PATH
 	Push "$INSTDIR"
@@ -66,10 +58,11 @@ Section "install"
 	!macro Register APP APP_NAME
 		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}" "" "${APP_NAME}"
 		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}" "Icon" "$INSTDIR\${APP}.exe"
-		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}\command" "" "$INSTDIR\${APP}.exe %V\*.ovpn"
+		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}\command" "" "$INSTDIR\${APP}.exe %V\*"
 	!macroend
 	!insertmacro Register "Checker" "Checker"
 	!insertmacro Register "Auth" "Authenticator"
+	!insertmacro Register "Renamer" "Renamer"
 	; Uninstall information
 	SetRegView 64
 	WriteRegStr "HKLM" "${UNINST_KEY}" "DisplayName" "${NAME}"
@@ -80,19 +73,20 @@ Section "install"
 SectionEnd
 
 Section "uninstall"
-	; Program files & Sample files
-	RMDir /r "$INSTDIR"
-	; Start Menu
-	RMDir /r "$SMPROGRAMS\${NAME}"
-	; Remove from PATH
-	Push "$INSTDIR"
-	Call un.RemoveFromPath
+	; Uninstall information
+	SetRegView 64
+	DeleteRegKey "HKLM" "${UNINST_KEY}"
 	; Remove from right-click menu for directories
 	SetRegView 64
 	DeleteRegKey HKCR "${DIRMENU_KEY}"
 	DeleteRegKey HKLM "${CMDMENU_KEY}\OCM.Checker"
 	DeleteRegKey HKLM "${CMDMENU_KEY}\OCM.Auth"
-	; Uninstall information
-	SetRegView 64
-	DeleteRegKey "HKLM" "${UNINST_KEY}"
+	DeleteRegKey HKLM "${CMDMENU_KEY}\OCM.Renamer"
+	; Remove from PATH
+	Push "$INSTDIR"
+	Call un.RemoveFromPath
+	; Start Menu
+	RMDir /r "$SMPROGRAMS\${NAME}"
+	; Program files & Template files
+	RMDir /r "$INSTDIR"
 SectionEnd

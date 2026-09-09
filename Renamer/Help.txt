@@ -1,0 +1,28 @@
+OpenVPN Config Checker v1.0.0 (c) 2026 Narezzurri - MIT Licence 
+Repository: https://github.com/Narezzurri/OpenVPN-Config-Helper 
+
+Function 
+	Rename files in bulk under configured rules.
+
+Usage 
+	Renamer [file1 file2 ...] config.ini file3 file4 ... 
+	Ps: Only the first config file (*.ini) will be loaded as a config.
+		If you want to rename the config file as well,pass it twice.
+
+Grammar 
+	See also : Templates\Template.ini
+	All the key and values should be angle-bracketed and case sensitive.
+	Section [Template] :
+		pattern : the pattern string to match filename.
+		target : the target string to match filename.
+		Variables are recognized with angle-bracket.
+	Section [Map.VariableName] :
+		Null Key : 
+			Define the type of current variable.
+			These values are legal :
+				string : Capture all characters.
+				alpha : Caputure all letters with upper and lower case.
+				digit : Capture all digits.
+				float : Capture all float numbers,that is,digits separated by one dot.
+		Additionally,use <key> = <value> to replace the variable with <value> if the value is <key>.
+		If the variable value is not matched,it will keep intact.

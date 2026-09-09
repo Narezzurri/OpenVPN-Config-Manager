@@ -36,11 +36,16 @@ int main (int argc, const char* argv[])
 	{
 		mark[i] = 1;
 		int nxt = i;
-		if (i == argc - 1 || [&] () -> bool
+		if (i <= argc - 1 && [&] () -> bool
 		{
 			string arg = argv[i] + 1;
 			if (arg == "t" || arg == "time")
-				return get_int (argv[++nxt], T) && get_float (argv[++nxt], sec_per_wait);
+			{
+				int succeed = get_int (argv[++nxt], T);
+				if (nxt == argc - 1 || !get_float (argv[++nxt], sec_per_wait))
+					nxt--;
+				return succeed;
+			}
 			else if (arg == "w" || arg == "wait")
 				return get_float (argv[++nxt], ping_timeout);
 			else if (arg == "n" || arg == "number")
@@ -67,7 +72,7 @@ int main (int argc, const char* argv[])
 			Sleep (sec_per_wait * 1000);
 		string filename = files[i];
 		cerr << filename << " : ";
-		if (extract (filename, '.') != ".ovpn")
+		if (extract_suffix (filename, '.') != ".ovpn")
 			fputs ("Unsupported file type.\n", stderr);
 		else
 		{
@@ -86,7 +91,7 @@ int main (int argc, const char* argv[])
 					ping += " -n " + to_string (ping_cnt);
 				else
 					ping += " -t";
-				if (string s = extract (filename, '\\'); !s.empty())
+				if (string s = extract_suffix (filename, '\\'); !s.empty())
 					filename = s.substr(1);
 				string cmd = "start " + quote (filename) + " cmd /c " + quote (ping);
 				if (!~T)
