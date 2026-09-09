@@ -52,7 +52,7 @@ int main (int argc, const char* argv[])
 				return get_int (argv[++nxt], ping_cnt);
 			else
 			{
-				cerr << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
+				cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
 				return 0;
 			}
 		}())
@@ -61,7 +61,7 @@ int main (int argc, const char* argv[])
 				mark[j] = 1;
 		}
 		else
-			cerr << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip" << endl;
+			cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip" << endl;
 	} ();
 	int cnt = 0;
 	for (int i = 1; i < argc; i++) if (!mark[i])
@@ -71,9 +71,9 @@ int main (int argc, const char* argv[])
 		if (T > 0 && cnt && !(cnt % T))
 			Sleep (sec_per_wait * 1000);
 		string filename = files[i];
-		cerr << filename << " : ";
+		cout << filename << " : ";
 		if (extract_suffix (filename, '.') != ".ovpn")
-			fputs ("Unsupported file type.\n", stderr);
+			puts ("Unsupported file type.");
 		else
 		{
 			cin.clear();
@@ -82,7 +82,7 @@ int main (int argc, const char* argv[])
 			cin >> addr;
 			while (cin >> addr && addr != "remote");
 			if (addr != "remote")
-				fputs ("Server ip address not found.\n", stderr);
+				puts ("Server ip address not found.");
 			else
 			{
 				cin >> addr;				// Server address
@@ -98,11 +98,11 @@ int main (int argc, const char* argv[])
 					cmd = "start /wait" + cmd.substr(5);
 				system (cmd.c_str());
 				cnt++;
-				fputs ("Done.\n", stderr);
+				puts ("Done.");
 			}
 		}
 	}
-	cerr << cnt << " files checked successfully." << endl;
+	cout << cnt << " files checked successfully." << endl;
 	freopen ("CON", "r", stdin);
 #ifndef		DEBUG
 	getchar ();

@@ -40,7 +40,7 @@ int main (int argc, const char* argv[])
 			}
 			else
 			{
-				cerr << "Unrecognized argument : " << argv[i] << ".Skip." << endl;
+				cout << "Unrecognized argument : " << argv[i] << ".Skip." << endl;
 				return 0;
 			}
 		}())
@@ -49,7 +49,7 @@ int main (int argc, const char* argv[])
 				mark[j] = 1;
 		}
 		else
-			cerr << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip." << endl;
+			cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip." << endl;
 	} ();
 	int cnt = 0;
 	for (int i = 1; i < argc; i++) if (!mark[i])
@@ -57,16 +57,16 @@ int main (int argc, const char* argv[])
 	for (int i = 0; i < files.size(); i++)
 	{
 		string filename = files[i];
-		cerr << filename << " : ";
+		cout << filename << " : ";
 		if (filename.substr(filename.find_last_of('.')) != ".ovpn")
 		{
-			fputs ("Unsupported file type.\n", stderr);
+			puts ("Unsupported file type.");
 			continue;
 		}
 		ifstream filein (filename, ios::binary);
 		if (!filein.is_open())
 		{
-			fputs ("Cannot open file.\n", stderr);
+			puts ("Cannot open file.");
 			continue;
 		}
 		stringstream ss;
@@ -75,7 +75,7 @@ int main (int argc, const char* argv[])
 		ofstream fileout (filename, ios::binary);
 		if (!fileout.is_open())
 		{
-			fputs ("Cannot write into file.\n", stderr);
+			puts ("Cannot write into file.");
 			continue;
 		}
 		vector<string> line;
@@ -119,10 +119,10 @@ int main (int argc, const char* argv[])
 			fileout.flush();
 		}
 		fileout.close();
-		fputs ("Done.\n", stderr);
+		puts ("Done.");
 		cnt++;
 	}
-	cerr << cnt << " files appended successfully." << endl;
+	cout << cnt << " files appended successfully." << endl;
 	freopen ("CON", "r", stdin);
 #ifndef		DEBUG
 	getchar ();
