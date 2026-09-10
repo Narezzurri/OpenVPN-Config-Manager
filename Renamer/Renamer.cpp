@@ -100,7 +100,9 @@ int main (int argc, const char* argv[])
 	for (auto [raw, nw] : ans)
 		cout << quote (raw) << " -> " << quote (nw) << endl;
 	cout << "Confirm to rename?(Y/N):";
-#ifndef		DEBUG
+#ifdef		DEBUG
+	cout << endl;
+#else
 	if (toupper (getchar ()) != 'Y')
 		puts ("Canceled.");
 	else
@@ -110,14 +112,14 @@ int main (int argc, const char* argv[])
 		for (auto [raw, nw] : ans) if (!system (("move " + raw + ' ' + parse_filepath (raw).first + '\\' + nw).c_str()))
 			succeed.emplace_back(raw, nw);
 		cout << succeed.size() << " file(s) renamed." << endl;
-#ifdef		DEBUG
-		int error = 0;
-		for (auto [raw, nw] : succeed) if (error |= system (("move " + parse_filepath (raw).first + '\\' + nw + ' ' + raw + " > nul").c_str()))
-			cout << "Roll back failed: " << quote (raw) << " -> " << quote (nw) << endl;
-		return error;
-#endif
+		// int error = 0;
+		// for (auto [raw, nw] : succeed) if (error |= system (("move " + parse_filepath (raw).first + '\\' + nw + ' ' + raw + " > nul").c_str()))
+		// 	cout << "Roll back failed: " << quote (raw) << " -> " << quote (nw) << endl;
+		// return error;
 	}
+#ifndef		DEBUG
 	getchar ();
 	getchar ();
+#endif
 	return 0;
 }

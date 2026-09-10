@@ -16,13 +16,13 @@ target_link_libraries ("${NAME}" PRIVATE "stdlib")
 # Test
 
 if (CMAKE_BUILD_TYPE STREQUAL "Test")
-# Program
+	# Program
 	add_executable (CheckerTest Test.cpp)
 	add_dependencies (CheckerTest Checker)
 	target_link_libraries (CheckerTest PRIVATE gtest gtest_main)
-# Resource
+	# Resource
 	configure_file ("Help.txt" "${CMAKE_CURRENT_BINARY_DIR}/Help.txt" COPYONLY)
 	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-# Register
+	# Register
 	add_test (NAME Checker COMMAND CheckerTest)
 endif ()

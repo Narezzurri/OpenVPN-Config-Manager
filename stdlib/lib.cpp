@@ -164,7 +164,7 @@ int string2re (const INIReader& rule, string s, map<string,int> &mp, string& ans
 			varname += i;
 		else
 		{
-			if (!isalnum (i) && i == '_')
+			if (!isalnum (i))
 				ans += '\\';
 			ans += i;
 		}

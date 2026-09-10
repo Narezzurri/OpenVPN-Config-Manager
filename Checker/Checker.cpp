@@ -32,6 +32,7 @@ int main (int argc, const char* argv[])
 #endif
 		return 0;
 	}
+	int err = 0;
 	vector<int> mark (argc);
 	for (int i = 1; i < argc; i++) if (argv[i][0] == '/') [&] ()
 	{
@@ -54,6 +55,7 @@ int main (int argc, const char* argv[])
 			else
 			{
 				cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
+				err = 1;
 				return 0;
 			}
 		}())
@@ -62,7 +64,10 @@ int main (int argc, const char* argv[])
 				mark[j] = 1;
 		}
 		else
+		{
 			cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip" << endl;
+			err = 1;
+		}
 	} ();
 	int cnt = 0;
 	for (int i = 1; i < argc; i++) if (!mark[i])
@@ -108,5 +113,5 @@ int main (int argc, const char* argv[])
 #ifndef		DEBUG
 	getchar ();
 #endif
-	return 0;
+	return err;
 }
