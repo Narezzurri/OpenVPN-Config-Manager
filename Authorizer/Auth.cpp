@@ -14,6 +14,7 @@ string credential = "auth.txt";
 
 int main (int argc, const char* argv[])
 {
+	system ("chcp 65001 > nul");
 	DisplayIcons ();
 	if (HelpDetected (argc, argv))
 	{
