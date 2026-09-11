@@ -16,7 +16,7 @@ int main (int argc, const char* argv[])
 	DisplayIcons ();
 	if (HelpDetected (argc, argv))
 	{
-		cout << string {
+		cout << endl << string {
 			#embed	"Help.txt"
 		} << endl;
 #ifndef		DEBUG
