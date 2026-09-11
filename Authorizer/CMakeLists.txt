@@ -1,11 +1,8 @@
 cmake_minimum_required (VERSION 3.12)
 
 set (NAME "Auth")
-set (VERSION "1.0.0")
+set (VERSION "1.1.0")
 set (DIR "Authorizer")
-# C++ version
-set (CMAKE_CXX_STANDARD 23)
-set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project (OpenVPN-Config-${DIR} VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
 
@@ -18,11 +15,14 @@ target_link_libraries ("${NAME}" PRIVATE "stdlib")
 
 # Test
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_test (NAME Auth-Help1 COMMAND Auth)
-	add_test (NAME Auth-Help2 COMMAND Auth --help)
-	add_test (NAME Auth-Help3 COMMAND Auth /help)
-	add_test (NAME Auth-Help4 COMMAND Auth /?)
-	add_test (NAME Auth-Function COMMAND Auth ${TEMPLATES}\\us-1.udp.ovpn ${TEMPLATES}\\/uk-2.udp.ovpn ${TEMPLATES}\\ca-3.tcp.ovpn ${TEMPLATES}\\jp-4.tcp.ovpn)
-	add_test (NAME Auth-Wildcard COMMAND Auth ${TEMPLATES}\\*.ovpn)
+if (CMAKE_BUILD_TYPE STREQUAL "Test")
+	# Program
+	add_executable (AuthTest Test.cpp)
+	add_dependencies (AuthTest Auth)
+	target_link_libraries (AuthTest PRIVATE gtest gtest_main)
+	# Resource
+	configure_file ("Help.txt" "${CMAKE_CURRENT_BINARY_DIR}/Help.txt" COPYONLY)
+	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+	# Register
+	add_test (NAME Auth COMMAND AuthTest TIMEOUT 5)
 endif ()

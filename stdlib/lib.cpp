@@ -164,7 +164,7 @@ int string2re (const INIReader& rule, string s, map<string,int> &mp, string& ans
 			varname += i;
 		else
 		{
-			if (!isalnum (i) && i == '_')
+			if (!isalnum (i))
 				ans += '\\';
 			ans += i;
 		}
@@ -234,7 +234,7 @@ int parse_error (int error_code, string name, FILE* err)
 			fputs (("Invalid variable type in" + name + ".\n").c_str(), err);
 			break;
 		default:
-			cerr << ("Unknown error occured when converting " + name + ".Code: ").c_str() << hex << error_code << endl;
+			cout << ("Unknown error occured when converting " + name + ".Code: ").c_str() << hex << error_code << endl;
 			break;
 	}
 	return 1;

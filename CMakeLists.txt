@@ -25,12 +25,24 @@ set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project (OpenVPN-Config-Manager VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
 
-# Debug
+# CMake deploy argument
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+set (CMAKE_CXX_FLAGS_DEBUG "-g")
+set (CMAKE_CXX_FLAGS_TEST "-g -Ofast")
+set (CMAKE_CXX_FLAGS_RELEASE "-Ofast")
+
+# Test
+
+include (CTest)
+
+set (OVPNS "us-1.udp.ovpn uk-2.udp.ovpn ca-3.tcp.ovpn jp-4.tcp.ovpn")
+set (OVPNS_AUTHED "us-1.udp-authed.ovpn uk-2.udp-authed.ovpn ca-3.tcp-authed.ovpn jp-4.tcp-authed.ovpn")
+
+if (CMAKE_BUILD_TYPE STREQUAL "Test")
+	add_compile_definitions (DEBUG OVPNS="${OVPNS}" OVPNS_AUTHED="${OVPNS_AUTHED}")
+	set (gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+	add_subdirectory (googletest)
 	enable_testing ()
-	set (CTEST_TIMEOUT 10)
-	add_compile_definitions (DEBUG)
 endif ()
 
 # Dependances
@@ -40,7 +52,7 @@ configure_file ("resource.rc.in.in" "${CMAKE_CURRENT_BINARY_DIR}/resource.rc.in"
 
 # Targets
 
-set (TEMPLATES ${CMAKE_SOURCE_DIR}\\Templates)
+set (TEMPLATES ${CMAKE_SOURCE_DIR}/Templates)
 include_directories (".")
 
 add_subdirectory ("inih")
