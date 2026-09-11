@@ -4,7 +4,7 @@ permissions: read-all
 
 on:
   push:
-    branch:
+    branches:
   release:
     types: [ published,edited ]
   pull_request:
@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v7.0.1
+      uses: actions/checkout@v4
 
     - name: Install NSIS
       run: choco install nsis -y
@@ -54,7 +54,7 @@ jobs:
 
     - name: Test
       working-directory: build
-      run: ctest -C Debug --output-on-failure --verbose
+      run: ctest --output-on-failure --verbose
 
     - name: Upload Release Artifacts
       uses: actions/upload-artifact@v4
