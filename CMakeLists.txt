@@ -41,6 +41,8 @@ set (OVPNS_AUTHED "us-1.udp-authed.ovpn uk-2.udp-authed.ovpn ca-3.tcp-authed.ovp
 if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	add_compile_definitions (DEBUG OVPNS="${OVPNS}" OVPNS_AUTHED="${OVPNS_AUTHED}")
 	set (gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+	set (INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+	set (INSTALL_GMOCK OFF CACHE BOOL "" FORCE)
 	add_subdirectory (googletest)
 	enable_testing ()
 endif ()
@@ -72,6 +74,8 @@ install (TARGETS Checker Auth Renamer stdlib inih
 # License
 install (FILES	"${CMAKE_SOURCE_DIR}/LICENSE"
 				"${CMAKE_SOURCE_DIR}/NOTICE"
+		 DESTINATION .)
+install (DIRECTORY "${CMAKE_SOURCE_DIR}/LICENSES"
 		 DESTINATION .)
 # Template
 install (DIRECTORY "${CMAKE_SOURCE_DIR}/Templates"
