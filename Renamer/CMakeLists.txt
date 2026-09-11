@@ -26,5 +26,5 @@ if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 	configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/Template.ini" "${CMAKE_CURRENT_BINARY_DIR}/Template.ini" COPYONLY)
 	# Register
-	add_test (NAME Renamer COMMAND RenamerTest)
+	add_test (NAME Renamer COMMAND RenamerTest TIMEOUT 5)
 endif ()
