@@ -1,4 +1,4 @@
-name: CMake
+name: CMake Creation
 
 permissions: read-all
 
@@ -10,6 +10,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  TZ: Asia/Shanghai
+
 jobs:
   build:
     runs-on: windows-latest
@@ -17,8 +20,8 @@ jobs:
       contents: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v7.0.1
 
     - name: Install NSIS
       run: choco install nsis -y
@@ -57,20 +60,20 @@ jobs:
       run: ctest --output-on-failure --verbose
 
     - name: Upload Release Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7.0.1
       if: github.event_name == 'workflow_dispatch'
       with:
         name: OpenVPN-Config-Manager-Release
         path: build/OpenVPNConfigManagerSetup-*.exe
 
-    - name: Create attachments
+    - name: Create Attachments
       working-directory: build
       if: github.event_name == 'release'
       run : |
         make zip
 
     - name: Upload to Release
-      uses: svenstaro/upload-release-action@v2
+      uses: svenstaro/upload-release-action@v2.11.5
       if: github.event_name == 'release'
       with:
         file: build/*.{exe,zip}

@@ -1,0 +1,68 @@
+name: Synchorize Third-Party Repositories
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+      timezone: "Asia/Shanghai"
+  workflow_dispatch:
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  Google-Test:
+    runs-on: windows-latest
+    environment: Signing
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v7.0.1
+
+    - name: Fetch Latest Source Code
+      id: fetch
+      shell: bash
+      run: |
+        set -euo pipefail
+        echo "old_version=$(sed -nE 's/^[[:space:]]*set\(GOOGLETEST_VERSION[[:space:]]+([0-9.]+)\).*/\1/p' googletest/CMakeLists.txt | head -1)" >> "$GITHUB_OUTPUT"
+        rm -rf googletest
+        git clone --depth=1 https://github.com/google/googletest.git
+        echo "new_version=$(sed -nE 's/^[[:space:]]*set\(GOOGLETEST_VERSION[[:space:]]+([0-9.]+)\).*/\1/p' googletest/CMakeLists.txt | head -1)" >> "$GITHUB_OUTPUT"
+        echo "sha=$(git -C googletest rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+        echo "date=$(git -C googletest log -1 --format=%cs)" >> "$GITHUB_OUTPUT"
+        echo "time=$(git -C googletest log -1 --format=%cd)" >> "$GITHUB_OUTPUT"
+        rm -rf googletest/.git
+
+    - name: Import GPG Key
+      uses: crazy-max/ghaction-import-gpg@v7.0.0
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        fingerprint: ${{ secrets.GPG_FINGERPRINT }}
+        trust_level: 5
+        git_tag_gpgsign: true
+        git_config_global: true
+        git_commit_gpgsign: true
+        git_user_signingkey: true
+        git_committer_name: github-actions[bot]
+        git_committer_email: 41898282+github-actions[bot]@users.noreply.github.com
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@8.1.1
+      with:
+        branch: bot/GoogleTest
+        commit-message: "Update Google Test"
+        title: "Update Google Test to version ${{ steps.fetch.outputs.new_version }} committed on ${{ steps.fetch.outputs.date }}"
+        body: |
+          This PR is created by Github Actions.
+
+          - Old version : `${{ steps.fetch.outputs.old_version }}` 
+          - New version : `${{ steps.fetch.outputs.new_version }}` 
+          - Commit date : `${{ steps.fetch.outputs.time }}` 
+          - SHA-256 : `${{ steps.fetch.outputs.sha }}`
+
+          Please inspect the changes manually before merging.
+        add-paths: googletest
+        delete-branch: true
