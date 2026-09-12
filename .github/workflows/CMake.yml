@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v7.0.1
+      uses: actions/checkout@main
 
     - name: Install NSIS
       run: choco install nsis -y
@@ -60,7 +60,7 @@ jobs:
       run: ctest --output-on-failure --verbose
 
     - name: Upload Release Artifacts
-      uses: actions/upload-artifact@v7.0.1
+      uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
         name: OpenVPN-Config-Manager-Release
@@ -73,7 +73,7 @@ jobs:
         make zip
 
     - name: Upload to Release
-      uses: svenstaro/upload-release-action@v2.11.5
+      uses: svenstaro/upload-release-action@master
       if: github.event_name == 'release'
       with:
         file: build/*.{exe,zip}

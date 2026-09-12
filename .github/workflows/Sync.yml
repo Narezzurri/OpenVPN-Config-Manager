@@ -20,7 +20,7 @@ jobs:
     
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v7.0.1
+      uses: actions/checkout@main
 
     - name: Fetch Latest Source Code
       id: fetch
@@ -37,7 +37,7 @@ jobs:
         rm -rf googletest/.git
 
     - name: Import GPG Key
-      uses: crazy-max/ghaction-import-gpg@v7.0.0
+      uses: crazy-max/ghaction-import-gpg@master
       with:
         gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
         fingerprint: ${{ secrets.GPG_FINGERPRINT }}
@@ -50,7 +50,7 @@ jobs:
         git_committer_email: 41898282+github-actions[bot]@users.noreply.github.com
 
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@8.1.1
+      uses: peter-evans/create-pull-request@main
       with:
         branch: bot/GoogleTest
         commit-message: "Update Google Test"
