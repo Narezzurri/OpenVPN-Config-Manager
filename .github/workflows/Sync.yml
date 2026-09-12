@@ -67,3 +67,4 @@ jobs:
           Please inspect the changes manually before merging.
         add-paths: googletest
         delete-branch: true
+        sign-commits: true
