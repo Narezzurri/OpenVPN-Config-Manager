@@ -31,7 +31,7 @@ jobs:
         git clone --depth=1 https://github.com/google/googletest.git
         echo "new_version=$(sed -nE 's/^[[:space:]]*set\(GOOGLETEST_VERSION[[:space:]]+([0-9.]+)\).*/\1/p' googletest/CMakeLists.txt | head -1)" >> "$GITHUB_OUTPUT"
         echo "sha=$(git -C googletest rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
-        echo "date=$(git -C googletest log -1 --format=%cs)" >> "$GITHUB_OUTPUT"
+        echo "date=$(git -C googletest log -1 --date=iso-local --format=%cs)" >> "$GITHUB_OUTPUT"
         echo "time=$(git -C googletest log -1 --format=%cd)" >> "$GITHUB_OUTPUT"
         rm -rf googletest/.git
 
