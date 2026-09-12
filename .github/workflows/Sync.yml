@@ -15,7 +15,7 @@ env:
 
 jobs:
   Google-Test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment: Signing
     
     steps:
@@ -24,7 +24,6 @@ jobs:
 
     - name: Fetch Latest Source Code
       id: fetch
-      shell: bash
       run: |
         set -euo pipefail
         echo "old_version=$(sed -nE 's/^[[:space:]]*set\(GOOGLETEST_VERSION[[:space:]]+([0-9.]+)\).*/\1/p' googletest/CMakeLists.txt | head -1)" >> "$GITHUB_OUTPUT"
