@@ -8,7 +8,7 @@ on:
   schedule:
     - cron: "0 5 * * *"
       timezone: "Asia/Shanghai"
-  pull_requests:
+  pull_request:
     branches: "bot/*"
     types: [closed]
 
