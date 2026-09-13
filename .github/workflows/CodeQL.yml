@@ -78,9 +78,7 @@ jobs:
         queries: +security-and-quality
 
     - name: Create an Setup Wizard
-      run: |
-        cmake --build build
-        make -C build build
+      run: make -C build build
       
     - name: Deploy
       working-directory: build
