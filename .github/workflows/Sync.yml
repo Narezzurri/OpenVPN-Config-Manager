@@ -48,6 +48,7 @@ jobs:
         git_user_signingkey: true
 
     - name: Create Pull Request
+      id: create-pr
       uses: peter-evans/create-pull-request@main
       with:
         author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
@@ -55,15 +56,23 @@ jobs:
         branch: bot/GoogleTest
         commit-message: "Update Google Test"
         title: "Update Google Test to version ${{ steps.fetch.outputs.new_version }} committed on ${{ steps.fetch.outputs.date }}"
-        body: |
-          This PR is created by Github Actions.
-
-          - Old version : `${{ steps.fetch.outputs.old_version }}` 
-          - New version : `${{ steps.fetch.outputs.new_version }}` 
-          - Commit date : `${{ steps.fetch.outputs.time }}` 
-          - SHA-256 : `${{ steps.fetch.outputs.sha }}`
-
-          Please inspect the changes manually before merging.
         add-paths: googletest
         delete-branch: true
         sign-commits: true
+
+    - name: Update PR Body
+      if: ${{ steps.create-pr.outputs.pull-request-number }} != ""                      # a PR updated
+      env:
+        GH_TOKEN = ${{ github.token }}
+      run: |
+        cat << "EOF" | gh pr edit ${{ steps.create-pr.outputs.pull-request-number }} --body-file -
+        This PR is created by Github Actions.
+
+        - Old version : `${{ steps.fetch.outputs.old_version }}` 
+        - New version : `${{ steps.fetch.outputs.new_version }}` 
+        - Commit date : `${{ steps.fetch.outputs.time }}` 
+        - SHA-256 : `${{ steps.fetch.outputs.sha }}`
+
+        Please inspect the changes manually before merging.
+        EOF
+
