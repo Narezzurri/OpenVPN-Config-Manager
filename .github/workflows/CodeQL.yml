@@ -45,7 +45,7 @@ jobs:
       if: github.event_name == 'workflow_dispatch'
       with:
         name: CodeQL-SARIF-results-actions.sarif
-        path: ${{ steps.analyze.outputs['sarif-output'] }}/actions.sarif
+        path: ${{ steps.analyze.outputs['sarif-output'] }}\\actions.sarif
         compression-level: 9
         archive: false
 
@@ -116,6 +116,6 @@ jobs:
       if: github.event_name == 'workflow_dispatch'
       with:
         name: CodeQL-SARIF-results-actions.sarif
-        path: ${{ steps.analyze.outputs['sarif-output'] }}/c-cpp.sarif
+        path: ${{ steps.analyze.outputs['sarif-output'] }}\\c-cpp.sarif
         compression-level: 9
         archive: false
