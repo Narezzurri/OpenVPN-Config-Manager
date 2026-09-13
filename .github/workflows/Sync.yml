@@ -63,7 +63,7 @@ jobs:
     - name: Update PR Body
       if: ${{ steps.create-pr.outputs.pull-request-number }} != ""                      # a PR updated
       env:
-        GH_TOKEN = ${{ github.token }}
+        GH_TOKEN: ${{ github.token }}
       run: |
         cat << "EOF" | gh pr edit ${{ steps.create-pr.outputs.pull-request-number }} --body-file -
         This PR is created by Github Actions.
