@@ -37,7 +37,7 @@ jobs:
     - name: Update Repository
       run: |
         set -euo pipefail
-        mkdir -p inih/cpp
+        mkdir -p
         cp /tmp/inih/ini.c              inih/ini.c
         cp /tmp/inih/ini.h              inih/ini.h
         cp /tmp/inih/LICENSE.txt        inih/LICENSE.txt
