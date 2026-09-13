@@ -30,9 +30,9 @@ jobs:
       if: github.event_name == 'release'
       run: cmake -B build -DCMAKE_BUILD_TYPE=Build -G "MinGW Makefiles"
 
-    - name: Configure CMake of Debug
+    - name: Configure CMake of Test
       if: github.event_name != 'release'
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles"
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Test -G "MinGW Makefiles"
 
     - name: Build
       run: cmake --build build
