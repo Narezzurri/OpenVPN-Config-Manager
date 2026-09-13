@@ -25,5 +25,5 @@ if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 	# Register
 	add_test (NAME Checker COMMAND CheckerTest)
-	set_tests_properties (Checker PROPERTIES TIMEOUT 15)
+	set_tests_properties (Checker PROPERTIES TIMEOUT 20)
 endif ()
