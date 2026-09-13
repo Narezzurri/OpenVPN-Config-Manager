@@ -138,7 +138,7 @@ jobs:
         add-paths: googletest
         delete-branch: true
         sign-commits: true
-        label: |
+        labels: |
           Bot
           Workflow
 
