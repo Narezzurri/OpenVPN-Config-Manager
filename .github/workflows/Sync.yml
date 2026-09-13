@@ -8,6 +8,10 @@ on:
   schedule:
     - cron: "0 5 * * *"
       timezone: "Asia/Shanghai"
+  pull_requests:
+    branches: "bot/*"
+    types: [closed]
+
   workflow_dispatch:
 
 env:
