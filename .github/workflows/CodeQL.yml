@@ -64,9 +64,7 @@ jobs:
       uses: actions/checkout@main
 
     - name: Install dependencies
-      shell: bash
       run: |
-        set -euo pipefail
         choco install nsis -y
         echo "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
