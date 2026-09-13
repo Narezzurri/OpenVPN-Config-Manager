@@ -73,7 +73,7 @@ jobs:
         add-paths: inih
         delete-branch: true
         sign-commits: true
-        label: |
+        labels: |
           Bot
           Workflow
 

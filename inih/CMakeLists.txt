@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.12)
 
-set (VERSION 62)
+set (VERSION 60)
 # C++ version
 set (CMAKE_CXX_STANDARD 23)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
