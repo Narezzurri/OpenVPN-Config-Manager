@@ -175,7 +175,6 @@ int string2re (const INIReader& rule, string s, map<string,int> &mp, string& ans
 int re2string (const INIReader& rule, string s, const smatch& match, map<string,int> mp, string& ans)
 {
 	ans.clear();
-	int cnt = 0;
 	int invar = 0;
 	string varname;
 	for (auto i : s)
