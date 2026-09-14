@@ -4,8 +4,8 @@ disable-default-queries: false
 
 query-filters:
   - exclude:
-    id: actions/unpinned-tag
+      id: actions/unpinned-tag
 
 paths-ignore:
-  - googletest
-  - inih
+  - googletest/**
+  - inih/**
