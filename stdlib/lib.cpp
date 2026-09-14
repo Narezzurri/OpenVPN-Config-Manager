@@ -239,3 +239,14 @@ int parse_error (int error_code, string name, FILE* err)
 	}
 	return 1;
 }
+
+int roll_back (map<string,string> mp)
+{
+	int error = 0;
+	for (auto [raw, nw] : mp)
+	{
+		if (error |= system (("move " + parse_filepath (raw).first + '\\' + nw + ' ' + raw + " > nul").c_str()))
+			cout << "Roll back failed: " << quote (raw) << " -> " << quote (nw) << endl;
+	}
+	return error;
+}
