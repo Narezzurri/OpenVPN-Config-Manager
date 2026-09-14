@@ -41,14 +41,14 @@ jobs:
         output: results
 
     - name: View SARIF
-      run: dir results
+      run: tree results /f
 
     - name: Upload SARIF
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
         name: CodeQL-SARIF-results-actions.sarif
-        path: results\actions.sarif
+        path: results\actions\actions.sarif
         compression-level: 9
         archive: false
 
@@ -112,16 +112,16 @@ jobs:
         category: "c-cpp (${{ matrix['build-type'] }})"
         upload: true
         wait-for-processing: true
-        output: results
+        output: results\${{ matrix['build-type'] }}
 
     - name: View SARIF
-      run: dir results
+      run: tree results /f
 
     - name: Upload SARIF
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
         name: CodeQL-SARIF-results-actions.sarif
-        path: results\c-cpp.sarif
+        path: results\${{ matrix['build-type'] }}\c-cpp.sarif
         compression-level: 9
         archive: false
