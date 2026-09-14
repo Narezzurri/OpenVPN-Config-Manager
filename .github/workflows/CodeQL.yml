@@ -122,7 +122,7 @@ jobs:
 
     steps:
     - name: View SARIF
-      run: dir results
+      run: ls results
 
     - name: Upload SARIF
       uses: actions/upload-artifact@main
