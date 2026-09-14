@@ -12,7 +12,6 @@ using namespace std;
 using db = double;
 
 int T = -1;
-int a, b, c, d;
 int ping_cnt = 0;
 db sec_per_wait = 1;
 db ping_timeout = 1;
