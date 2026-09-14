@@ -45,8 +45,17 @@ jobs:
         wait-for-processing: true
         output: results/${{ matrix.language }}
 
-    - name: Export SARIF
-      run: mv results/${{ matrix.language }}/actions.sarif results/${{ matrix.language }}.sarif
+    - name: View SARIF
+      run: ls results
+
+    - name: Upload SARIF
+      uses: actions/upload-artifact@main
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        name: CodeQL-SARIF-results-${{ matrix.language }}.sarif
+        path: results/actions.sarif
+        compression-level: 9
+        archive: false
 
   Analyze-C-CPP:
     name: Analyze (${{ matrix.language }}) (${{ matrix['build-type'] }})
@@ -111,23 +120,17 @@ jobs:
         wait-for-processing: true
         output: results/${{ matrix['build-type'] }}
 
-    - name: Export SARIF
-      run: mv results/${{ matrix['build-type'] }}/cpp.sarif results/${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
-
-  Upload-SARIF:
-    name: Upload SARIF
-    needs: [ Analyze-Actions,Analyze-C-CPP ]
-    runs-on: 'ubuntu-latest'
-    if: github.event_name == 'workflow_dispatch'
-
-    steps:
     - name: View SARIF
       run: ls results
+
+    - name: Renamer SARIF
+      run: mv results/${{ matrix['build-type'] }}/cpp.sarif results/${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
 
     - name: Upload SARIF
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
-        name: CodeQL-SARIF-results
-        path: results/*.sarif
+        name: CodeQL-SARIF-results-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
+        path: results/${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
         compression-level: 9
+        archive: false
