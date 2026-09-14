@@ -1,3 +1,4 @@
+#pragma		once
 #define		CONVERSION_SUCCEEDED		0x00
 #define		INVALID_VARIABLE_NAME		0x01
 #define		MISSING_VARIABLE_BRACKETS	0x02
@@ -35,3 +36,5 @@ int re2string (const INIReader& rule, string s, const smatch& match, map<string,
 /** @brief Parse the error code and output details in [err] 
  *  @return 1 if error occurs */
 int parse_error (int error_code, string name, FILE* err);
+/** @brief Roll back a rename operation */
+int roll_back (map<string,string> mp);

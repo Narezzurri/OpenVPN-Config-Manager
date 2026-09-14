@@ -110,7 +110,9 @@ int main (int argc, const char* argv[])
 					continue;
 				}
 				int nxt = s.find(credential, idx);
-				if (int pos = s.find_first_not_of(' ', nxt); pos == string::npos || pos < nxt)
+				if (!~nxt)
+					nxt = s.length();
+				if (s.find_first_not_of(' ', nxt) != nxt)
 					s.insert(idx, ' ' + credential);
 				pos = idx + credential.length() + 1;
 				end += credential.length() + 1;

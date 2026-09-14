@@ -175,7 +175,6 @@ int string2re (const INIReader& rule, string s, map<string,int> &mp, string& ans
 int re2string (const INIReader& rule, string s, const smatch& match, map<string,int> mp, string& ans)
 {
 	ans.clear();
-	int cnt = 0;
 	int invar = 0;
 	string varname;
 	for (auto i : s)
@@ -238,4 +237,15 @@ int parse_error (int error_code, string name, FILE* err)
 			break;
 	}
 	return 1;
+}
+
+int roll_back (map<string,string> mp)
+{
+	int error = 0;
+	for (auto [raw, nw] : mp)
+	{
+		if (error |= system (("move " + parse_filepath (raw).first + '\\' + nw + ' ' + raw + " > nul").c_str()))
+			cout << "Roll back failed: " << quote (raw) << " -> " << quote (nw) << endl;
+	}
+	return error;
 }
