@@ -49,14 +49,13 @@ jobs:
       run: ls results/${{ matrix.language }}
 
     - name: Move SARIF
-      run: mv results/${{ matrix.language }}/actions.sarif results/${{ matrix.language }}.sarif
+      run: mv results/${{ matrix.language }}/actions.sarif results/CodeQL-SARIF-results-${{ matrix.language }}.sarif
 
     - name: Upload SARIF
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
-        name: CodeQL-SARIF-results-${{ matrix.language }}.sarif
-        path: results/${{ matrix.language }}.sarif
+        path: results/CodeQL-SARIF-results-${{ matrix.language }}.sarif
         compression-level: 9
         archive: false
 
@@ -127,13 +126,12 @@ jobs:
       run: ls results/${{ matrix.language }}-${{ matrix['build-type'] }}
 
     - name: Move SARIF
-      run: mv results/${{ matrix.language }}-${{ matrix['build-type'] }}/cpp.sarif results/${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
+      run: mv results/${{ matrix.language }}-${{ matrix['build-type'] }}/cpp.sarif results/CodeQL-SARIF-results-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
 
     - name: Upload SARIF
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
-        name: CodeQL-SARIF-results-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
-        path: results/${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
+        path: results/CodeQL-SARIF-results-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
         compression-level: 9
         archive: false

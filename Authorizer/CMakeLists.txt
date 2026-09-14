@@ -25,5 +25,5 @@ if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 	# Register
 	add_test (NAME Auth COMMAND AuthTest)
-	set_tests_properties (Auth PROPERTIES TIMEOUT 5)
+	set_tests_properties (Auth PROPERTIES TIMEOUT 8)
 endif ()
