@@ -7,7 +7,6 @@ on:
     branches:
   release:
     types: [ published,edited ]
-  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -21,18 +20,17 @@ jobs:
       uses: actions/checkout@main
 
     - name: Install NSIS
-      run: choco install nsis -y
-
-    - name: Deploy NSIS
-      run: echo "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      run: |
+        choco install nsis -y
+        echo "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: Configure CMake of Release
       if: github.event_name == 'release'
       run: cmake -B build -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"
 
-    - name: Configure CMake of Debug
+    - name: Configure CMake of Test
       if: github.event_name != 'release'
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles"
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Test -G "MinGW Makefiles"
 
     - name: Build
       run: cmake --build build

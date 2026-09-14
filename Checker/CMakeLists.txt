@@ -24,5 +24,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	configure_file ("Help.txt" "${CMAKE_CURRENT_BINARY_DIR}/Help.txt" COPYONLY)
 	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 	# Register
-	add_test (NAME Checker COMMAND CheckerTest TIMEOUT 15)
+	add_test (NAME Checker COMMAND CheckerTest)
+	set_tests_properties (Checker PROPERTIES TIMEOUT 25)
 endif ()

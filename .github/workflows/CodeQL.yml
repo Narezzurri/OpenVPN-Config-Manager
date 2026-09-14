@@ -1,0 +1,129 @@
+name: "CodeQL Advanced"
+
+permissions:
+  actions: read
+  contents: read
+  packages: read
+  security-events: write
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+  schedule:
+    - cron: '0 5 * * *'
+      timezone: "Asia/Shanghai"
+  workflow_dispatch:
+
+jobs:
+  Analyze-Actions:
+    name: Analyze (${{ matrix.language }})
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ actions ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@main
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@main
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: none
+        queries: +security-and-quality
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@main
+      id: analyze
+      with:
+        category: "${{ matrix.language }}"
+        upload: true
+        wait-for-processing: true
+        output: results/${{ matrix.language }}
+
+    - name: Move SARIF
+      run: mv results/${{ matrix.language }}/actions.sarif CodeQL-SARIF-${{ matrix.language }}.sarif
+
+    - name: Upload SARIF
+      uses: actions/upload-artifact@main
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        path: CodeQL-SARIF-${{ matrix.language }}.sarif
+        archive: false
+
+  Analyze-C-CPP:
+    name: Analyze (${{ matrix.language }}) (${{ matrix['build-type'] }})
+    runs-on: 'windows-latest'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ c-cpp ]
+        build-type: [ Release,Debug,Test ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@main
+
+    - name: Install dependencies
+      run: |
+        choco install nsis -y
+        echo "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - name: Configure CMake
+      run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix['build-type'] }} -G "MinGW Makefiles"
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@main
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: manual
+        queries: +security-and-quality
+
+    - name: Create an Setup Wizard
+      run: make -C build build
+      
+    - name: Deploy
+      working-directory: build
+      run: |
+        $setup = Get-ChildItem -Filter "OpenVPNConfigManagerSetup-*.exe" | Select-Object -First 1
+        if (-not $setup)
+        {
+          Write-Error "Package not found."
+          exit 1
+        }
+        Start-Process -FilePath $setup.FullName -ArgumentList "/S" -Wait
+        echo "C:\Program Files (x86)\OpenVPN Config Manager" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - name: Test
+      if: matrix.build-type == 'Test'
+      working-directory: build
+      run: ctest --output-on-failure --verbose
+
+    - name: Create Attachments
+      working-directory: build
+      run : |
+        make zip
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@main
+      id: analyze
+      with:
+        category: "${{ matrix.language }} (${{ matrix['build-type'] }})"
+        upload: true
+        wait-for-processing: true
+        output: results/${{ matrix.language }}-${{ matrix['build-type'] }}
+
+    - name: Move SARIF
+      run: mv results/${{ matrix.language }}-${{ matrix['build-type'] }}/cpp.sarif CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
+
+    - name: Upload SARIF
+      uses: actions/upload-artifact@main
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        path: CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
+        archive: false
