@@ -1,4 +1,4 @@
-name: Synchorize Third-Party Repositories
+name: Synchronize Third-Party Repositories
 
 permissions:
   contents: write
