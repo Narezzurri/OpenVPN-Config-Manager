@@ -5,6 +5,8 @@ permissions: read-all
 on:
   push:
     branches:
+  pull_request:
+    types: [ opened ]
   release:
     types: [ published,edited ]
   workflow_dispatch:
