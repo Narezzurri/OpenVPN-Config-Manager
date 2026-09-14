@@ -121,7 +121,7 @@ jobs:
         output: results/${{ matrix.language }}-${{ matrix['build-type'] }}
 
     - name: Move SARIF
-      run: mv results/${{ matrix.language }}-${{ matrix['build-type'] }}/cpp.sarif CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
+      run: move results/${{ matrix.language }}-${{ matrix['build-type'] }}/cpp.sarif CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
 
     - name: Upload SARIF
       uses: actions/upload-artifact@main
