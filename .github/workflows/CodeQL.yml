@@ -43,7 +43,7 @@ jobs:
         category: "${{ matrix.language }}"
         upload: true
         wait-for-processing: true
-        output: results\${{ matrix.language }}
+        output: results/${{ matrix.language }}
 
     - name: View SARIF
       run: tree results /f
@@ -53,7 +53,7 @@ jobs:
       if: github.event_name == 'workflow_dispatch'
       with:
         name: CodeQL-SARIF-results-${{ matrix.language }}.sarif
-        path: results\${{ matrix.language }}\${{ matrix.language }}.sarif
+        path: results\${{ matrix.language }}\*.sarif
         compression-level: 9
         archive: false
 
@@ -118,7 +118,7 @@ jobs:
         category: "${{ matrix.language }} (${{ matrix['build-type'] }})"
         upload: true
         wait-for-processing: true
-        output: results\${{ matrix['build-type'] }}
+        output: results/${{ matrix['build-type'] }}
 
     - name: View SARIF
       run: tree results /f
@@ -127,7 +127,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
-        name: CodeQL-SARIF-results-cpp.sarif
-        path: results\${{ matrix['build-type'] }}\cpp.sarif
+        name: CodeQL-SARIF-results-${{ matrix.language }}.sarif
+        path: results\${{ matrix['build-type'] }}\*.sarif
         compression-level: 9
         archive: false
