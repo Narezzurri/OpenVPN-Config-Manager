@@ -40,6 +40,9 @@ jobs:
         wait-for-processing: true
         output: results
 
+    - name: View SARIF
+      run: dir results
+
     - name: Upload SARIF
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
