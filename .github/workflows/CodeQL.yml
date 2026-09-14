@@ -17,8 +17,13 @@ on:
 
 jobs:
   Analyze-Actions:
-    name: Analyze (actions)
+    name: Analyze (${{ matrix.language }})
     runs-on: 'windows-latest'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ actions ]
 
     steps:
     - name: Checkout repository
@@ -27,7 +32,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@main
       with:
-        languages: actions
+        languages: ${{ matrix.language }}
         build-mode: none
         queries: +security-and-quality
 
@@ -35,10 +40,10 @@ jobs:
       uses: github/codeql-action/analyze@main
       id: analyze
       with:
-        category: "actions"
+        category: "${{ matrix.language }}"
         upload: true
         wait-for-processing: true
-        output: results\actions
+        output: results\${{ matrix.language }}
 
     - name: View SARIF
       run: tree results /f
@@ -47,18 +52,19 @@ jobs:
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
-        name: CodeQL-SARIF-results-actions.sarif
-        path: results\actions\actions.sarif
+        name: CodeQL-SARIF-results-${{ matrix.language }}.sarif
+        path: results\${{ matrix.language }}\${{ matrix.language }}.sarif
         compression-level: 9
         archive: false
 
   Analyze-C-CPP:
-    name: Analyze (c-cpp) (${{ matrix['build-type'] }})
+    name: Analyze (${{ matrix.language }}) (${{ matrix['build-type'] }})
     runs-on: 'windows-latest'
 
     strategy:
       fail-fast: false
       matrix:
+        language: [ c-cpp ]
         build-type: [ Release,Debug,Test ]
 
     steps:
@@ -76,7 +82,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@main
       with:
-        languages: c-cpp
+        languages: ${{ matrix.language }}
         build-mode: manual
         queries: +security-and-quality
 
@@ -109,7 +115,7 @@ jobs:
       uses: github/codeql-action/analyze@main
       id: analyze
       with:
-        category: "c-cpp (${{ matrix['build-type'] }})"
+        category: "${{ matrix.language }} (${{ matrix['build-type'] }})"
         upload: true
         wait-for-processing: true
         output: results\${{ matrix['build-type'] }}
@@ -122,6 +128,6 @@ jobs:
       if: github.event_name == 'workflow_dispatch'
       with:
         name: CodeQL-SARIF-results-actions.sarif
-        path: results\${{ matrix['build-type'] }}\c-cpp.sarif
+        path: results\${{ matrix['build-type'] }}\${{ matrix.language }}.sarif
         compression-level: 9
         archive: false
