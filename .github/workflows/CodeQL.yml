@@ -18,7 +18,7 @@ on:
 jobs:
   Analyze-Actions:
     name: Analyze (${{ matrix.language }})
-    runs-on: 'windows-latest'
+    runs-on: 'ubuntu-latest'
 
     strategy:
       fail-fast: false
