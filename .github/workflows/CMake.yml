@@ -1,4 +1,4 @@
-name: CMake
+name: CMake Creation
 
 permissions: read-all
 
@@ -16,17 +16,17 @@ jobs:
       contents: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@main
 
     - name: Install NSIS
       run: |
         choco install nsis -y
         echo "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-    - name: Configure CMake of Build
+    - name: Configure CMake of Release
       if: github.event_name == 'release'
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Build -G "MinGW Makefiles"
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"
 
     - name: Configure CMake of Test
       if: github.event_name != 'release'
@@ -36,8 +36,9 @@ jobs:
       run: cmake --build build
 
     - name: Create an Setup Wizard
-      run: make -C build build
-      
+      working-directory: build
+      run: make build
+
     - name: Deploy
       working-directory: build
       run: |
@@ -54,21 +55,24 @@ jobs:
       working-directory: build
       run: ctest --output-on-failure --verbose
 
-    - name: Upload Release Artifacts
-      uses: actions/upload-artifact@v4
-      if: github.event_name == 'workflow_dispatch'
-      with:
-        name: OpenVPN-Config-Manager-Release
-        path: build/OpenVPNConfigManagerSetup-*.exe
-
-    - name: Create attachments
+    - name: Create Attachments
       working-directory: build
-      if: github.event_name == 'release'
+      if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
       run : |
         make zip
 
+    - name: Upload Release Artifacts
+      uses: actions/upload-artifact@main
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        name: OpenVPN-Config-Manager-Release
+        path: |
+          build/OpenVPNConfigManagerSetup-*.exe
+          build/OpenVPNConfigManagerSetup-*.zip
+        compression-level: 9
+
     - name: Upload to Release
-      uses: svenstaro/upload-release-action@v2
+      uses: svenstaro/upload-release-action@master
       if: github.event_name == 'release'
       with:
         file: build/*.{exe,zip}
