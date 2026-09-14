@@ -38,7 +38,7 @@ jobs:
         category: "actions"
         upload: true
         wait-for-processing: true
-        output: results
+        output: results\actions
 
     - name: View SARIF
       run: tree results /f
