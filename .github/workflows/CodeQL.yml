@@ -127,7 +127,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
-        name: CodeQL-SARIF-results-actions.sarif
-        path: results\${{ matrix['build-type'] }}\${{ matrix.language }}.sarif
+        name: CodeQL-SARIF-results-cpp.sarif
+        path: results\${{ matrix['build-type'] }}\cpp.sarif
         compression-level: 9
         archive: false
