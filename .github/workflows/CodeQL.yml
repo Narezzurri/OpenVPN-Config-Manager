@@ -53,7 +53,6 @@ jobs:
       if: github.event_name == 'workflow_dispatch'
       with:
         path: CodeQL-SARIF-${{ matrix.language }}.sarif
-        compression-level: 9
         archive: false
 
   Analyze-C-CPP:
@@ -127,5 +126,4 @@ jobs:
       if: github.event_name == 'workflow_dispatch'
       with:
         path: CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
-        compression-level: 9
         archive: false
