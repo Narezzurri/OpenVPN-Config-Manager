@@ -83,6 +83,7 @@ jobs:
         languages: ${{ matrix.language }}
         build-mode: manual
         queries: +security-and-quality
+        config-file: CodeQL-Config.yml
 
     - name: Create an Setup Wizard
       run: make -C build build
