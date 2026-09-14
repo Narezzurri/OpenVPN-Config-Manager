@@ -11,7 +11,7 @@
 using namespace std;
 using db = double;
 
-int T = -1;
+int period = -1;
 int ping_cnt = 0;
 db sec_per_wait = 1;
 db ping_timeout = 1;
@@ -42,7 +42,7 @@ int main (int argc, const char* argv[])
 			string arg = argv[i] + 1;
 			if (arg == "t" || arg == "time")
 			{
-				int succeed = get_int (argv[++nxt], T);
+				int succeed = get_int (argv[++nxt], period);
 				if (nxt == argc - 1 || !get_float (argv[++nxt], sec_per_wait))
 					nxt--;
 				return succeed;
@@ -73,7 +73,7 @@ int main (int argc, const char* argv[])
 		Search (argv[i], files);
 	for (int i = 0; i < files.size(); i++)
 	{
-		if (T > 0 && cnt && !(cnt % T))
+		if (period > 0 && cnt && !(cnt % period))
 			Sleep (sec_per_wait * 1000);
 		string filename = files[i];
 		cout << filename << " : ";
@@ -99,7 +99,7 @@ int main (int argc, const char* argv[])
 				if (string s = extract_suffix (filename, '\\'); !s.empty())
 					filename = s.substr(1);
 				string cmd = "start " + quote (filename) + " cmd /c " + quote (ping);
-				if (!~T)
+				if (!~period)
 					cmd = "start /wait" + cmd.substr(5);
 				system (cmd.c_str());
 				cnt++;
