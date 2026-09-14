@@ -11,14 +11,19 @@ on:
     branches: [ "main" ]
   pull_request:
   schedule:
-    - cron: '0 5 * * 0'
+    - cron: '0 5 * * *'
       timezone: "Asia/Shanghai"
   workflow_dispatch:
 
 jobs:
   Analyze-Actions:
-    name: Analyze (actions)
+    name: Analyze (${{ matrix.language }})
     runs-on: 'ubuntu-latest'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ actions ]
 
     steps:
     - name: Checkout repository
@@ -27,7 +32,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@main
       with:
-        languages: actions
+        languages: ${{ matrix.language }}
         build-mode: none
         queries: +security-and-quality
 
@@ -35,27 +40,29 @@ jobs:
       uses: github/codeql-action/analyze@main
       id: analyze
       with:
-        category: "actions"
+        category: "${{ matrix.language }}"
         upload: true
         wait-for-processing: true
-        output: results
+        output: results/${{ matrix.language }}
+
+    - name: Move SARIF
+      run: mv results/${{ matrix.language }}/actions.sarif CodeQL-SARIF-${{ matrix.language }}.sarif
 
     - name: Upload SARIF
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
-        name: CodeQL-SARIF-results-actions.sarif
-        path: ${{ steps.analyze.outputs['sarif-output'] }}/actions.sarif
-        compression-level: 9
+        path: CodeQL-SARIF-${{ matrix.language }}.sarif
         archive: false
 
   Analyze-C-CPP:
-    name: Analyze (c-cpp) (${{ matrix['build-type'] }})
+    name: Analyze (${{ matrix.language }}) (${{ matrix['build-type'] }})
     runs-on: 'windows-latest'
 
     strategy:
       fail-fast: false
       matrix:
+        language: [ c-cpp ]
         build-type: [ Release,Debug,Test ]
 
     steps:
@@ -73,13 +80,12 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@main
       with:
-        languages: c-cpp
+        languages: ${{ matrix.language }}
         build-mode: manual
         queries: +security-and-quality
 
     - name: Create an Setup Wizard
-      working-directory: build
-      run: make build
+      run: make -C build build
       
     - name: Deploy
       working-directory: build
@@ -107,16 +113,17 @@ jobs:
       uses: github/codeql-action/analyze@main
       id: analyze
       with:
-        category: "c-cpp (${{ matrix['build-type'] }})"
+        category: "${{ matrix.language }} (${{ matrix['build-type'] }})"
         upload: true
         wait-for-processing: true
-        output: results
+        output: results/${{ matrix.language }}-${{ matrix['build-type'] }}
+
+    - name: Move SARIF
+      run: mv results/${{ matrix.language }}-${{ matrix['build-type'] }}/cpp.sarif CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
 
     - name: Upload SARIF
       uses: actions/upload-artifact@main
       if: github.event_name == 'workflow_dispatch'
       with:
-        name: CodeQL-SARIF-results-actions.sarif
-        path: ${{ steps.analyze.outputs['sarif-output'] }}/c-cpp.sarif
-        compression-level: 9
+        path: CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
         archive: false
