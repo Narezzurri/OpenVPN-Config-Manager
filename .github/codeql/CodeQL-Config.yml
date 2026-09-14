@@ -1,0 +1,11 @@
+name: CodeQL Config
+
+disable-default-queries: false
+
+query-filters:
+  - exclude:
+      id: actions/unpinned-tag
+
+paths-ignore:
+  - googletest/**
+  - inih/**
