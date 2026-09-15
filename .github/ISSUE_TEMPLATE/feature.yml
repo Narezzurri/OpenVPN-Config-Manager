@@ -1,0 +1,26 @@
+name: Feature Request
+description: Suggest a new program or new feature
+labels: [ 'Feature' ]
+body:
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: Request Type
+      options:
+        - New Program
+        - Checker
+        - Authorizer
+        - Renamer
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: The preciser the better.
+      placeholder: |
+        For New Program: Describe the program's function and why it cannot be implemented within existing programs (Checker/Authorizer/Renamer).
+        For New Feature: Describe the your ideas.
+    validations:
+      required: true
