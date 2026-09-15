@@ -4,6 +4,9 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat)](http://makeapullrequest.com)
 <!-- [![GitHub downloads](https://img.shields.io/github/downloads/Narezzurri/OpenVPN-Config-Helper/total)](https://github.com/Narezzurri/OpenVPN-Config-Helper/releases) -->
 <!-- ![GitHub contributors](https://img.shields.io/github/contributors/Narezzurri/OpenVPN-Config-Helper) -->
+![v2.3](https://img.shields.io/badge/v2.3-Active-brightgreen)
+![v2.2](https://img.shields.io/badge/v2.2-Maintenance-yellow)
+![<v2.2](https://img.shields.io/badge/%3Cv2.2-EOL-red)
 
 # OpenVPN-Config-Manager
 
@@ -14,8 +17,6 @@ Tired of deploying for dozens of configs one by one, or adding login credentials
 This tool automates both tasks, making bulk OpenVPN deployment simple and reliable.
 
 # Contributing
-
-~~There's no collaborators yet.~~ 
 
 Contributions, bug reports, and feature requests are all welcome.
 

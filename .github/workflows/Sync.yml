@@ -63,8 +63,8 @@ jobs:
         author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
         committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
         branch: bot/Inih
-        commit-message: "Update Inih"
-        title: "Update Inih to version ${{ steps.fetch.outputs.new_version }} committed on ${{ steps.fetch.outputs.date }}"
+        commit-message: "🤖:Update Inih"
+        title: "🤖:Update Inih to version ${{ steps.fetch.outputs.new_version }} committed on ${{ steps.fetch.outputs.date }}"
         add-paths: inih
         delete-branch: true
         sign-commits: true
@@ -127,8 +127,8 @@ jobs:
         author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
         committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
         branch: bot/GoogleTest
-        commit-message: "Update Google Test"
-        title: "Update Google Test to version ${{ steps.fetch.outputs.new_version }} committed on ${{ steps.fetch.outputs.date }}"
+        commit-message: "🤖:Update Google Test"
+        title: "🤖:Update Google Test to version ${{ steps.fetch.outputs.new_version }} committed on ${{ steps.fetch.outputs.date }}"
         add-paths: googletest
         delete-branch: true
         sign-commits: true
