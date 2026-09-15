@@ -6,10 +6,9 @@ permissions:
 
 on:
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "21 5 * * *"
       timezone: "Asia/Shanghai"
   pull_request:
-    branches: "bot/*"
     types: [closed]
   workflow_dispatch:
 
@@ -20,6 +19,7 @@ jobs:
   inih:
     runs-on: ubuntu-latest
     environment: Signing
+    if: github.event_name != 'pull_request' || startsWith (github.event.pull_request.head.ref, 'bot/')
     
     steps:
     - name: Checkout Code
@@ -93,6 +93,7 @@ jobs:
   Google-Test:
     runs-on: ubuntu-latest
     environment: Signing
+    if: github.event_name != 'pull_request' || startsWith (github.event.pull_request.head.ref, 'bot/')
     
     steps:
     - name: Checkout Code
