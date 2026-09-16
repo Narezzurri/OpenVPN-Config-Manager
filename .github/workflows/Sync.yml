@@ -63,6 +63,7 @@ jobs:
         author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
         committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
         branch: bot/Inih
+        base: develop
         commit-message: "🤖:Update Inih"
         title: "🤖:Update Inih to version ${{ steps.fetch.outputs.new_version }} committed on ${{ steps.fetch.outputs.date }}"
         add-paths: inih
