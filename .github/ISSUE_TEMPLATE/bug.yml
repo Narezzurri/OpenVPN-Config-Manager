@@ -2,52 +2,56 @@ name: Bug Report
 description: Report a bug
 labels: [ 'bug' ]
 body:
-- type: markdown
-  attributes:
-    value: Describe the bug in brief.
+  - type: markdown
+    attributes:
+      value: Describe the bug in brief.
 
-- type: dropdown
-  id: version
-  attributes:
-    label: Version
-    description: Which version of **OpenVPN Config Manager** are you using?
-    options:
-      - 2.3
-      - 2.2
-  validations:
-    required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: Which version of **OpenVPN Config Manager** are you using?
+      options:
+        - 2.3
+        - 2.2
+    validations:
+      required: true
 
-- type: checkboxes
-  id: program
-  attributes:
-    label: Bug Program
-    description: Which program did the bug occured in?
-    options:
-      - label: Checker
-      - label: Authorizer
-      - label: Renamer
-  validations:
-    required: true
+  - type: checkboxes
+    id: program
+    attributes:
+      label: Bug Program
+      description: Which program did the bug occured in?
+      options:
+        - label: Checker
+        - label: Authorizer
+        - label: Renamer
+    validations:
+      required: true
 
-- type: input
-  id: command
-  attributes:
-    label: Launch Command
-    description: Enter launch command to reproduce the bug
-    placeholder: Checker *.ovpn /t 4 6
-  validations:
-    required: true
+  - type: input
+    id: command
+    attributes:
+      label: Launch Command
+      description: Enter launch command to reproduce the bug
+      placeholder: Checker *.ovpn /t 4 6
+    validations:
+      required: true
 
-- type: upload
-  id: attachment
-  attributes:
-    label: Attachment
-    description: Upload a **zip** including all files mentioned above
-  validations:
-    required: true
-    accept: ".zip"
+  - type: upload
+    id: attachment
+    attributes:
+      label: Attachment
+      description: Upload a **zip** including all files mentioned above
+    validations:
+      required: true
+      accept: ".zip"
 
-- type: markdown
-  attributes:
-    value: |
-      > ⚠️**Security Notice**: Before uploading, please remove or replace any sensitive data (passwords, private keys, credentials) from your config file.
+  - type: markdown
+    attributes:
+      value: |
+        > ⚠️**Security Notice**: Before uploading, please remove or replace any sensitive data (passwords, private keys, credentials) from your config file.
+
+  - type: textarea
+    attributes:
+      label: Additional Information
