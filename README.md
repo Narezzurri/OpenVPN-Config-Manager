@@ -22,6 +22,20 @@ Contributions, bug reports, and feature requests are all welcome.
 
 If you're new to open source, look for issues tagged [`good first issue`](https://github.com/Narezzurri/OpenVPN-Config-Helper/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22) 
 
+# Maintenance & Release Cadence
+
+This project is actively maintained with the following cadence:
+
+| Cadence |       Type       |                        What to expect                        |
+| ------- | ---------------- | ------------------------------------------------------------ |
+|  daily  |      Commit      | Bug fixes, documentation, refactoring, or small improvements |
+| Weekly  | Pre-release / RC |         Incremental updates ready for early testing          |
+| Monthly |  Stable release  |     Accumulated features, fixes, and maintenance updates     |
+
+I aim to keep this schedule, but it is a best-effort commitment, not a legal guarantee.
+
+Critical bug fixes and security issues will always take priority over the regular cadence.
+
 # Legal Statement
 
 This tool is designed for educational and administrative purposes only. It is intended to help users manage OpenVPN configurations they are legally authorized to use.We guarantee that we will not collect,transmit or upload any information from the configuration files to any remote server.
