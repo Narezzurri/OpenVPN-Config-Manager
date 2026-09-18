@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@main
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
 
       - name: Install NSIS
         run: |
@@ -64,7 +64,7 @@ jobs:
           make zip
 
       - name: Upload Release Artifacts
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         if: github.event_name == 'workflow_dispatch'
         with:
           name: OpenVPN-Config-Manager-Release
@@ -74,7 +74,7 @@ jobs:
           compression-level: 9
 
       - name: Upload to Release
-        uses: svenstaro/upload-release-action@master
+        uses: svenstaro/upload-release-action@29e53e917877a24fad85510ded594ab3c9ca12de
         if: github.event_name == 'release'
         with:
           file: build/*.{exe,zip}

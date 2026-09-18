@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@main
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
 
       - name: Fetch Latest Source Code
         id: fetch
@@ -47,7 +47,7 @@ jobs:
           sed -i -E "s/^([[:space:]]*set[[:space:]]*\([[:space:]]*VERSION[[:space:]]+)[0-9]+(.*)/\1${{ steps.fetch.outputs.new_version }}\2/" inih/CMakeLists.txt
 
       - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@master
+        uses: crazy-max/ghaction-import-gpg@377dc5d6faebf439805626394e6191cc4ce1b0ba
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           trust_level: 5
@@ -58,7 +58,7 @@ jobs:
 
       - name: Create Pull Request
         id: create-pr
-        uses: peter-evans/create-pull-request@main
+        uses: peter-evans/create-pull-request@11e8dc7c9cc95aabee9cfaa85faaec8b50907340
         with:
           author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
           committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
@@ -96,7 +96,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@main
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
 
       - name: Fetch Latest Source Code
         id: fetch
@@ -112,7 +112,7 @@ jobs:
           rm -rf googletest/.git
 
       - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@master
+        uses: crazy-max/ghaction-import-gpg@377dc5d6faebf439805626394e6191cc4ce1b0ba
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           trust_level: 5
@@ -123,7 +123,7 @@ jobs:
 
       - name: Create Pull Request
         id: create-pr
-        uses: peter-evans/create-pull-request@main
+        uses: peter-evans/create-pull-request@11e8dc7c9cc95aabee9cfaa85faaec8b50907340
         with:
           author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
           committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
