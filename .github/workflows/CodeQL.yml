@@ -30,10 +30,10 @@ jobs:
       run: echo ${{ github.event.action }}
 
     - name: Checkout repository
-      uses: actions/checkout@main
+      uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@main
+      uses: github/codeql-action/init@a0cc01096a24026610f4adb239c336ec0a1e4bd2
       with:
         languages: ${{ matrix.language }}
         build-mode: none
@@ -41,7 +41,7 @@ jobs:
         config-file: .github/codeql/CodeQL-Config.yml
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@main
+      uses: github/codeql-action/analyze@a0cc01096a24026610f4adb239c336ec0a1e4bd2
       id: analyze
       with:
         category: "${{ matrix.language }}"
@@ -53,7 +53,7 @@ jobs:
       run: mv results/${{ matrix.language }}/actions.sarif CodeQL-SARIF-${{ matrix.language }}.sarif
 
     - name: Upload SARIF
-      uses: actions/upload-artifact@main
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
       if: github.event_name == 'workflow_dispatch'
       with:
         path: CodeQL-SARIF-${{ matrix.language }}.sarif
@@ -71,7 +71,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@main
+      uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
 
     - name: Install dependencies
       run: |
@@ -82,7 +82,7 @@ jobs:
       run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix['build-type'] }} -G "MinGW Makefiles"
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@main
+      uses: github/codeql-action/init@a0cc01096a24026610f4adb239c336ec0a1e4bd2
       with:
         languages: ${{ matrix.language }}
         build-mode: manual
@@ -115,7 +115,7 @@ jobs:
         make zip
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@main
+      uses: github/codeql-action/analyze@a0cc01096a24026610f4adb239c336ec0a1e4bd2
       id: analyze
       with:
         category: "${{ matrix.language }} (${{ matrix['build-type'] }})"
@@ -127,7 +127,7 @@ jobs:
       run: move results/${{ matrix.language }}-${{ matrix['build-type'] }}/cpp.sarif CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
 
     - name: Upload SARIF
-      uses: actions/upload-artifact@main
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
       if: github.event_name == 'workflow_dispatch'
       with:
         path: CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif

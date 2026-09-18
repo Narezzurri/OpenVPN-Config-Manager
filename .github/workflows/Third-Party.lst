@@ -1,0 +1,8 @@
+https://github.com/actions/checkout/
+https://github.com/actions/upload-artifact/
+https://github.com/github/codeql-action/init
+https://github.com/github/codeql-action/analyze
+https://github.com/crazy-max/ghaction-import-gpg/
+https://github.com/peter-evans/create-pull-request/
+https://github.com/svenstaro/upload-release-action/
+https://github.com/iamazeem/delete-workflow-runs-action/
