@@ -10,7 +10,6 @@
 #include	"lib.h"
 using namespace std;
 using db = double;
-
 int period = -1;
 int ping_cnt = 0;
 db sec_per_wait = 1;
