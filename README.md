@@ -28,7 +28,6 @@ This project is actively maintained with the following cadence:
 
 | Cadence |       Type       |                        What to expect                        |
 | ------- | ---------------- | ------------------------------------------------------------ |
-|  daily  |      Commit      | Bug fixes, documentation, refactoring, or small improvements |
 | Weekly  | Pre-release / RC |         Incremental updates ready for early testing          |
 | Monthly |  Stable release  |     Accumulated features, fixes, and maintenance updates     |
 
