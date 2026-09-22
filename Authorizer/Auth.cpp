@@ -26,35 +26,33 @@ int main (int argc, const char* argv[])
 #endif
 		return 0;
 	}
-	vector<int> mark (argc);
-	for (int i = 1; i < argc; i++) if (argv[i][0] == '/') [&] ()
+	for (int i = 1; i < argc; i++)
 	{
-		mark[i] = 1;
-		int nxt = i;
-		if (i <= argc - 1 && [&] () -> bool
-		{
-			string arg = argv[i] + 1;
-			if (arg == "c" || arg == "credit")
-			{
-				credential = argv[++nxt];
-				return 1;
-			}
-			else
-			{
-				cout << "Unrecognized argument : " << argv[i] << ".Skip." << endl;
-				return 0;
-			}
-		}())
-		{
-			for (int j = nxt; j > i; j--)
-				mark[j] = 1;
-		}
+		if (argv[i][0] != '/')
+			Search (argv[i], files);
 		else
-			cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip." << endl;
-	} ();
+		{
+			int nxt = i;
+			if (i <= argc - 1 && [&] () -> bool
+			{
+				string arg = argv[i] + 1;
+				if (arg == "c" || arg == "credit")
+				{
+					credential = argv[++nxt];
+					return 1;
+				}
+				else
+				{
+					cout << "Unrecognized argument : " << argv[i] << ".Skip." << endl;
+					return 0;
+				}
+			}())
+				i = nxt;
+			else
+				cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip." << endl;
+		}
+	}
 	int cnt = 0;
-	for (int i = 1; i < argc; i++) if (!mark[i])
-		Search (argv[i], files);
 	for (int i = 0; i < files.size(); i++)
 	{
 		string filename = files[i];
