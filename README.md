@@ -26,12 +26,14 @@ If you're new to open source, look for issues tagged [`good first issue`](https:
 
 This project is actively maintained with the following cadence:
 
-| Cadence |       Type       |                        What to expect                        |
-| ------- | ---------------- | ------------------------------------------------------------ |
-| Weekly  | Pre-release / RC |         Incremental updates ready for early testing          |
-| Monthly |  Stable release  |     Accumulated features, fixes, and maintenance updates     |
+| Cadence |       Type       |                                      What to expect                                      |
+| ------- | ---------------- | ---------------------------------------------------------------------------------------- |
+| Weekly  | Pre-release / RC |                       Incremental updates ready for early testing                        |
+| Monthly |  Stable release  | Accumulated features, fixes, and maintenance updates, published on the 4th of each month |
 
 I aim to keep this schedule, but it is a best-effort commitment, not a legal guarantee.
+
+If the 4th falls on a weekend or holiday, the stable release may be shifted by 1–2 days.
 
 Critical bug fixes and security issues will always take priority over the regular cadence.
 
