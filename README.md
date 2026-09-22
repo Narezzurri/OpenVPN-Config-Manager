@@ -43,3 +43,11 @@ This tool is designed for educational and administrative purposes only. It is in
 Users are solely responsible for ensuring their use of this software and any associated VPN services complies with all applicable local laws and regulations. The author assumes no liability for any misuse of this tool.
 
 For details on third-party components and their licenses, please refer to the [`NOTICE`](NOTICE) file.
+
+# In the distance
+
+https://chat.deepseek.com/share/rp4vp4pt2x4ldcpnpm
+
+https://chat.deepseek.com/share/s7ajpqv73wkdm2ar0a
+
+AI + Natural Language Deployment
