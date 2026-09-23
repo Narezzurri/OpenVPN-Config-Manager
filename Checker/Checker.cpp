@@ -32,45 +32,43 @@ int main (int argc, const char* argv[])
 		return 0;
 	}
 	int err = 0;
-	vector<int> mark (argc);
-	for (int i = 1; i < argc; i++) if (argv[i][0] == '/') [&] ()
+	for (int i = 1; i < argc; i++) [&] ()
 	{
-		mark[i] = 1;
-		int nxt = i;
-		if (i <= argc - 1 && [&] () -> bool
-		{
-			string arg = argv[i] + 1;
-			if (arg == "t" || arg == "time")
-			{
-				int succeed = get_int (argv[++nxt], period);
-				if (nxt == argc - 1 || !get_float (argv[++nxt], sec_per_wait))
-					nxt--;
-				return succeed;
-			}
-			else if (arg == "w" || arg == "wait")
-				return get_float (argv[++nxt], ping_timeout);
-			else if (arg == "n" || arg == "number")
-				return get_int (argv[++nxt], ping_cnt);
-			else
-			{
-				cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
-				err = 1;
-				return 0;
-			}
-		}())
-		{
-			for (int j = nxt; j > i; j--)
-				mark[j] = 1;
-		}
+		if (argv[i][0] != '/')
+			Search (argv[i], files);
 		else
 		{
-			cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip" << endl;
-			err = 1;
+			int nxt = i;
+			if (i <= argc - 1 && [&] () -> bool
+			{
+				string arg = argv[i] + 1;
+				if (arg == "t" || arg == "time")
+				{
+					int succeed = get_int (argv[++nxt], period);
+					if (nxt == argc - 1 || !get_float (argv[++nxt], sec_per_wait))
+						nxt--;
+					return succeed;
+				}
+				else if (arg == "w" || arg == "wait")
+					return get_float (argv[++nxt], ping_timeout);
+				else if (arg == "n" || arg == "number")
+					return get_int (argv[++nxt], ping_cnt);
+				else
+				{
+					cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
+					err = 1;
+					return 0;
+				}
+			}())
+				i = nxt;
+			else
+			{
+				cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip" << endl;
+				err = 1;
+			}
 		}
 	} ();
 	int cnt = 0;
-	for (int i = 1; i < argc; i++) if (!mark[i])
-		Search (argv[i], files);
 	for (int i = 0; i < files.size(); i++)
 	{
 		if (period > 0 && cnt && !(cnt % period))
