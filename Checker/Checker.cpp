@@ -15,6 +15,7 @@ int period = -1;
 int ping_cnt = 0;
 db sec_per_wait = 1;
 db ping_timeout = 1;
+int show_address = 0;
 vector<string> files;
 
 int main (int argc, const char* argv[])
@@ -53,10 +54,14 @@ int main (int argc, const char* argv[])
 					return get_float (argv[++nxt], ping_timeout);
 				else if (arg == "n" || arg == "number")
 					return get_int (argv[++nxt], ping_cnt);
+				else if (arg == "show")
+				{
+					show_address = 1;
+					return 1;
+				}
 				else
 				{
 					cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
-					err = 1;
 					return 0;
 				}
 			}())
@@ -69,6 +74,7 @@ int main (int argc, const char* argv[])
 		}
 	} ();
 	int cnt = 0;
+	set<string> address;
 	for (int i = 0; i < files.size(); i++)
 	{
 		if (period > 0 && cnt && !(cnt % period))
@@ -82,13 +88,31 @@ int main (int argc, const char* argv[])
 			cin.clear();
 			freopen (filename.c_str(), "r", stdin);
 			string addr;
-			cin >> addr;
-			while (cin >> addr && addr != "remote");
-			if (addr != "remote")
-				puts ("Server ip address not found.");
-			else
+			int cnt_found = 0;
+			while (cin >> addr)
 			{
-				cin >> addr;				// Server address
+				if (addr == "remote" && cin >> addr && !address.count(addr))
+				{
+					address.emplace(addr);
+					cnt_found++;
+				}
+			}
+			if (!cnt_found)
+				puts ("None of new server address found.");
+			else
+				cout << cnt_found << " new address(es) found." << endl;
+		}
+	}
+	if (show_address)
+	{
+		if (address.empty())
+			puts ("No server address found.");
+		else
+		{
+			cout << address.size() << " server address(es) found." << endl;
+			for (auto addr : address)
+			{
+				cout << "Launching connection with " << addr << endl;
 				string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
 				if (ping_cnt)
 					ping += " -n " + to_string (ping_cnt);
