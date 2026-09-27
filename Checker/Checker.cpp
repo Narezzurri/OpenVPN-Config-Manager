@@ -70,32 +70,33 @@ int main (int argc, const char* argv[])
 	} ();
 	int cnt = 0;
 	set<string> address;
-	for (int i = 0; i < files.size(); i++)
+	for (auto filename : files)
 	{
 		if (period > 0 && cnt && !(cnt % period))
 			Sleep (sec_per_wait * 1000);
-		string filename = files[i];
 		cout << filename << " : ";
 		if (extract_suffix (filename, '.') != ".ovpn")
 			puts ("Unsupported file type.");
 		else
 		{
 			cin.clear();
-			freopen (filename.c_str(), "r", stdin);
 			string addr;
-			int cnt_found = 0;
-			while (cin >> addr)
-			{
-				if (addr == "remote" && cin >> addr && !address.count(addr))
-				{
-					address.emplace(addr);
-					cnt_found++;
-				}
-			}
-			if (!cnt_found)
+			set<string> new_address;
+			freopen (filename.c_str(), "r", stdin);
+			while (cin >> addr) if (addr == "remote" && cin >> addr && !address.count(addr))
+				new_address.emplace(addr);
+			if (new_address.empty())
 				puts ("None of new server address found.");
 			else
-				cout << cnt_found << " New address(es) found." << endl;
+			{
+				cout << new_address.size() << " New address(es) found: ";
+				for (auto addr : new_address)
+				{
+					cout << addr << ' ';
+					address.emplace(addr);
+				}
+				cout << endl;
+			}
 		}
 	}
 	if (address.empty())
