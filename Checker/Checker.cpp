@@ -56,7 +56,8 @@ int main (int argc, const char* argv[])
 				else
 				{
 					cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
-					return 0;
+					err = 1;
+					return 1;
 				}
 			}())
 				i = nxt;
