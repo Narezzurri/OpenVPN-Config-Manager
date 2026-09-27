@@ -15,7 +15,6 @@ int period = -1;
 int ping_cnt = 0;
 db sec_per_wait = 1;
 db ping_timeout = 1;
-int show_address = 0;
 vector<string> files;
 
 int main (int argc, const char* argv[])
@@ -54,11 +53,6 @@ int main (int argc, const char* argv[])
 					return get_float (argv[++nxt], ping_timeout);
 				else if (arg == "n" || arg == "number")
 					return get_int (argv[++nxt], ping_cnt);
-				else if (arg == "show")
-				{
-					show_address = 1;
-					return 1;
-				}
 				else
 				{
 					cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
@@ -100,36 +94,31 @@ int main (int argc, const char* argv[])
 			if (!cnt_found)
 				puts ("None of new server address found.");
 			else
-				cout << cnt_found << " new address(es) found." << endl;
+				cout << cnt_found << " New address(es) found." << endl;
 		}
 	}
-	if (show_address)
+	if (address.empty())
+		puts ("No server address found.");
+	else
 	{
-		if (address.empty())
-			puts ("No server address found.");
-		else
+		cout << address.size() << " server address(es) found." << endl;
+		for (auto addr : address)
 		{
-			cout << address.size() << " server address(es) found." << endl;
-			for (auto addr : address)
-			{
-				cout << "Launching connection with " << addr << endl;
-				string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
-				if (ping_cnt)
-					ping += " -n " + to_string (ping_cnt);
-				else
-					ping += " -t";
-				if (string s = extract_suffix (filename, '\\'); !s.empty())
-					filename = s.substr(1);
-				string cmd = "start " + quote (filename) + " cmd /c " + quote (ping);
-				if (!~period)
-					cmd = "start /wait" + cmd.substr(5);
-				system (cmd.c_str());
-				cnt++;
-				puts ("Done.");
-			}
+			cout << "Launching connection with " << addr << endl;
+			string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
+			if (ping_cnt)
+				ping += " -n " + to_string (ping_cnt);
+			else
+				ping += " -t";
+			string cmd = "start " + quote (addr) + " cmd /c " + quote (ping);
+			if (!~period)
+				cmd = "start /wait" + cmd.substr(5);
+			system (cmd.c_str());
+			cnt++;
+			puts ("Done.");
 		}
 	}
-	cout << cnt << " files checked successfully." << endl;
+	cout << cnt << " address(es) checked successfully." << endl;
 	freopen ("CON", "r", stdin);
 #ifndef		DEBUG
 	getchar ();
