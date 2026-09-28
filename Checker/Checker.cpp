@@ -80,11 +80,11 @@ int main (int argc, const char* argv[])
 		else
 		{
 			cin.clear();
-			string addr;
+			string s;
 			set<string> new_address;
 			freopen (filename.c_str(), "r", stdin);
-			while (cin >> addr) if (addr == "remote" && cin >> addr && !address.count(addr))
-				new_address.emplace(addr);
+			while (cin >> s) if (s == "remote" && cin >> s && !address.count(s))
+				new_address.emplace(s);
 			if (new_address.empty())
 				puts ("None of new server address found.");
 			else
