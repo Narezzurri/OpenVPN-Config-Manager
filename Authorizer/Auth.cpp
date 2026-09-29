@@ -71,12 +71,6 @@ int main (int argc, const char* argv[])
 		stringstream ss;
 		ss << filein.rdbuf();
 		filein.close();
-		ofstream fileout (filename, ios::binary);
-		if (!fileout.is_open())
-		{
-			puts ("Cannot write into file.");
-			continue;
-		}
 		vector<string> line;
 		string cfg = ss.str();
 		while (cfg.find('\n') != string::npos)
@@ -86,7 +80,7 @@ int main (int argc, const char* argv[])
 			cfg = cfg.substr(idx + 1);
 		}
 		line.emplace_back(cfg);
-		for (auto s : line)
+		for (auto &s : line)
 		{
 			int sharp = s.find_first_of('#');
 			string comment;
@@ -115,10 +109,16 @@ int main (int argc, const char* argv[])
 				pos = idx + credential.length() + 1;
 				end += credential.length() + 1;
 			}
-			fileout.write(s.data(), s.length());
-			fileout.write(comment.data(), comment.length());
-			fileout.flush();
+			s += comment;
 		}
+		ofstream fileout (filename, ios::binary);
+		if (!fileout.is_open())
+		{
+			puts ("Cannot write into file.");
+			continue;
+		}
+		for (auto &s : line)
+			fileout.write(s.data(), s.length());
 		fileout.close();
 		puts ("Done.");
 		cnt++;
