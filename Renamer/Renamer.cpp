@@ -115,7 +115,6 @@ int main (int argc, const char* argv[])
 	}
 #ifndef		DEBUG
 	getchar ();
-	getchar ();
 #endif
 	return 0;
 }
