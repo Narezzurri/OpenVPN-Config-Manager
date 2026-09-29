@@ -6,6 +6,7 @@ body:
     id: request_type
     attributes:
       label: Request Type
+      multiple: true
       options:
         - New Program
         - Checker
