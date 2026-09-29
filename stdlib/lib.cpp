@@ -249,3 +249,10 @@ int roll_back (map<string,string> mp)
 	}
 	return error;
 }
+
+bool choice (istream &in)
+{
+	string choice;
+	in >> choice;
+	return choice == "Y" || choice == "y";
+}

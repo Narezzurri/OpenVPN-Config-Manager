@@ -38,3 +38,5 @@ int re2string (const INIReader& rule, string s, const smatch& match, map<string,
 int parse_error (int error_code, string name, FILE* err);
 /** @brief Roll back a rename operation */
 int roll_back (map<string,string> mp);
+/** @brief Obtain a Y/n choice from [in] */
+bool choice (istream &in);
