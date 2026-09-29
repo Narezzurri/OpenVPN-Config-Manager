@@ -256,3 +256,10 @@ bool choice (istream &in)
 	in >> choice;
 	return choice == "Y" || choice == "y";
 }
+
+string remove_end_newline (string s)
+{
+	while (s.back() == '\r' || s.back() == '\n')
+		s.pop_back();
+	return s;
+}

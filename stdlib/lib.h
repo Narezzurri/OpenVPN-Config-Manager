@@ -40,3 +40,5 @@ int parse_error (int error_code, string name, FILE* err);
 int roll_back (map<string,string> mp);
 /** @brief Obtain a Y/n choice from [in] */
 bool choice (istream &in);
+/** @brief Remove the `\r`(s) and `\\n`(s) in s */
+string remove_end_newline (string s);
