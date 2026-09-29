@@ -23,4 +23,4 @@ body:
         For New Program: Describe the program's function and why it cannot be implemented within existing programs (Checker/Authorizer/Renamer).
         For New Feature: Describe the your ideas.
     validations:
-      required: true
+      required: false
