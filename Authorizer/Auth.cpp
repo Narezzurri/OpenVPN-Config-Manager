@@ -119,13 +119,14 @@ int main (int argc, const char* argv[])
 				{
 					t.insert(idx, ' ' + credential);
 					cout << "Appendage on Line " << i + 1 << " : " << remove_end_newline (s) << " -> " << remove_end_newline (t) << endl;
-					if (dryrun)
-						continue;
-					cout << "Confirm to append?(Y/n)";
-					if (choice (cin))
+					if (!dryrun)
 					{
-						s = t;
-						file_updated = 1;
+						cout << "Confirm to append?(Y/n)";
+						if (choice (cin))
+						{
+							s = t;
+							file_updated = 1;
+						}
 					}
 				}
 				pos = idx + credential.length() + 1;
@@ -135,7 +136,7 @@ int main (int argc, const char* argv[])
 		}
 		if (!file_updated)
 		{
-			puts ("No Updates.");
+			puts ("No effective updates.");
 			continue;
 		}
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
