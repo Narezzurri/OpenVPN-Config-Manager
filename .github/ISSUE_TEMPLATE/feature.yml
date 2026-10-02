@@ -21,7 +21,7 @@ body:
       label: Description
       description: The preciser the better.
       placeholder: |
-        For New Program: Describe the program's function and why it cannot be implemented within existing programs (Checker/Authorizer/Renamer).
+        For New Program: Describe the program's function and why it cannot be implemented with the existing programs.
         For New Feature: Describe the your ideas.
     validations:
       required: false
