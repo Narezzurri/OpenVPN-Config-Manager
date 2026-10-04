@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.12)
 
 set (NAME "Auth")
-set (VERSION "1.1.0")
+set (VERSION "1.2.0")
 set (DIR "Authorizer")
 
 project (OpenVPN-Config-${DIR} VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)

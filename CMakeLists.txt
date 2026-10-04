@@ -19,7 +19,7 @@ set (ALL_DEPENDS
 	${CMAKE_SOURCE_DIR}/Renamer/Template.ini 
 )
 # Version
-set (VERSION "2.2.1")
+set (VERSION "2.3.0")
 set (CMAKE_CXX_STANDARD 23)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 

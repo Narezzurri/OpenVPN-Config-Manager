@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.12)
 
 set (DIR "Renamer")
 set (NAME "Renamer")
-set (VERSION "1.0.0")
+set (VERSION "1.0.1")
 
 project (OpenVPN-Config-${DIR} VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
 
