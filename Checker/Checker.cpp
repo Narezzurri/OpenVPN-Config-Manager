@@ -57,7 +57,7 @@ int main (int argc, const char* argv[])
 				{
 					cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
 					err = 1;
-					return 0;
+					return 1;
 				}
 			}())
 				i = nxt;
@@ -69,43 +69,58 @@ int main (int argc, const char* argv[])
 		}
 	} ();
 	int cnt = 0;
-	for (int i = 0; i < files.size(); i++)
+	set<string> address;
+	for (auto filename : files)
 	{
 		if (period > 0 && cnt && !(cnt % period))
 			Sleep (sec_per_wait * 1000);
-		string filename = files[i];
 		cout << filename << " : ";
 		if (extract_suffix (filename, '.') != ".ovpn")
 			puts ("Unsupported file type.");
 		else
 		{
 			cin.clear();
+			string s;
+			set<string> new_address;
 			freopen (filename.c_str(), "r", stdin);
-			string addr;
-			cin >> addr;
-			while (cin >> addr && addr != "remote");
-			if (addr != "remote")
-				puts ("Server ip address not found.");
+			while (cin >> s) if (s == "remote" && cin >> s && !address.count(s))
+				new_address.emplace(s);
+			if (new_address.empty())
+				puts ("None of new server address found.");
 			else
 			{
-				cin >> addr;				// Server address
-				string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
-				if (ping_cnt)
-					ping += " -n " + to_string (ping_cnt);
-				else
-					ping += " -t";
-				if (string s = extract_suffix (filename, '\\'); !s.empty())
-					filename = s.substr(1);
-				string cmd = "start " + quote (filename) + " cmd /c " + quote (ping);
-				if (!~period)
-					cmd = "start /wait" + cmd.substr(5);
-				system (cmd.c_str());
-				cnt++;
-				puts ("Done.");
+				cout << new_address.size() << " New address(es) found: ";
+				for (auto addr : new_address)
+				{
+					cout << addr << ' ';
+					address.emplace(addr);
+				}
+				cout << endl;
 			}
 		}
 	}
-	cout << cnt << " files checked successfully." << endl;
+	if (address.empty())
+		puts ("No server address found.");
+	else
+	{
+		cout << address.size() << " server address(es) found." << endl;
+		for (auto addr : address)
+		{
+			cout << "Launching connection with " << addr << endl;
+			string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
+			if (ping_cnt)
+				ping += " -n " + to_string (ping_cnt);
+			else
+				ping += " -t";
+			string cmd = "start " + quote (addr) + " cmd /c " + quote (ping);
+			if (!~period)
+				cmd = "start /wait" + cmd.substr(5);
+			system (cmd.c_str());
+			cnt++;
+			puts ("Done.");
+		}
+	}
+	cout << cnt << " address(es) checked successfully." << endl;
 	freopen ("CON", "r", stdin);
 #ifndef		DEBUG
 	getchar ();
