@@ -1,0 +1,28 @@
+name: Clear Workflow Records
+
+permissions:
+  actions: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Workflow Filename'
+        required: true
+        type: string
+      keep:
+        description: 'Number of Records to Keep'
+        type: number
+        default: 0
+
+jobs:
+  Clear-Records:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
+
+      - uses: iamazeem/delete-workflow-runs-action@9020b412d8dce3036e9fce9284617cf0c8ed5ff3
+        with:
+          workflow: '${{ inputs.name }}'
+          keep: ${{ inputs.keep }}

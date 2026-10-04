@@ -22,6 +22,21 @@ Contributions, bug reports, and feature requests are all welcome.
 
 If you're new to open source, look for issues tagged [`good first issue`](https://github.com/Narezzurri/OpenVPN-Config-Helper/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22) 
 
+# Maintenance & Release Cadence
+
+This project is actively maintained with the following cadence:
+
+| Cadence |       Type       |                                      What to expect                                      |
+| ------- | ---------------- | ---------------------------------------------------------------------------------------- |
+| Weekly  | Pre-release / RC |                       Incremental updates ready for early testing                        |
+| Monthly |  Stable release  | Accumulated features, fixes, and maintenance updates, published on the 4th of each month |
+
+I aim to keep this schedule, but it is a best-effort commitment, not a legal guarantee.
+
+If the 4th falls on a weekend or holiday, the stable release may be shifted by 1–2 days.
+
+Critical bug fixes and security issues will always take priority over the regular cadence.
+
 # Legal Statement
 
 This tool is designed for educational and administrative purposes only. It is intended to help users manage OpenVPN configurations they are legally authorized to use.We guarantee that we will not collect,transmit or upload any information from the configuration files to any remote server.
@@ -29,3 +44,11 @@ This tool is designed for educational and administrative purposes only. It is in
 Users are solely responsible for ensuring their use of this software and any associated VPN services complies with all applicable local laws and regulations. The author assumes no liability for any misuse of this tool.
 
 For details on third-party components and their licenses, please refer to the [`NOTICE`](NOTICE) file.
+
+# In the distance
+
+https://chat.deepseek.com/share/rp4vp4pt2x4ldcpnpm
+
+https://chat.deepseek.com/share/s7ajpqv73wkdm2ar0a
+
+AI + Natural Language Deployment
