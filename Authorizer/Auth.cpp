@@ -10,6 +10,7 @@
 using namespace std;
 
 int dryrun = 0;
+int auto_confirm = 0;
 vector<string> files;
 string credential = "auth.txt";
 
@@ -37,6 +38,11 @@ int main (int argc, const char* argv[])
 				if (arg == "c" || arg == "cred")
 				{
 					credential = argv[++nxt];
+					return 1;
+				}
+				else if (arg == "Y" || arg == "y")
+				{
+					auto_confirm = 1;
 					return 1;
 				}
 				else if (arg == "dry-run")
@@ -121,7 +127,7 @@ int main (int argc, const char* argv[])
 #ifdef		DEBUG
 						cout << endl;
 #else
-						if (choice (cin))
+						if (auto_confirm || choice (cin))
 #endif
 						{
 							s = t;
