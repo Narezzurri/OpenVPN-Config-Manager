@@ -122,7 +122,9 @@ int main (int argc, const char* argv[])
 					if (!dryrun)
 					{
 						cout << "Confirm to append?(Y/n)";
-#ifndef		DEBUG
+#ifdef		DEBUG
+						cout << endl;
+#else
 						if (choice (cin))
 #endif
 						{
@@ -141,16 +143,36 @@ int main (int argc, const char* argv[])
 			puts ("No effective updates.");
 			continue;
 		}
-		ofstream fileout (filename, ios::binary);
-		if (!fileout.is_open())
-			puts ("Cannot write into file.");
-		else
+		cout << "Assign the output file:(Reserved to skip)";
+		string output_filename = filename;
+#ifndef		DEBUG
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		if (cin.peek() != '\n')
+			getline (cin, output_filename);
+		do
 		{
-			for (auto s : line)
-				fileout.write(s.data(), s.length());
-			fileout.close();
-			cnt++;
+#endif
+			ofstream fileout (output_filename, ios::binary);
+			if (!fileout.is_open())
+				puts ("Cannot write into file.");
+			else
+			{
+				for (auto s : line)
+					fileout.write(s.data(), s.length());
+				fileout.close();
+				cout << "Written into file: " << output_filename << endl;
+				cnt++;
+#ifndef		DEBUG
+				break;
+#endif
+			}
+#ifndef		DEBUG
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Assign the output file:(Reserved to skip)";
+			getline (cin, output_filename);
 		}
+		while (!output_filename.empty());
+#endif
 	}
 	cout << endl << cnt << " file(s) appended successfully." << endl;
 #ifndef		DEBUG
