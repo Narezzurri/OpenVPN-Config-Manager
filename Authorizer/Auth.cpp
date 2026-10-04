@@ -11,6 +11,7 @@
 using namespace std;
 
 int dryrun = 0;
+int auto_confirm = 0;
 vector<string> files;
 string credential = "auth.txt";
 
@@ -41,6 +42,11 @@ int main (int argc, const char* argv[])
 				if (arg == "c" || arg == "credit")
 				{
 					credential = argv[++nxt];
+					return 1;
+				}
+				else if (arg == "Y" || arg == "y")
+				{
+					auto_confirm = 1;
 					return 1;
 				}
 				else if (arg == "dry-run")
@@ -122,7 +128,7 @@ int main (int argc, const char* argv[])
 					if (!dryrun)
 					{
 						cout << "Confirm to append?(Y/n)";
-						if (choice (cin))
+						if (auto_confirm || choice (cin))
 						{
 							s = t;
 							file_updated = 1;
