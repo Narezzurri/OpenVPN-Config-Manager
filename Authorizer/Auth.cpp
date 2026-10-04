@@ -121,8 +121,14 @@ int main (int argc, const char* argv[])
 					cout << "Appendage on Line " << i + 1 << " : " << remove_end_newline (s) << " -> " << remove_end_newline (t) << endl;
 					if (!dryrun)
 					{
-						s = t;
-						file_updated = 1;
+						cout << "Confirm to append?(Y/n)";
+#ifndef		DEBUG
+						if (choice (cin))
+#endif
+						{
+							s = t;
+							file_updated = 1;
+						}
 					}
 				}
 				pos = idx + credential.length() + 1;
