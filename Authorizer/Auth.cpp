@@ -146,8 +146,9 @@ int main (int argc, const char* argv[])
 		cout << "Assign the output file:(Reserved to skip)";
 		string output_filename = filename;
 #ifndef		DEBUG
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		if (cin.peek() != '\n')
+		if (cin.peek() == '\n')
+			cin.get();
+		else
 			getline (cin, output_filename);
 		do
 		{
