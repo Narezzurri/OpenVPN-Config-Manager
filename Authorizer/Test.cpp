@@ -54,7 +54,8 @@ TEST_F (Feature, Skip_Authed)
 		EXPECT_EQ (0, system (("copy Templates\\" + i + "-authed.ovpn Templates\\" + i + ".ovpn /Y").c_str()));
 	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn"));
 }
-TEST (Dryrun, Dryrun)
+
+TEST_F (Dryrun, Dryrun)
 {
 	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn /dry-run > stdout"));
 	vector<int> mark (templates.size());

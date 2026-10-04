@@ -6,7 +6,6 @@
 #include	<fstream>
 #include	<sstream>
 #include	<vector>
-#include	<climits>
 #include	"lib.h"
 using namespace std;
 
@@ -144,12 +143,13 @@ int main (int argc, const char* argv[])
 			continue;
 		}
 		cout << "Assign the output file:(Reserved to skip)";
-		string output_filename = filename;
+		string output_filename;
 #ifndef		DEBUG
-		if (cin.peek() == '\n')
-			cin.get();
-		else
-			getline (cin, output_filename);
+		getline (cin, output_filename);
+		if (output_filename.empty())
+#endif
+			output_filename = filename;
+#ifndef		DEBUG
 		do
 		{
 #endif
@@ -168,7 +168,6 @@ int main (int argc, const char* argv[])
 #endif
 			}
 #ifndef		DEBUG
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Assign the output file:(Reserved to skip)";
 			getline (cin, output_filename);
 		}
