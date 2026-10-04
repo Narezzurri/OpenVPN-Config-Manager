@@ -6,6 +6,4 @@
 
 *.exe
 
-/Todo.txt
-
 googletest/.git

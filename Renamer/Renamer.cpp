@@ -103,7 +103,7 @@ int main (int argc, const char* argv[])
 #ifdef		DEBUG
 	cout << endl;
 #else
-	if (toupper (getchar ()) != 'Y')
+	if (!choice (cin))
 		puts ("Canceled.");
 	else
 #endif
@@ -114,7 +114,6 @@ int main (int argc, const char* argv[])
 		cout << succeed.size() << " file(s) renamed." << endl;
 	}
 #ifndef		DEBUG
-	getchar ();
 	getchar ();
 #endif
 	return 0;
