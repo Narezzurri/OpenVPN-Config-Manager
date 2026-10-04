@@ -252,13 +252,9 @@ int roll_back (map<string,string> mp)
 
 bool choice (istream &in)
 {
-#ifdef		DEBUG
-	return 1;
-#else
 	string choice;
 	in >> choice;
 	return choice == "Y" || choice == "y";
-#endif
 }
 
 string remove_end_newline (string s)
