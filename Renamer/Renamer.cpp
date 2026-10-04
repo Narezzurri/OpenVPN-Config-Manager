@@ -103,7 +103,7 @@ int main (int argc, const char* argv[])
 #ifdef		DEBUG
 	cout << endl;
 #else
-	if (choice (cin))
+	if (!choice (cin))
 		puts ("Canceled.");
 	else
 #endif

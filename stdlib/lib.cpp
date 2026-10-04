@@ -253,7 +253,7 @@ int roll_back (map<string,string> mp)
 bool choice (istream &in)
 {
 	string choice;
-	in >> choice;
+	getline (in, choice);
 	return choice == "Y" || choice == "y";
 }
 
