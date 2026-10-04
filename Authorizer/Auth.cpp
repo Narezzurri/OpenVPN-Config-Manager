@@ -121,47 +121,30 @@ int main (int argc, const char* argv[])
 					cout << "Appendage on Line " << i + 1 << " : " << remove_end_newline (s) << " -> " << remove_end_newline (t) << endl;
 					if (!dryrun)
 					{
-						cout << "Confirm to append?(Y/n)";
-						if (choice (cin))
-						{
-							s = t;
-							file_updated = 1;
-						}
+						s = t;
+						file_updated = 1;
 					}
 				}
 				pos = idx + credential.length() + 1;
 				end += credential.length() + 1;
 			}
 			s += comment;
-		}
+ 		}
 		if (!file_updated)
 		{
 			puts ("No effective updates.");
 			continue;
 		}
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "Assign the output file:(Reserved to skip)";
-		string output_filename = filename;
-		if (cin.peek() != '\n')
-			getline (cin, output_filename);
-		do
-		{
-			ofstream fileout (output_filename, ios::binary);
-			if (fileout.is_open())
-			{
-				for (auto s : line)
-					fileout.write(s.data(), s.length());
-				fileout.close();
-				cout << "Written into file: " << output_filename << endl;
-				cnt++;
-				break;
-			}
+		ofstream fileout (filename, ios::binary);
+		if (!fileout.is_open())
 			puts ("Cannot write into file.");
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "Assign the output file:(Reserved to skip)";
-			getline (cin, output_filename);
+		else
+		{
+			for (auto s : line)
+				fileout.write(s.data(), s.length());
+			fileout.close();
+			cnt++;
 		}
-		while (!output_filename.empty());
 	}
 	cout << endl << cnt << " file(s) appended successfully." << endl;
 #ifndef		DEBUG
