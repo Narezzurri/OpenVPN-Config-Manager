@@ -20,6 +20,6 @@ Syntax
         In addition,a null key is required to define the variable type.
         These are legal values :
             string    Capture all characters.
-            alpha     Caputure all letters with upper and lower case.
+            alpha     Capture all letters with upper and lower case.
             digit     Capture all digits.
             float     Capture all float numbers(digits separated by a dot).
