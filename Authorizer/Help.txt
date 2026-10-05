@@ -1,10 +1,17 @@
 OpenVPN Config Authorizer v1.2 (c) 2026 Narezzurri - MIT Licence 
-Repository: https://github.com/Narezzurri/OpenVPN-Config-Helper 
+Repository: https://github.com/Narezzurri/OpenVPN-Config-Manager 
 
-Function 
-    Append login credentials to OpenVPN config file(s) (*.ovpn).
-    More precisely,it can append the filename of
-    the crdential (default is auth.txt) to every "auth-user-pass" part.
+Append login credentials to OpenVPN config file(s) (*.ovpn).
+> It appends the assigned crdential to each effective "auth-user-pass" part.
 
-Usage
-    > Auth config1.ovpn config2.ovpn ... 
+Usage: Auth [/c[redential] filename] [/dry-run] config1.ovpn config2.ovpn ...
+
+If there are multiple arguments of the same type,only the last one matters.
+
+    /c[redential] ----- Assign the credential file
+    filename ---------- The credential file
+                        Default: 'auth.txt'
+
+    /dry-run ---------- Reject and show all changes.
+
+    /? /help --help --- Print this help document
