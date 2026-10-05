@@ -2,7 +2,7 @@ OpenVPN Config Authorizer v1.2 (c) 2026 Narezzurri - MIT Licence
 Repository: https://github.com/Narezzurri/OpenVPN-Config-Manager 
 
 Append login credentials to OpenVPN config file(s) (*.ovpn).
-> It appends the assigned crdential to each effective "auth-user-pass" part.
+> It appends the assigned credential to each effective "auth-user-pass" part.
 
 Usage: Auth [/c[redential] filename] [/dry-run] config1.ovpn config2.ovpn ...
 
