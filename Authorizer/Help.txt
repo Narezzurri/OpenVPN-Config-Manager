@@ -4,7 +4,7 @@ Repository: https://github.com/Narezzurri/OpenVPN-Config-Manager
 Append login credentials to OpenVPN config file(s) (*.ovpn).
 > It appends the assigned credential to each effective "auth-user-pass" part.
 
-Usage: Auth [/c[redential] filename] [/dry-run] config1.ovpn config2.ovpn ...
+Usage: Auth [/c[red] filename] [/dry-run] config1.ovpn config2.ovpn ...
 
 If there are multiple arguments of the same type,only the last one matters.
 

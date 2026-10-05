@@ -37,7 +37,7 @@ int main (int argc, const char* argv[])
 			if (i <= argc - 1 && [&] () -> bool
 			{
 				string arg = argv[i] + 1;
-				if (arg == "c" || arg == "credit")
+				if (arg == "c" || arg == "cred")
 				{
 					credential = argv[++nxt];
 					return 1;
