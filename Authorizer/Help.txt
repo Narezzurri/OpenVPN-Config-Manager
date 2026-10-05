@@ -8,7 +8,7 @@ Usage: Auth [/c[red] filename] [/dry-run] config1.ovpn config2.ovpn ...
 
 If there are multiple arguments of the same type,only the last one matters.
 
-    /c[redential] ----- Assign the credential file
+    /c[red] ----------- Assign the credential file
     filename ---------- The credential file
                         Default: 'auth.txt'
 
