@@ -24,16 +24,19 @@ If you're new to open source, look for issues tagged [`good first issue`](https:
 
 # Maintenance & Release Cadence
 
-This project is actively maintained with the following cadence:
+This project follows a monthly release cycle with a defined feature freeze and release candidate phase:
 
-| Cadence |       Type       |                                      What to expect                                      |
-| ------- | ---------------- | ---------------------------------------------------------------------------------------- |
-| Weekly  | Pre-release / RC |                       Incremental updates ready for early testing                        |
-| Monthly |  Stable release  | Accumulated features, fixes, and maintenance updates, published on the 4th of each month |
+|     Phase      |            Date            |                                              Description                                              |
+| -------------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
+|      RC1       |     24th of each month     |               First release candidate: starts community testing and feedback collection               |
+|      RC2       | 1st of the following month | Second release candidate with **new features frozen**: only bug fixes and security fixes are accepted |
+| Stable Release | 4th of the following month |       Official stable release, containing accumulated features, fixes, and maintenance updates        |
 
-I aim to keep this schedule, but it is a best-effort commitment, not a legal guarantee.
+Each minor version is maintained for **4 months** after its stable release, only receiving bug and security fixes during that period.
 
-If the 4th falls on a weekend or holiday, the stable release may be shifted by 1–2 days.
+I aim to keep this schedule, but it is a best-effort commitment, not a legal guarantee.  
+
+If the release date falls on a weekend or holiday, the release may be shifted by 1–2 days.
 
 Critical bug fixes and security issues will always take priority over the regular cadence.
 
