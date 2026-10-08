@@ -53,7 +53,7 @@ jobs:
       run: mv results/${{ matrix.language }}/actions.sarif CodeQL-SARIF-${{ matrix.language }}.sarif
 
     - name: Upload SARIF
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      uses: actions/upload-artifact@f430e030ddbb5b0abf93d22962f4752f3646cd9
       if: github.event_name == 'workflow_dispatch'
       with:
         path: CodeQL-SARIF-${{ matrix.language }}.sarif
@@ -127,7 +127,7 @@ jobs:
       run: move results/${{ matrix.language }}-${{ matrix['build-type'] }}/cpp.sarif CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
 
     - name: Upload SARIF
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      uses: actions/cf430e030ddbb5b0abf93d22962f4752f3646cd9
       if: github.event_name == 'workflow_dispatch'
       with:
         path: CodeQL-SARIF-${{ matrix.language }}-${{ matrix['build-type'] }}.sarif
