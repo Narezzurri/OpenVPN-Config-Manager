@@ -26,9 +26,6 @@ int main (int argc, const char* argv[])
 		cout << string {
 			#embed	"Help.txt"
 		};
-#ifndef		DEBUG
-		getchar ();
-#endif
 		return 0;
 	}
 	int err = 0;
