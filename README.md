@@ -1,10 +1,11 @@
-[![GitHub release](https://img.shields.io/github/v/release/Narezzurri/OpenVPN-Config-Helper)](https://github.com/Narezzurri/OpenVPN-Config-Helper/releases)
-[![GitHub license](https://img.shields.io/github/license/Narezzurri/OpenVPN-Config-Helper)](https://github.com/Narezzurri/OpenVPN-Config-Helper/blob/main/LICENSE)
-![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat)](http://makeapullrequest.com)
-<!-- [![GitHub downloads](https://img.shields.io/github/downloads/Narezzurri/OpenVPN-Config-Helper/total)](https://github.com/Narezzurri/OpenVPN-Config-Helper/releases) -->
-<!-- ![GitHub contributors](https://img.shields.io/github/contributors/Narezzurri/OpenVPN-Config-Helper) -->
-![v2.3](https://img.shields.io/badge/v2.3-Active-brightgreen)
+[![CMake Creation](https://github.com/Narezzurri/OpenVPN-Config-Manager/actions/workflows/CMake.yml/badge.svg)](https://github.com/Narezzurri/OpenVPN-Config-Manager/actions/workflows/CMake.yml)
+[![License](https://img.shields.io/github/license/Narezzurri/OpenVPN-Config-Manager)](https://github.com/Narezzurri/OpenVPN-Config-Manager/blob/main/LICENSE)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-orange)](https://github.com/Narezzurri/OpenVPN-Config-Manager/issues)
+<!-- [![GitHub downloads](https://img.shields.io/github/downloads/Narezzurri/OpenVPN-Config-Manager/total)](https://github.com/Narezzurri/OpenVPN-Config-Manager/releases) -->
+<!-- ![GitHub contributors](https://img.shields.io/github/contributors/Narezzurri/OpenVPN-Config-Manager) -->
+[![GitHub Release](https://img.shields.io/github/v/release/Narezzurri/OpenVPN-Config-Manager)](https://github.com/Narezzurri/OpenVPN-Config-Manager/releases)
+![v2.4](https://img.shields.io/badge/v2.4-Active-brightgreen)
+![v2.3](https://img.shields.io/badge/v2.3-Maintenance-yellow)
 ![v2.2](https://img.shields.io/badge/v2.2-Maintenance-yellow)
 ![<v2.2](https://img.shields.io/badge/%3Cv2.2-EOL-red)
 
@@ -20,7 +21,7 @@ This tool automates both tasks, making bulk OpenVPN deployment simple and reliab
 
 Contributions, bug reports, and feature requests are all welcome.
 
-If you're new to open source, look for issues tagged [`good first issue`](https://github.com/Narezzurri/OpenVPN-Config-Helper/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22) 
+If you're new to open source, look for issues tagged [`good first issue`](https://github.com/Narezzurri/OpenVPN-Config-Manager/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22) 
 
 # Maintenance & Release Cadence
 
