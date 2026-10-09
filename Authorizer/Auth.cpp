@@ -117,7 +117,7 @@ int main (int argc, const char* argv[])
 					cout << "Appendage on Line " << i + 1 << " : " << remove_end_newline (s) << " -> " << remove_end_newline (t) << endl;
 					if (!dryrun)
 					{
-						cout << "Confirm to append?(Y/n)";
+						cout << "Confirm to append? [Y/n] ";
 #ifdef		DEBUG
 						cout << endl;
 #else
