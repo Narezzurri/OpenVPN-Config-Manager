@@ -11,6 +11,8 @@ using namespace std;
 using db = double;
 using pss = pair<string,string>;
 
+vector<string> templates = {"us-1.udp", "uk-2.udp", "ca-3.tcp", "jp-4.tcp"};
+
 /** @brief Read a non-negative integer from [s] and store it in [ans] */
 int get_int (string s, int &ans);
 /** @brief Read a non-negative decimal fraction from [s] and store it in [ans] */
