@@ -1,7 +1,5 @@
 #include	<gtest/gtest.h>
-#ifndef		OVPNS
-#define		OVPNS		""
-#endif
+#include	"lib.h"
 using namespace std;
 
 class Feature : public testing::Test
@@ -32,7 +30,13 @@ TEST (Help, Help)
 	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
 }
 
-TEST_F (Feature, Basic) { EXPECT_EQ (0, system ("cd Templates && ..\\Auth " OVPNS)); }
+TEST_F (Feature, Basic)
+{
+	string cmd = "Auth ";
+	for (auto i : templates)
+		cmd += "Templates\\" + i + ".ovpn ";
+	EXPECT_EQ (0, system (cmd.c_str()));
+}
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Auth Templates\\*.ovpn")); }
 TEST_F (Feature, Skip_Authed)
 {
