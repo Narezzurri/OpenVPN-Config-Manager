@@ -99,7 +99,7 @@ int main (int argc, const char* argv[])
 	cout << ans.size() << " file(s) matched." << endl;
 	for (auto [raw, nw] : ans)
 		cout << quote (raw) << " -> " << quote (nw) << endl;
-	cout << "Confirm to rename?(Y/N):";
+	cout << "Confirm to rename? [Y/n] ";
 #ifdef		DEBUG
 	cout << endl;
 #else
