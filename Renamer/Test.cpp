@@ -1,13 +1,16 @@
 #include	<gtest/gtest.h>
 #include	<filesystem>
-#ifndef		OVPNS
-#define		OVPNS				""
-#endif
-#ifndef		OVPNS_AUTHED
-#define		OVPNS_AUTHED		""
-#endif
+#include	"lib.h"
 using namespace std;
 using namespace filesystem;
+
+vector<string> new_templates = 
+{
+	"UnitedStates#1-UDP.ovpn", "UnitedStates#1-udp-authed.ovpn",
+	"UnitedKingdom#2-UDP.ovpn", "UnitedKingdom#2-udp-authed.ovpn",
+	"Canada#3-TCP.ovpn", "Canada#3-tcp-authed.ovpn",
+	"Japan#4-TCP.ovpn", "Japan#4-tcp-authed.ovpn"
+};
 
 class Feature : public testing::Test
 {
@@ -21,23 +24,14 @@ public:
 	void TearDown (void) override
 	{
 		// Old files
-		EXPECT_FALSE (exists ("Templates\\us-1.udp.ovpn"));
-		EXPECT_FALSE (exists ("Templates\\uk-2.udp.ovpn"));
-		EXPECT_FALSE (exists ("Templates\\ca-3.tcp.ovpn"));
-		EXPECT_FALSE (exists ("Templates\\jp-4.tcp.ovpn"));
-		EXPECT_FALSE (exists ("Templates\\us-1.udp-authed.ovpn"));
-		EXPECT_FALSE (exists ("Templates\\uk-2.udp-authed.ovpn"));
-		EXPECT_FALSE (exists ("Templates\\ca-3.tcp-authed.ovpn"));
-		EXPECT_FALSE (exists ("Templates\\jp-4.tcp-authed.ovpn"));
+		for (auto i : templates)
+		{
+			EXPECT_FALSE (exists ("Templates\\" + i + ".ovpn"));
+			EXPECT_FALSE (exists ("Templates\\" + i + "-authed.ovpn"));
+		}
 		// New files
-		EXPECT_TRUE (exists ("Templates\\UnitedStates#1-UDP.ovpn"));
-		EXPECT_TRUE (exists ("Templates\\UnitedKingdom#2-UDP.ovpn"));
-		EXPECT_TRUE (exists ("Templates\\Canada#3-TCP.ovpn"));
-		EXPECT_TRUE (exists ("Templates\\Japan#4-TCP.ovpn"));
-		EXPECT_TRUE (exists ("Templates\\UnitedStates#1-udp-authed.ovpn"));
-		EXPECT_TRUE (exists ("Templates\\UnitedKingdom#2-udp-authed.ovpn"));
-		EXPECT_TRUE (exists ("Templates\\Canada#3-tcp-authed.ovpn"));
-		EXPECT_TRUE (exists ("Templates\\Japan#4-tcp-authed.ovpn"));
+		for (auto i : new_templates)
+			EXPECT_TRUE (exists ("Templates\\" + i));
 	}
 };
 

@@ -1,11 +1,8 @@
 #include	<gtest/gtest.h>
 #include	<fstream>
-#ifndef		OVPNS
-#define		OVPNS		""
-#endif
+#include	"lib.h"
 using namespace std;
 
-vector<string> templates = {"us-1.udp", "uk-2.udp", "ca-3.tcp", "jp-4.tcp"};
 class Feature : public testing::Test
 {
 public:
@@ -42,9 +39,9 @@ TEST (Help, Help)
 
 TEST_F (Feature, Basic)
 {
-	string cmd = "cd Templates && ..\\Auth ";
+	string cmd = "Auth ";
 	for (auto i : templates)
-		cmd += i + ".ovpn ";
+		cmd += "Templates\\" + i + ".ovpn ";
 	EXPECT_EQ (0, system (cmd.c_str()));
 }
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Auth Templates\\*.ovpn")); }
