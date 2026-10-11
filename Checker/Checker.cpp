@@ -68,12 +68,9 @@ int main (int argc, const char* argv[])
 			}
 		}
 	} ();
-	int cnt = 0;
 	set<string> address;
 	for (auto filename : files)
 	{
-		if (period > 0 && cnt && !(cnt % period))
-			Sleep (sec_per_wait * 1000);
 		cout << filename << " : ";
 		if (extract_suffix (filename, '.') != ".ovpn")
 			puts ("Unsupported file type.");
@@ -104,9 +101,12 @@ int main (int argc, const char* argv[])
 	else
 	{
 		cout << address.size() << " server address(es) found." << endl;
+		int cnt = 0;
 		for (auto addr : address)
 		{
-			cout << "Launching connection with " << addr << endl;
+			if (period > 0 && cnt && !(cnt % period))
+				Sleep (sec_per_wait * 1000);
+			cout << "Launching connection with " << addr << " : ";
 			string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
 			if (ping_cnt)
 				ping += " -n " + to_string (ping_cnt);
@@ -119,8 +119,8 @@ int main (int argc, const char* argv[])
 			cnt++;
 			puts ("Done.");
 		}
+		cout << cnt << " address(es) checked successfully." << endl;
 	}
-	cout << cnt << " address(es) checked successfully." << endl;
 	freopen ("CON", "r", stdin);
 #ifndef		DEBUG
 	getchar ();
