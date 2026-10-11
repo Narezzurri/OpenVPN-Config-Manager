@@ -12,6 +12,7 @@ body:
       label: Version
       description: Which version of **OpenVPN Config Manager** are you using?
       options:
+        - develop branch
         - 2.3
         - 2.2
     validations:
