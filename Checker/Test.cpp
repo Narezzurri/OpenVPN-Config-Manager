@@ -28,14 +28,10 @@ TEST (Feature, PrintAddress)
 	for (int i = 0; i < 8; i++)
 		getline (fin, input);
 	getline (fin, input); EXPECT_EQ (input, "4 server address(es) found.");
-	getline (fin, input); EXPECT_EQ (input, "Launching connection with ja.wikipedia.org");
-	getline (fin, input); EXPECT_EQ (input, "Done.");
-	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.bbc.com");
-	getline (fin, input); EXPECT_EQ (input, "Done.");
-	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.cbc.ca");
-	getline (fin, input); EXPECT_EQ (input, "Done.");
-	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.github.com");
-	getline (fin, input); EXPECT_EQ (input, "Done.");
+	getline (fin, input); EXPECT_EQ (input, "Launching connection with ja.wikipedia.org : Done.");
+	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.bbc.com : Done.");
+	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.cbc.ca : Done.");
+	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.github.com : Done.");
 	getline (fin, input); EXPECT_EQ (input, "4 address(es) checked successfully.");
 }
 
