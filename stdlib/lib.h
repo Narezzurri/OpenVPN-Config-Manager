@@ -12,6 +12,7 @@ using db = double;
 using pss = pair<string,string>;
 
 vector<string> templates = {"us-1.udp", "uk-2.udp", "ca-3.tcp", "jp-4.tcp"};
+vector<string> templates_address = {"www.github.com", "www.bbc.com", "www.cbc.ca", "ja.wikipedia.org"};
 
 /** @brief Read a non-negative integer from [s] and store it in [ans] */
 int get_int (string s, int &ans);
