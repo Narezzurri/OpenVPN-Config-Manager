@@ -47,5 +47,15 @@ TEST (Help, Help)
 	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
 }
 
-TEST_F (Feature, Basic) { EXPECT_EQ (0, system ("cd Templates && ..\\Renamer " OVPNS " " OVPNS_AUTHED " Template.ini")); }
+TEST_F (Feature, Basic)
+{
+	string cmd = "Renamer ";
+	for (auto i : templates)
+	{
+		cmd += "Templates\\" + i + ".ovpn ";
+		cmd += "Templates\\" + i + "-authed" + ".ovpn ";
+	}
+	cmd += "Template.ini";
+	EXPECT_EQ (0, system (cmd.c_str()));
+}
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Renamer Templates\\*")); }
