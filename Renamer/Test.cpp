@@ -14,12 +14,11 @@ vector<string> new_templates =
 
 class Feature : public testing::Test
 {
-public:
+protected:
 	void SetUp (void) override
 	{
 		system ("rmdir Templates /s /q");
-		system ("xcopy ..\\..\\Templates Templates /I");
-		system ("copy Template.ini Templates /Y");
+		system ("xcopy ..\\Templates Templates /I");
 	}
 	void TearDown (void) override
 	{
@@ -55,7 +54,7 @@ TEST_F (Feature, Basic)
 		cmd += "Templates\\" + i + ".ovpn ";
 		cmd += "Templates\\" + i + "-authed" + ".ovpn ";
 	}
-	cmd += "Template.ini";
+	cmd += "Templates\\Template.ini";
 	EXPECT_EQ (0, system (cmd.c_str()));
 }
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Renamer Templates\\*")); }

@@ -5,10 +5,10 @@ using namespace std;
 
 class Feature : public testing::Test
 {
-public:
+protected:
 	void SetUp (void) override
 	{
-		ASSERT_EQ (0, system ("xcopy ..\\..\\Templates Templates /I /Y"));
+		ASSERT_EQ (0, system ("xcopy ..\\Templates Templates /I /Y"));
 	}
 	void TearDown (void) override
 	{
@@ -18,10 +18,10 @@ public:
 };
 class Dryrun : public testing::Test
 {
-public:
+protected:
 	void SetUp (void) override
 	{
-		ASSERT_EQ (0, system ("xcopy ..\\..\\Templates Templates /I /Y"));
+		ASSERT_EQ (0, system ("xcopy ..\\Templates Templates /I /Y"));
 	}
 };
 
