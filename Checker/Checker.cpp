@@ -98,25 +98,33 @@ int main (int argc, const char* argv[])
 	else
 	{
 		cout << address.size() << " server address(es) found." << endl;
-		int cnt = 0;
-		for (auto addr : address)
+		cout << "Test connection with these " << address.size() << " address(es)? [Y/n] ";
+#ifdef		DEBUG
+		cout << endl;
+#else
+		if (choice (cin))
+#endif
 		{
-			if (period > 0 && cnt && !(cnt % period))
-				Sleep (sec_per_wait * 1000);
-			cout << "Launching connection with " << addr << " : ";
-			string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
-			if (ping_cnt)
-				ping += " -n " + to_string (ping_cnt);
-			else
-				ping += " -t";
-			string cmd = "start " + quote (addr) + " cmd /c " + quote (ping);
-			if (!~period)
-				cmd = "start /wait" + cmd.substr(5);
-			system (cmd);
-			cnt++;
-			puts ("Done.");
+			int cnt = 0;
+			for (auto addr : address)
+			{
+				if (period > 0 && cnt && !(cnt % period))
+					Sleep (sec_per_wait * 1000);
+				cout << "Launching connection with " << addr << " : ";
+				string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
+				if (ping_cnt)
+					ping += " -n " + to_string (ping_cnt);
+				else
+					ping += " -t";
+				string cmd = "start " + quote (addr) + " cmd /c " + quote (ping);
+				if (!~period)
+					cmd = "start /wait" + cmd.substr(5);
+				system (cmd);
+				cnt++;
+				puts ("Done.");
+			}
+			cout << cnt << " address(es) checked successfully." << endl;
 		}
-		cout << cnt << " address(es) checked successfully." << endl;
 	}
 	freopen ("CON", "r", stdin);
 #ifndef		DEBUG
