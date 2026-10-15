@@ -1,5 +1,5 @@
-OpenVPN Config Checker v1.3.0 (c) 2026 Narezzurri - MIT Licence 
-Repository: https://github.com/Narezzurri/OpenVPN-Config-Helper 
+OpenVPN Config Checker v@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@ (c) 2026 Narezzurri - MIT Licence 
+Repository: https://github.com/Narezzurri/OpenVPN-Config-Manager 
 
 Function 
     Check in bulk the connection between the host

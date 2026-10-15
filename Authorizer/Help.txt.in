@@ -1,5 +1,5 @@
-OpenVPN Config Authorizer v1.0.0 (c) 2026 Narezzurri - MIT Licence 
-Repository: https://github.com/Narezzurri/OpenVPN-Config-Helper 
+OpenVPN Config Authorizer v@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@ (c) 2026 Narezzurri - MIT Licence 
+Repository: https://github.com/Narezzurri/OpenVPN-Config-Manager 
 
 Function 
     Append login credentials to OpenVPN config file(s) (*.ovpn).
