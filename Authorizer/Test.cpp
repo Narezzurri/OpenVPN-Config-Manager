@@ -4,17 +4,15 @@ using namespace std;
 
 class Feature : public testing::Test
 {
-public:
+protected:
 	void SetUp (void) override
 	{
-		system ("xcopy ..\\..\\Templates Templates /I /Y");
+		ASSERT_EQ (0, system ("xcopy ..\\Templates Templates /I /Y"));
 	}
 	void TearDown (void) override
 	{
-		EXPECT_EQ (0, system ("fc Templates\\us-1.udp.ovpn Templates\\us-1.udp-authed.ovpn"));
-		EXPECT_EQ (0, system ("fc Templates\\uk-2.udp.ovpn Templates\\uk-2.udp-authed.ovpn"));
-		EXPECT_EQ (0, system ("fc Templates\\ca-3.tcp.ovpn Templates\\ca-3.tcp-authed.ovpn"));
-		EXPECT_EQ (0, system ("fc Templates\\jp-4.tcp.ovpn Templates\\jp-4.tcp-authed.ovpn"));
+		for (auto i : templates)
+			EXPECT_EQ (0, system (("fc Templates\\" + i + ".ovpn Templates\\" + i + "-authed.ovpn").c_str()));
 	}
 };
 

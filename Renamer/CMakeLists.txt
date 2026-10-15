@@ -27,8 +27,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	add_dependencies (RenamerTest Renamer)
 	target_link_libraries (RenamerTest PRIVATE gtest gtest_main stdlib)
 	# Resource
-	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-	configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/Template.ini" "${CMAKE_CURRENT_BINARY_DIR}/Template.ini" COPYONLY)
+	configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/Template.ini" "${CMAKE_BINARY_DIR}/Templates/Template.ini" COPYONLY)
 	# Register
 	add_test (NAME Renamer COMMAND RenamerTest)
 	set_tests_properties (Renamer PROPERTIES TIMEOUT 8)

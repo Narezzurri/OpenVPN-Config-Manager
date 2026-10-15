@@ -14,10 +14,10 @@ TEST (Feature, Basic)
 {
 	string cmd = "Checker ";
 	for (auto i : templates)
-		cmd += "Templates\\" + i + ".ovpn ";
+		cmd += "..\\Templates\\" + i + ".ovpn ";
 	cmd += "/w 0.8 /t 2 1 /n 2";
 	EXPECT_EQ (0, system (cmd.c_str()));
 }
-TEST (Feature, Wildcard) { EXPECT_EQ (0, system ("Checker Templates\\*.ovpn /w 0.8 /t 2 1 /n 2")); }
+TEST (Feature, Wildcard) { EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /w 0.8 /t 2 1 /n 2")); }
 
-TEST (Bug, Bug202609090913) { EXPECT_EQ (0, system ("Checker Templates\\*.ovpn /t 2 /n 2")); }
+TEST (Bug, Bug202609090913) { EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /t 2 /n 2")); }
