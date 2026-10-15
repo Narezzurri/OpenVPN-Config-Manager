@@ -68,7 +68,7 @@ TEST_F (Feature, Basic)
 		cmd += "Templates\\" + i + ".ovpn ";
 		cmd += "Templates\\" + i + "-authed" + ".ovpn ";
 	}
-	cmd += "Template.ini";
+	cmd += "Templates\\Template.ini";
 	EXPECT_EQ (0, system (cmd.c_str()));
 }
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Renamer Templates\\*")); }
