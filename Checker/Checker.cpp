@@ -112,7 +112,7 @@ int main (int argc, const char* argv[])
 			string cmd = "start " + quote (addr) + " cmd /c " + quote (ping);
 			if (!~period)
 				cmd = "start /wait" + cmd.substr(5);
-			system (cmd.c_str());
+			system (cmd);
 			cnt++;
 			puts ("Done.");
 		}

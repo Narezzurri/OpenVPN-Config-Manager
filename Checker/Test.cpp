@@ -44,7 +44,7 @@ TEST_F (Feature, Basic)
 	for (auto i : templates)
 		cmd += "..\\Templates\\" + i + ".ovpn ";
 	cmd += "/w 0.8 /t 2 1 /n 2";
-	EXPECT_EQ (0, system (cmd.c_str()));
+	EXPECT_EQ (0, system (cmd));
 }
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /w 0.8 /t 2 1 /n 2")); }
 TEST_F (Feature, PrintAddress)

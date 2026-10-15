@@ -45,3 +45,5 @@ int roll_back (map<string,string> mp);
 bool choice (istream &in);
 /** @brief Remove the `\r`(s) and `\\n`(s) in s */
 string remove_end_newline (string s);
+/** @brief Run command cmd */
+int system (string cmd);

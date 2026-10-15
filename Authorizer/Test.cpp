@@ -19,7 +19,7 @@ protected:
 	void TearDown (void) override
 	{
 		for (auto i : templates)
-			EXPECT_EQ (0, system (("fc Templates\\" + i + ".ovpn Templates\\" + i + "-authed.ovpn").c_str()));
+			EXPECT_EQ (0, system ("fc Templates\\" + i + ".ovpn Templates\\" + i + "-authed.ovpn"));
 		db dt = duration_cast<duration<db,milli> > (steady_clock::now() - birth).count();
 		EXPECT_LE (minthr, dt);
 		EXPECT_LE (dt, maxthr);
@@ -67,13 +67,13 @@ TEST_F (Feature, Basic)
 	string cmd = "Auth ";
 	for (auto i : templates)
 		cmd += "Templates\\" + i + ".ovpn ";
-	EXPECT_EQ (0, system (cmd.c_str()));
+	EXPECT_EQ (0, system (cmd));
 }
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Auth Templates\\*.ovpn")); }
 TEST_F (Feature, Skip_Authed)
 {
 	for (auto i : templates)
-		EXPECT_EQ (0, system (("copy Templates\\" + i + "-authed.ovpn Templates\\" + i + ".ovpn /Y").c_str()));
+		EXPECT_EQ (0, system ("copy Templates\\" + i + "-authed.ovpn Templates\\" + i + ".ovpn /Y"));
 	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn"));
 }
 

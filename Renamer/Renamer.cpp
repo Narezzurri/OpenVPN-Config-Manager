@@ -106,7 +106,7 @@ int main (int argc, const char* argv[])
 #endif
 	{
 		map<string,string> succeed;
-		for (auto [raw, nw] : ans) if (!system (("move " + raw + ' ' + parse_filepath (raw).first + '\\' + nw).c_str()))
+		for (auto [raw, nw] : ans) if (!system ("move " + raw + ' ' + parse_filepath (raw).first + '\\' + nw))
 			succeed[raw] = nw;
 		cout << succeed.size() << " file(s) renamed." << endl;
 	}
