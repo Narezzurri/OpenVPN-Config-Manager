@@ -35,7 +35,7 @@ set (CMAKE_CXX_FLAGS_RELEASE "-Ofast")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	include (CTest)
-	add_compile_definitions (DEBUG OVPNS="${OVPNS}" OVPNS_AUTHED="${OVPNS_AUTHED}")
+	add_compile_definitions (DEBUG)
 	set (gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 	set (INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 	set (INSTALL_GMOCK OFF CACHE BOOL "" FORCE)
