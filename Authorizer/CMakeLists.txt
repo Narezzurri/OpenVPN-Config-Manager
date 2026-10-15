@@ -26,8 +26,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	add_executable (AuthTest Test.cpp)
 	add_dependencies (AuthTest Auth)
 	target_link_libraries (AuthTest PRIVATE gtest gtest_main stdlib)
-	# Resource
-	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 	# Register
 	add_test (NAME Auth COMMAND AuthTest)
 	set_tests_properties (Auth PROPERTIES TIMEOUT 8)

@@ -14,7 +14,7 @@ protected:
 	void SetUp (void) override
 	{
 		birth = steady_clock::now();
-		ASSERT_EQ (0, system ("xcopy ..\\..\\Templates Templates /I /Y"));
+		ASSERT_EQ (0, system ("xcopy ..\\Templates Templates /I /Y"));
 	}
 	void TearDown (void) override
 	{
@@ -39,7 +39,7 @@ protected:
 	void SetUp (void) override
 	{
 		birth = steady_clock::now();
-		ASSERT_EQ (0, system ("xcopy ..\\..\\Templates Templates /I /Y"));
+		ASSERT_EQ (0, system ("xcopy ..\\Templates Templates /I /Y"));
 	}
 	void TearDown (void) override
 	{

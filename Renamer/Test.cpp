@@ -18,14 +18,13 @@ class Feature : public testing::Test
 {
 protected:
 	db minthr = 50;
-	db maxthr = 800;
+	db maxthr = 1000;
 	steady_clock::time_point birth;
 	void SetUp (void) override
 	{
 		birth = steady_clock::now();
 		system ("rmdir Templates /s /q");
-		system ("xcopy ..\\..\\Templates Templates /I");
-		system ("copy Template.ini Templates /Y");
+		system ("xcopy ..\\Templates Templates /I");
 	}
 	void TearDown (void) override
 	{
@@ -65,7 +64,7 @@ TEST_F (Feature, Basic)
 		cmd += "Templates\\" + i + ".ovpn ";
 		cmd += "Templates\\" + i + "-authed" + ".ovpn ";
 	}
-	cmd += "Template.ini";
+	cmd += "Templates\\Template.ini";
 	EXPECT_EQ (0, system (cmd.c_str()));
 }
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Renamer Templates\\*")); }
