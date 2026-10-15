@@ -56,14 +56,10 @@ protected:
 
 TEST (Help, Help)
 {
-	EXPECT_EQ (0, system ("Auth > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Auth --help > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Auth /help > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Auth /? > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth			> stdout && fc stdout Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth --help	> stdout && fc stdout Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth /help	> stdout && fc stdout Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth /?		> stdout && fc stdout Help.txt /W"));
 }
 
 TEST_F (Feature, Basic)
