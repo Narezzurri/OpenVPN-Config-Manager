@@ -13,6 +13,7 @@
 using namespace std;
 using db = double;
 
+int dryrun = 0;
 int period = -1;
 int ping_cnt = 0;
 db sec_per_wait = 1;
@@ -54,6 +55,8 @@ int main (int argc, const char* argv[])
 					return get_float (argv[++nxt], ping_timeout);
 				else if (arg == "n" || arg == "number")
 					return get_int (argv[++nxt], ping_cnt);
+				else if (arg == "dry-run")
+					return dryrun = 1;
 				else
 				{
 					cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
@@ -106,7 +109,7 @@ int main (int argc, const char* argv[])
 #ifdef		DEBUG
 		cout << endl;
 #else
-		if (choice (cin))
+		if (!dryrun && choice (cin))
 #endif
 		{
 			int cnt = 0;
