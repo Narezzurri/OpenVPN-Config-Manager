@@ -44,6 +44,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	set (ALL_DEPENDS ${ALL_DEPENDS} CheckerTest AuthTest RenamerTest)
 	add_subdirectory (googletest)
 	enable_testing ()
+	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_BINARY_DIR})
 endif ()
 
 # Dependances

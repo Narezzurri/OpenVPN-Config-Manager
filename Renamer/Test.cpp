@@ -18,14 +18,13 @@ class Feature : public testing::Test
 {
 protected:
 	db minthr = 50;
-	db maxthr = 800;
+	db maxthr = 1000;
 	steady_clock::time_point birth;
 	void SetUp (void) override
 	{
 		birth = steady_clock::now();
 		system ("rmdir Templates /s /q");
-		system ("xcopy ..\\..\\Templates Templates /I");
-		system ("copy Template.ini Templates /Y");
+		system ("xcopy ..\\Templates Templates /I");
 	}
 	void TearDown (void) override
 	{

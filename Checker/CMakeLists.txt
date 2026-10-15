@@ -26,8 +26,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	add_executable (CheckerTest Test.cpp)
 	add_dependencies (CheckerTest Checker)
 	target_link_libraries (CheckerTest PRIVATE gtest gtest_main stdlib)
-	# Resource
-	file (COPY ${CMAKE_SOURCE_DIR}/Templates DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 	# Register
 	add_test (NAME Checker COMMAND CheckerTest)
 	set_tests_properties (Checker PROPERTIES TIMEOUT 25)
