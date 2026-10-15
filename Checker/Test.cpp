@@ -76,6 +76,7 @@ TEST_F (Feature, PrintAddress)
 	for (auto i : mark)
 		EXPECT_EQ (i, 1);
 	getline (fin, input); EXPECT_EQ (input, "4 server address(es) found.");
+	getline (fin, input); EXPECT_EQ (input, "Test connection with these 4 address(es)? [Y/n] ");
 	getline (fin, input); EXPECT_EQ (input, "Launching connection with ja.wikipedia.org : Done.");
 	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.bbc.com : Done.");
 	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.cbc.ca : Done.");
