@@ -9,7 +9,7 @@
 ![v2.2](https://img.shields.io/badge/v2.2-Maintenance-yellow)
 ![<v2.2](https://img.shields.io/badge/%3Cv2.2-EOL-red)
 
-# OpenVPN-Config-Manager
+# OpenVPN Config Manager
 
 > Batch configuration management for OpenVPN - test, inject, and deploy with ease.
 
