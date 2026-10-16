@@ -7,6 +7,8 @@
 #include	<iostream>
 #include	<sstream>
 #include	<vector>
+#include  <algorithm>
+#include  <cctype>
 #include	"lib.h"
 using namespace std;
 using db = double;
@@ -39,6 +41,8 @@ int main (int argc, const char* argv[])
 			if (i <= argc - 1 && [&] () -> bool
 			{
 				string arg = argv[i] + 1;
+				std::transform(arg.begin(), arg.end(), arg.begin(),
+               [](unsigned char c) { return std::tolower(c); });
 				if (arg == "t" || arg == "time")
 				{
 					int succeed = get_int (argv[++nxt], period);

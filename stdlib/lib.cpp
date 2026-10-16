@@ -7,7 +7,10 @@
 #include	<string>
 #include	<vector>
 #include	<regex>
+#include 	<algorithm>
+#include 	<cctype>
 #include	"lib.h"
+
 using namespace std;
 
 int get_int (string s, int &ans)
@@ -83,6 +86,8 @@ int HelpDetected (int argc, const char* argv[])
 	for (int i = 1; i < argc; i++)
 	{
 		string arg = argv[i];
+		std::transform(arg.begin(), arg.end(), arg.begin(),
+		               [](unsigned char c) { return std::tolower(c); });
 		if (arg == "--help" || arg == "/?" || arg == "/help")
 			return 1;
 	}
