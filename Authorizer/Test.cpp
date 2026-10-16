@@ -83,9 +83,9 @@ TEST_F (Feature, Skip_Authed)
 
 TEST_F (Dryrun, Dryrun)
 {
-	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn /dry-run > stdout"));
+	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn /dry-run > stdout.Dryrun"));
 	vector<int> mark (templates.size());
-	ifstream fin ("stdout");
+	ifstream fin ("stdout.Dryrun");
 	for (int i = 0; i < templates.size() * 2; i++)
 	{
 		vector<string> input;
