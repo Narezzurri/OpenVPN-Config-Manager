@@ -105,12 +105,6 @@ TEST_F (Feature, PrintAddress)
 	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.cbc.ca : Done.");
 	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.github.com : Done.");
 	getline (fin, input); EXPECT_EQ (input, "4 address(es) checked successfully.");
-	fin.close();
-}
-
-TEST (tst, tst)
-{
-	EXPECT_EQ (0, system ("del stdout"));
 }
 
 TEST (Dryrun, Dryrun)
