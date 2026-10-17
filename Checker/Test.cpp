@@ -72,8 +72,8 @@ TEST_F (Feature, Basic)
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /w 0.8 /t 2 1 /n 2")); }
 TEST_F (Feature, PrintAddress)
 {
-	EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /w 0.8 /t 2 1 /n 2 > stdout"));
-	ifstream fin ("stdout");
+	EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /w 0.8 /t 2 1 /n 2 > stdout.Feature.PrintAddress"));
+	ifstream fin ("stdout.Feature.PrintAddress");
 	string input;
 	vector<int> mark (templates.size());
 	for (int i = 0; i < 8; i++) [&] ()
@@ -105,12 +105,6 @@ TEST_F (Feature, PrintAddress)
 	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.cbc.ca : Done.");
 	getline (fin, input); EXPECT_EQ (input, "Launching connection with www.github.com : Done.");
 	getline (fin, input); EXPECT_EQ (input, "4 address(es) checked successfully.");
-	fin.close();
-}
-
-TEST (tst, tst)
-{
-	EXPECT_EQ (0, system ("del stdout"));
 }
 
 TEST (Dryrun, Dryrun)
