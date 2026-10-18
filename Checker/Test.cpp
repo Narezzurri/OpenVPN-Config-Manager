@@ -113,11 +113,12 @@ TEST (Dryrun, Dryrun)
 	ifstream fin ("stdout.Dryrun.Dryrun");
 	string input;
 	vector<int> mark (templates.size());
-	for (int i = 0; i < 8; i++) [&] ()
+	for (int i = 0; i < 9; i++) [&] ()
 	{
 		getline (fin, input);
 		smatch match;
 		ASSERT_EQ (1, regex_match (input, match, regex (R"(^.*Templates\\([1-4a-z.-]*) : (.*)$)")));
+		cerr << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " << input << endl;
 		if (match[1] == "Template.ini")
 			EXPECT_EQ (match[2], "Unsupported file type.");
 		else
