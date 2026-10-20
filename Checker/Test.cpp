@@ -94,7 +94,7 @@ TEST_F (Feature, PrintAddress)
 			}
 			return ;
 		}
-		EXPECT_EQ ("", ("Illegal filename output : " + output).c_str());
+		EXPECT_EQ ("", "Illegal filename output : " + output);
 	} ();
 	for (auto i : mark)
 		EXPECT_EQ (i, 1);
