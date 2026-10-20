@@ -27,14 +27,14 @@ protected:
 
 TEST (Help, Help)
 {
-	EXPECT_EQ (0, system ("Auth > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Auth --help > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Auth /help > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Auth /? > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth > stdout.Help.Help.1"));
+	EXPECT_EQ (0, system ("fc stdout.Help.Help.1 Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth --help > stdout.Help.Help.2"));
+	EXPECT_EQ (0, system ("fc stdout.Help.Help.2 Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth /help > stdout.Help.Help.3"));
+	EXPECT_EQ (0, system ("fc stdout.Help.Help.3 Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth /? > stdout.Help.Help.4"));
+	EXPECT_EQ (0, system ("fc stdout.Help.Help.4 Help.txt /W"));
 }
 
 TEST_F (Feature, Basic)
@@ -54,9 +54,9 @@ TEST_F (Feature, Skip_Authed)
 
 TEST_F (Dryrun, Dryrun)
 {
-	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn /dry-run > stdout"));
+	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn /dry-run > stdout.Dryrun.Dryrun"));
 	vector<int> mark (templates.size());
-	ifstream fin ("stdout");
+	ifstream fin ("stdout.Dryrun.Dryrun");
 	for (int i = 0; i < templates.size() * 2; i++)
 	{
 		vector<string> input;

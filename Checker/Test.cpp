@@ -5,10 +5,10 @@ using namespace std;
 
 TEST (Help, Help)
 {
-	EXPECT_EQ (0, system ("Checker			> stdout && fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Checker --help	> stdout && fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Checker /help	> stdout && fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Checker /?		> stdout && fc stdout Help.txt /W"));
+	EXPECT_EQ (0, system ("Checker			> stdout.Help.Help.1 && fc stdout.Help.Help.1 Help.txt /W"));
+	EXPECT_EQ (0, system ("Checker --help	> stdout.Help.Help.2 && fc stdout.Help.Help.2 Help.txt /W"));
+	EXPECT_EQ (0, system ("Checker /help	> stdout.Help.Help.3 && fc stdout.Help.Help.3 Help.txt /W"));
+	EXPECT_EQ (0, system ("Checker /?		> stdout.Help.Help.4 && fc stdout.Help.Help.4 Help.txt /W"));
 }
 
 TEST (Feature, Basic)
@@ -22,8 +22,8 @@ TEST (Feature, Basic)
 TEST (Feature, Wildcard) { EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /w 0.8 /t 2 1 /n 2")); }
 TEST (Feature, PrintAddress)
 {
-	EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /w 0.8 /t 2 1 /n 2 > stdout"));
-	ifstream fin ("stdout");
+	EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /w 0.8 /t 2 1 /n 2 > stdout.Feature.PrintAddress"));
+	ifstream fin ("stdout.Feature.PrintAddress");
 	string input;
 	for (int i = 0; i < 8; i++)
 		getline (fin, input);
