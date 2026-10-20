@@ -118,7 +118,6 @@ TEST (Dryrun, Dryrun)
 		getline (fin, input);
 		smatch match;
 		ASSERT_EQ (1, regex_match (input, match, regex (R"(^.*Templates\\)" REGEX_FILENAME R"( : (.*)$)")));
-		cout << "> " << match[1] << " : " << match[2] << endl;
 		if (match[1] == "Template.ini")
 			EXPECT_EQ (match[2], "Unsupported file type.");
 		else
