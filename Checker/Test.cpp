@@ -80,7 +80,7 @@ TEST_F (Feature, PrintAddress)
 	{
 		getline (fin, input);
 		smatch match;
-		ASSERT_EQ (1, regex_match (input, match, regex (R"(^.*Templates\\([1-4a-z.-]*)\.ovpn : (.*)$)")));
+		ASSERT_EQ (1, regex_match (input, match, regex (R"(^.*Templates\\)" REGEX_FILENAME R"(\.ovpn : (.*)$)")));
 		string output = match[2];
 		for (int i = 0; i < templates.size(); i++) if (match[1] == templates[i] || match[1] == templates[i] + "-authed")
 		{
@@ -89,7 +89,7 @@ TEST_F (Feature, PrintAddress)
 			else
 			{
 				mark[i] = 1;
-				ASSERT_EQ (1, regex_match (output, match, regex (R"(^1 New address\(es\) found: ([a-z.]+) $)")));
+				ASSERT_EQ (1, regex_match (output, match, regex (R"(^1 New address\(es\) found: )" REGEX_WEBSITE " $")));
 				EXPECT_EQ (match[1], templates_address[i]);
 			}
 			return ;
@@ -117,8 +117,7 @@ TEST (Dryrun, Dryrun)
 	{
 		getline (fin, input);
 		smatch match;
-		ASSERT_EQ (1, regex_match (input, match, regex (R"(^.*Templates\\([1-4a-z.-]*) : (.*)$)")));
-		cerr << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " << input << endl;
+		ASSERT_EQ (1, regex_match (input, match, regex (R"(^.*Templates\\)" REGEX_FILENAME R"(: (.*)$)")));
 		if (match[1] == "Template.ini")
 			EXPECT_EQ (match[2], "Unsupported file type.");
 		else
@@ -131,7 +130,7 @@ TEST (Dryrun, Dryrun)
 				else
 				{
 					mark[i] = 1;
-					ASSERT_EQ (1, regex_match (output, match, regex (R"(^1 New address\(es\) found: ([a-z.]+) $)")));
+					ASSERT_EQ (1, regex_match (output, match, regex (R"(^1 New address\(es\) found: )" REGEX_WEBSITE " $")));
 					EXPECT_EQ (match[1], templates_address[i]);
 				}
 				return ;
