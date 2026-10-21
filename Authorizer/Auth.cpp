@@ -6,6 +6,8 @@
 #include	<fstream>
 #include	<sstream>
 #include	<vector>
+#include 	<algorithm>
+#include 	<cctype>
 #include	"lib.h"
 using namespace std;
 
@@ -34,6 +36,8 @@ int main (int argc, const char* argv[])
 			if (i <= argc - 1 && [&] () -> bool
 			{
 				string arg = argv[i] + 1;
+				std::transform(arg.begin(), arg.end(), arg.begin(),
+               [](unsigned char c) { return std::tolower(c); });
 				if (arg == "c" || arg == "cred")
 				{
 					credential = argv[++nxt];

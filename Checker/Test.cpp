@@ -84,4 +84,15 @@ TEST_F (Feature, PrintAddress)
 	getline (fin, input); EXPECT_EQ (input, "4 address(es) checked successfully.");
 }
 
+TEST_F (Feature, CaseInsensitivity)
+{
+
+	EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /W 0.8 /T 2 1 /N 2 > nul"));
+
+	EXPECT_EQ (0, system ("Checker --HELP > stdout1 && fc stdout1 Help.txt /W"));
+	EXPECT_EQ (0, system ("Checker /Help > stdout2 && fc stdout2 Help.txt /W"));
+	EXPECT_EQ (0, system ("Checker /? > stdout3 && fc stdout3 Help.txt /W"));
+
+}
+
 TEST (Bug, Bug202609090913) { EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /t 2 /n 2")); }
