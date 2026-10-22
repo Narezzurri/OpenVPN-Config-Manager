@@ -1,8 +1,10 @@
 #include	"INIReader.h"
 #include	"resource.h"
+#include	<algorithm>
 #include	<windows.h>
 #include	<iostream>
 #include	<sstream>
+#include	<cctype>
 #include	<format>
 #include	<string>
 #include	<vector>
@@ -86,8 +88,7 @@ int HelpDetected (int argc, const char* argv[])
 	for (int i = 1; i < argc; i++)
 	{
 		string arg = argv[i];
-		std::transform(arg.begin(), arg.end(), arg.begin(),
-		               [](unsigned char c) { return std::tolower(c); });
+		transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));
 		if (arg == "--help" || arg == "/?" || arg == "/help")
 			return 1;
 	}

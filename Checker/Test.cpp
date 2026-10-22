@@ -109,10 +109,10 @@ TEST_F (Feature, PrintAddress)
 TEST_F (Feature, CaseInsensitivity)
 {
 	SetThr (1200, 3000);
-	EXPECT_EQ (0, system ("Checker --HELP > stdout1 && fc stdout1 Help.txt /W"));
-	EXPECT_EQ (0, system ("Checker /Help > stdout2 && fc stdout2 Help.txt /W"));
-	EXPECT_EQ (0, system ("Checker /? > stdout3 && fc stdout3 Help.txt /W"));
-	EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /W 0.8 /T 2 1 /N 2 > nul"));
+	EXPECT_EQ (0, system ("Checker --HELP	> stdout.Feature.CaseInsensitivity.1 && fc stdout.Feature.CaseInsensitivity.1 Help.txt /W"));
+	EXPECT_EQ (0, system ("Checker /Help	> stdout.Feature.CaseInsensitivity.2 && fc stdout.Feature.CaseInsensitivity.2 Help.txt /W"));
+	EXPECT_EQ (0, system ("Checker /?		> stdout.Feature.CaseInsensitivity.3 && fc stdout.Feature.CaseInsensitivity.3 Help.txt /W"));
+	EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /W 0.8 /T 2 1 /N 2"));
 }
 
 TEST (Dryrun, Dryrun)
@@ -148,7 +148,8 @@ TEST (Dryrun, Dryrun)
 	} ();
 	for (auto i : mark)
 		EXPECT_EQ (i, 1);
-	getline (fin, input); EXPECT_EQ (input, "4 server address(es) found.");
+	getline (fin, input);
+	EXPECT_EQ (input, "4 server address(es) found.");
 }
 
 TEST (Bug, Bug202609090913) { EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /t 2 /n 2")); }

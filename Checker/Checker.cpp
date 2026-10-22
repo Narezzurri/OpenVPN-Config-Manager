@@ -3,9 +3,11 @@
  * Copyright (c) 2026 Narezzurri - MIT License
 */
 #include	"resource.h"
+#include	<algorithm>
 #include	<windows.h>
 #include	<iostream>
 #include	<sstream>
+#include	<cctype>
 #include	<vector>
 #include  <algorithm>
 #include  <cctype>
@@ -42,8 +44,7 @@ int main (int argc, const char* argv[])
 			if (i <= argc - 1 && [&] () -> bool
 			{
 				string arg = argv[i] + 1;
-				std::transform(arg.begin(), arg.end(), arg.begin(),
-               [](unsigned char c) { return std::tolower(c); });
+				transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));
 				if (arg == "t" || arg == "time")
 				{
 					int succeed = get_int (argv[++nxt], period);
