@@ -13,6 +13,7 @@
 using namespace std;
 using db = double;
 
+int dryrun = 0;
 int period = -1;
 int ping_cnt = 0;
 db sec_per_wait = 1;
@@ -54,6 +55,8 @@ int main (int argc, const char* argv[])
 					return get_float (argv[++nxt], ping_timeout);
 				else if (arg == "n" || arg == "number")
 					return get_int (argv[++nxt], ping_cnt);
+				else if (arg == "dry-run")
+					return dryrun = 1;
 				else
 				{
 					cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
@@ -102,32 +105,35 @@ int main (int argc, const char* argv[])
 	else
 	{
 		cout << address.size() << " server address(es) found." << endl;
-		cout << "Test connection with these " << address.size() << " address(es)? [Y/n] ";
-#ifdef		DEBUG
-		cout << endl;
-#else
-		if (choice (cin))
-#endif
+		if (!dryrun)
 		{
-			int cnt = 0;
-			for (auto addr : address)
+			cout << "Test connection with these " << address.size() << " address(es)? [Y/n] ";
+#ifdef	DEBUG
+			cout << endl;
+#else
+			if (choice (cin))
+#endif
 			{
-				if (period > 0 && cnt && !(cnt % period))
-					Sleep (sec_per_wait * 1000);
-				cout << "Launching connection with " << addr << " : ";
-				string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
-				if (ping_cnt)
-					ping += " -n " + to_string (ping_cnt);
-				else
-					ping += " -t";
-				string cmd = "start " + quote (addr) + " cmd /c " + quote (ping);
-				if (!~period)
-					cmd = "start /wait" + cmd.substr(5);
-				system (cmd);
-				cnt++;
-				puts ("Done.");
+				int cnt = 0;
+				for (auto addr : address)
+				{
+					if (period > 0 && cnt && !(cnt % period))
+						Sleep (sec_per_wait * 1000);
+					cout << "Launching connection with " << addr << " : ";
+					string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
+					if (ping_cnt)
+						ping += " -n " + to_string (ping_cnt);
+					else
+						ping += " -t";
+					string cmd = "start " + quote (addr) + " cmd /c " + quote (ping);
+					if (!~period)
+						cmd = "start /wait" + cmd.substr(5);
+					system (cmd);
+					cnt++;
+					puts ("Done.");
+				}
+				cout << cnt << " address(es) checked successfully." << endl;
 			}
-			cout << cnt << " address(es) checked successfully." << endl;
 		}
 	}
 	freopen ("CON", "r", stdin);
