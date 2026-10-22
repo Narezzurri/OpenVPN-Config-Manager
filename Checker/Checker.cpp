@@ -9,6 +9,8 @@
 #include	<sstream>
 #include	<cctype>
 #include	<vector>
+#include  <algorithm>
+#include  <cctype>
 #include	"lib.h"
 using namespace std;
 using db = double;
