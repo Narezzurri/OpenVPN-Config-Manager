@@ -33,11 +33,9 @@ set (CMAKE_CXX_FLAGS_RELEASE "-Ofast")
 
 # Test
 
-include (CTest)
-set (OVPNS "us-1.udp.ovpn uk-2.udp.ovpn ca-3.tcp.ovpn jp-4.tcp.ovpn")
-set (OVPNS_AUTHED "us-1.udp-authed.ovpn uk-2.udp-authed.ovpn ca-3.tcp-authed.ovpn jp-4.tcp-authed.ovpn")
 if (CMAKE_BUILD_TYPE STREQUAL "Test")
-	add_compile_definitions (DEBUG OVPNS="${OVPNS}" OVPNS_AUTHED="${OVPNS_AUTHED}")
+	include (CTest)
+	add_compile_definitions (DEBUG)
 	set (gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 	set (INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 	set (INSTALL_GMOCK OFF CACHE BOOL "" FORCE)

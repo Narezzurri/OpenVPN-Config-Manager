@@ -36,14 +36,10 @@ protected:
 
 TEST (Help, Help)
 {
-	EXPECT_EQ (0, system ("Renamer > stdout.Help.Help.1"));
-	EXPECT_EQ (0, system ("fc stdout.Help.Help.1 Help.txt /W"));
-	EXPECT_EQ (0, system ("Renamer --help > stdout.Help.Help.2"));
-	EXPECT_EQ (0, system ("fc stdout.Help.Help.2 Help.txt /W"));
-	EXPECT_EQ (0, system ("Renamer /help > stdout.Help.Help.3"));
-	EXPECT_EQ (0, system ("fc stdout.Help.Help.3 Help.txt /W"));
-	EXPECT_EQ (0, system ("Renamer /? > stdout.Help.Help.4"));
-	EXPECT_EQ (0, system ("fc stdout.Help.Help.4 Help.txt /W"));
+	EXPECT_EQ (0, system ("Renamer			> stdout.Help.Help.1 && fc stdout.Help.Help.1 Help.txt /W"));
+	EXPECT_EQ (0, system ("Renamer --help	> stdout.Help.Help.2 && fc stdout.Help.Help.2 Help.txt /W"));
+	EXPECT_EQ (0, system ("Renamer /help	> stdout.Help.Help.3 && fc stdout.Help.Help.3 Help.txt /W"));
+	EXPECT_EQ (0, system ("Renamer /?		> stdout.Help.Help.4 && fc stdout.Help.Help.4 Help.txt /W"));
 }
 
 TEST_F (Feature, Basic)
