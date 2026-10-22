@@ -92,10 +92,10 @@ TEST_F (Dryrun, Dryrun)
 		}
 		while (input.back() != "");
 		smatch match;
-		regex rgx (R"(^Auth> ([^<]+)Templates\\([^<]+)\.ovpn$)");
+		regex rgx (R"(^Auth> .*Templates\\)" REGEX_FILENAME R"(\.ovpn$)");
 		ASSERT_EQ (1, regex_match (input[0], match, rgx));
 		int authed = 0;
-		string filename = match[2];
+		string filename = match[1];
 		if (filename.length() == 15)
 		{
 			authed = 1;
