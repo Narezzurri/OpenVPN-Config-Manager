@@ -33,7 +33,7 @@ jobs:
       uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@a0cc01096a24026610f4adb239c336ec0a1e4bd2
+      uses: github/codeql-action/init@c5a2f4b0fe28ca06eaaeb86fb05a5f612ae293f9
       with:
         languages: ${{ matrix.language }}
         build-mode: none
@@ -41,7 +41,7 @@ jobs:
         config-file: .github/codeql/CodeQL-Config.yml
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@a0cc01096a24026610f4adb239c336ec0a1e4bd2
+      uses: github/codeql-action/analyze@c5a2f4b0fe28ca06eaaeb86fb05a5f612ae293f9
       id: analyze
       with:
         category: "${{ matrix.language }}"
@@ -82,7 +82,7 @@ jobs:
       run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix['build-type'] }} -G "MinGW Makefiles"
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@a0cc01096a24026610f4adb239c336ec0a1e4bd2
+      uses: github/codeql-action/init@c5a2f4b0fe28ca06eaaeb86fb05a5f612ae293f9
       with:
         languages: ${{ matrix.language }}
         build-mode: manual
@@ -115,7 +115,7 @@ jobs:
         make zip
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@a0cc01096a24026610f4adb239c336ec0a1e4bd2
+      uses: github/codeql-action/analyze@c5a2f4b0fe28ca06eaaeb86fb05a5f612ae293f9
       id: analyze
       with:
         category: "${{ matrix.language }} (${{ matrix['build-type'] }})"
