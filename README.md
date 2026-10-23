@@ -37,7 +37,7 @@ Each minor version is maintained for **4 months** after its stable release, only
 
 I aim to keep this schedule, but it is a best-effort commitment, not a legal guarantee.  
 
-If the release date falls on a weekend or holiday, the release may be shifted by 1–2 days.
+If the release date falls on a weekend or holiday, it may be shifted by 1–2 days.
 
 Critical bug fixes and security issues will always take priority over the regular cadence.
 
