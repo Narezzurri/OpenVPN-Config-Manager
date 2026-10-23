@@ -6,6 +6,7 @@ Append login credentials to OpenVPN config file(s) (*.ovpn).
 
 Usage: Auth [/c[red] filename] [/dry-run] config1.ovpn config2.ovpn ...
 
+The arguments are case-insensitive.
 If there are multiple arguments of the same type,only the last one matters.
 
     /c[red] ----------- Assign the credential file

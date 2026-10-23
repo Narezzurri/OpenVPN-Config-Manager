@@ -7,6 +7,7 @@ the OpenVPN config file(s) (*.ovpn).
 Usage: Checker [/t[ime] period [time]] [/w[ait] timeout] [/n[umber] count]
                config1.ovpn config2.ovpn ... 
 
+The arguments are case-insensitive.
 If there are multiple arguments of the same type,only the last one matters.
 
     /t[ime] ------- Assign process speed
