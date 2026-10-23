@@ -9,10 +9,7 @@
 #include	<string>
 #include	<vector>
 #include	<regex>
-#include 	<algorithm>
-#include 	<cctype>
 #include	"lib.h"
-
 using namespace std;
 
 int get_int (string s, int &ans)
