@@ -1,11 +1,5 @@
-**/*.vscode/
-
 **/*build/
 
 /Testing/
-
-*.exe
-
-/Todo.txt
 
 googletest/.git
