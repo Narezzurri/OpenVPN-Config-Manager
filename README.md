@@ -2,7 +2,6 @@
 [![License](https://img.shields.io/github/license/Narezzurri/OpenVPN-Config-Manager)](https://github.com/Narezzurri/OpenVPN-Config-Manager/blob/main/LICENSE)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-orange)](https://github.com/Narezzurri/OpenVPN-Config-Manager/issues)
 <!-- [![GitHub downloads](https://img.shields.io/github/downloads/Narezzurri/OpenVPN-Config-Manager/total)](https://github.com/Narezzurri/OpenVPN-Config-Manager/releases) -->
-<!-- ![GitHub contributors](https://img.shields.io/github/contributors/Narezzurri/OpenVPN-Config-Manager) -->
 [![GitHub Release](https://img.shields.io/github/v/release/Narezzurri/OpenVPN-Config-Manager)](https://github.com/Narezzurri/OpenVPN-Config-Manager/releases)
 ![v2.4](https://img.shields.io/badge/v2.4-Active-brightgreen)
 ![v2.3](https://img.shields.io/badge/v2.3-Maintenance-yellow)
@@ -48,11 +47,3 @@ This tool is designed for educational and administrative purposes only. It is in
 Users are solely responsible for ensuring their use of this software and any associated VPN services complies with all applicable local laws and regulations. The author assumes no liability for any misuse of this tool.
 
 For details on third-party components and their licenses, please refer to the [`NOTICE`](NOTICE) file.
-
-# In the distance
-
-https://chat.deepseek.com/share/rp4vp4pt2x4ldcpnpm
-
-https://chat.deepseek.com/share/s7ajpqv73wkdm2ar0a
-
-AI + Natural Language Deployment
