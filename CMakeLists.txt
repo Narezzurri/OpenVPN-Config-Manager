@@ -20,6 +20,7 @@ set (ALL_DEPENDS
 )
 # Version
 set (VERSION "2.2.2")
+set (VERSIONSTR "2.2.2")
 set (CMAKE_CXX_STANDARD 23)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -85,7 +86,7 @@ install (FILES	"${CMAKE_SOURCE_DIR}/Renamer/Template.ini"
 
 configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/Setup.nsi.in" "${CMAKE_CURRENT_BINARY_DIR}/Setup.nsi" @ONLY)
 add_custom_command (
-	OUTPUT OpenVPNConfigManagerSetup-${VERSION}.exe
+	OUTPUT OpenVPNConfigManagerSetup-${VERSIONSTR}.exe
 	DEPENDS ${ALL_DEPENDS} ${CMAKE_BINARY_DIR}/Setup.nsi
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 	COMMENT "Generating NSIS Setup Wizard"
@@ -94,25 +95,25 @@ add_custom_command (
 )
 
 add_custom_command (
-	OUTPUT OpenVPNConfigManagerSetup-${VERSION}.zip
+	OUTPUT OpenVPNConfigManagerSetup-${VERSIONSTR}.zip
 	DEPENDS ${ALL_DEPENDS} deploy
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 	COMMENT "Generating program file package"
 	COMMAND ${CMAKE_COMMAND} --install ${CMAKE_BINARY_DIR}
-	COMMAND "C:/Program Files/7-Zip/7z.exe" a -tzip "OpenVPNConfigManagerSetup-${VERSION}.zip" "${CMAKE_INSTALL_PREFIX}/*"
+	COMMAND "C:/Program Files/7-Zip/7z.exe" a -tzip "OpenVPNConfigManagerSetup-${VERSIONSTR}.zip" "${CMAKE_INSTALL_PREFIX}/*"
 )
 
-add_custom_target (build DEPENDS OpenVPNConfigManagerSetup-${VERSION}.exe)
+add_custom_target (build DEPENDS OpenVPNConfigManagerSetup-${VERSIONSTR}.exe)
 
 add_custom_target (
 	deploy
-	DEPENDS OpenVPNConfigManagerSetup-${VERSION}.exe
+	DEPENDS OpenVPNConfigManagerSetup-${VERSIONSTR}.exe
 	COMMENT "Deploying ${PROJECT_NAME}"
-	COMMAND ${CMAKE_BINARY_DIR}/OpenVPNConfigManagerSetup-${VERSION}.exe /S
+	COMMAND ${CMAKE_BINARY_DIR}/OpenVPNConfigManagerSetup-${VERSIONSTR}.exe /S
 )
 
 add_custom_target (
 	zip
-	DEPENDS OpenVPNConfigManagerSetup-${VERSION}.zip
+	DEPENDS OpenVPNConfigManagerSetup-${VERSIONSTR}.zip
 	COMMENT "Creating program file package"
 )
