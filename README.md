@@ -32,6 +32,8 @@ This project follows a monthly release cycle with a defined feature freeze and r
 |      RC2       | 1st of the following month | Second release candidate with **new features frozen**: only bug fixes and security fixes are accepted |
 | Stable Release | 4th of the following month |       Official stable release, containing accumulated features, fixes, and maintenance updates        |
 
+All release dates are specified in **CST (UTC+8)**.
+
 Each minor version is maintained for **4 months** after its stable release, only receiving bug and security fixes during that period.
 
 I aim to keep this schedule, but it is a best-effort commitment, not a legal guarantee.  
