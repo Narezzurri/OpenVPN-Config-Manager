@@ -22,7 +22,7 @@ int main (int argc, const char* argv[])
 		cout << string {
 			#embed	"Help.txt"
 		};
-#ifndef		DEBUG
+#ifndef		SILENT
 		getchar ();
 #endif
 		return 0;
@@ -121,7 +121,7 @@ int main (int argc, const char* argv[])
 					if (!dryrun)
 					{
 						cout << "Confirm to append?(Y/n)";
-#ifdef		DEBUG
+#ifdef		SILENT
 						cout << endl;
 #else
 						if (choice (cin))
@@ -144,12 +144,12 @@ int main (int argc, const char* argv[])
 		}
 		cout << "Assign the output file:(Reserved to skip)";
 		string output_filename;
-#ifndef		DEBUG
+#ifndef		SILENT
 		getline (cin, output_filename);
 		if (output_filename.empty())
 #endif
 			output_filename = filename;
-#ifndef		DEBUG
+#ifndef		SILENT
 		do
 		{
 #endif
@@ -163,11 +163,11 @@ int main (int argc, const char* argv[])
 				fileout.close();
 				cout << "Written into file: " << output_filename << endl;
 				cnt++;
-#ifndef		DEBUG
+#ifndef		SILENT
 				break;
 #endif
 			}
-#ifndef		DEBUG
+#ifndef		SILENT
 			cout << "Assign the output file:(Reserved to skip)";
 			getline (cin, output_filename);
 		}
@@ -175,7 +175,7 @@ int main (int argc, const char* argv[])
 #endif
 	}
 	cout << endl << cnt << " file(s) appended successfully." << endl;
-#ifndef		DEBUG
+#ifndef		SILENT
 	getchar ();
 #endif
 	return 0;
