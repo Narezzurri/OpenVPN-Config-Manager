@@ -28,7 +28,7 @@ project (OpenVPN-Config-Manager VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_UR
 
 # CMake deploy argument
 
-set (CMAKE_CXX_FLAGS_SILENT "-g")
+set (CMAKE_CXX_FLAGS_DEBUG "-g")
 set (CMAKE_CXX_FLAGS_TEST "-g -Ofast")
 set (CMAKE_CXX_FLAGS_RELEASE "-Ofast")
 
