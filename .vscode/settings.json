@@ -1,0 +1,15 @@
+{
+	"cmake.ctest.neverDebugTestsWithLaunchConfiguration": false,
+	"C_Cpp.default.cppStandard": "c++26",
+	"C_Cpp.default.cStandard": "c23",
+	"cmake.ctestDefaultArgs": [
+		"-T",
+		"test",
+		"--output-on-failure",
+		"--verbose"
+	],
+	"git.enableCommitSigning": true,
+	"C_Cpp.default.includePath": [
+		"${workspaceFolder}/**"
+	]
+}
