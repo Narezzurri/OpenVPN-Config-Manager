@@ -28,7 +28,7 @@ project (OpenVPN-Config-Manager VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_UR
 
 # CMake deploy argument
 
-set (CMAKE_CXX_FLAGS_DEBUG "-g")
+set (CMAKE_CXX_FLAGS_SILENT "-g")
 set (CMAKE_CXX_FLAGS_TEST "-g -Ofast")
 set (CMAKE_CXX_FLAGS_RELEASE "-Ofast")
 
@@ -36,7 +36,7 @@ set (CMAKE_CXX_FLAGS_RELEASE "-Ofast")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	include (CTest)
-	add_compile_definitions (DEBUG)
+	add_compile_definitions (SILENT)
 	set (gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 	set (INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 	set (INSTALL_GMOCK OFF CACHE BOOL "" FORCE)

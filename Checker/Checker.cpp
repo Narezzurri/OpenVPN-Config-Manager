@@ -107,7 +107,7 @@ int main (int argc, const char* argv[])
 		if (!dryrun)
 		{
 			cout << "Test connection with these " << address.size() << " address(es)? [Y/n] ";
-#ifdef	DEBUG
+#ifdef		SILENT
 			cout << endl;
 #else
 			if (choice (cin))
@@ -136,7 +136,7 @@ int main (int argc, const char* argv[])
 		}
 	}
 	freopen ("CON", "r", stdin);
-#ifndef		DEBUG
+#ifndef		SILENT
 	getchar ();
 #endif
 	return err;
