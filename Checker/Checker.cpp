@@ -26,7 +26,7 @@ int main (int argc, const char* argv[])
 		cout << string {
 			#embed	"Help.txt"
 		};
-#ifndef		DEBUG
+#ifndef		SILENT
 		getchar ();
 #endif
 		return 0;
@@ -107,7 +107,7 @@ int main (int argc, const char* argv[])
 	}
 	cout << cnt << " files checked successfully." << endl;
 	freopen ("CON", "r", stdin);
-#ifndef		DEBUG
+#ifndef		SILENT
 	getchar ();
 #endif
 	return err;
