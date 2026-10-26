@@ -113,7 +113,7 @@ jobs:
     - name: Create Attachments
       working-directory: build
       run : |
-        make zip
+        ninja -j 0 -v zip
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@c5a2f4b0fe28ca06eaaeb86fb05a5f612ae293f9
