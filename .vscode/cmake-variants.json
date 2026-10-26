@@ -1,0 +1,22 @@
+{
+	"buildType": {
+		"default": "Debug",
+		"choices": {
+			"Debug": {
+				"short": "Debug",
+				"long": "调试版本，包含调试信息",
+				"buildType": "Debug"
+			},
+			"Release": {
+				"short": "Release",
+				"long": "发布版本，开启优化",
+				"buildType": "Release"
+			},
+			"Test": {
+				"short": "Test",
+				"long": "自动化测试版本",
+				"buildType": "Test"
+			}
+		}
+	}
+}

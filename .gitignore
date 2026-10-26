@@ -1,9 +1,5 @@
-**/*.vscode/
-
 **/*build/
 
 /Testing/
-
-*.exe
 
 googletest/.git
