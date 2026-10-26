@@ -9,14 +9,14 @@ set (ALL_DEPENDS
 	# Programs
 	Checker Auth Renamer
 	# License
-	${CMAKE_SOURCE_DIR}/LICENSE 
-	${CMAKE_SOURCE_DIR}/NOTICE 
+	${CMAKE_SOURCE_DIR}/LICENSE
+	${CMAKE_SOURCE_DIR}/NOTICE
 	# Template
-	${CMAKE_SOURCE_DIR}/Templates/us-1.udp.ovpn 
-	${CMAKE_SOURCE_DIR}/Templates/uk-2.udp.ovpn 
-	${CMAKE_SOURCE_DIR}/Templates/ca-3.tcp.ovpn 
-	${CMAKE_SOURCE_DIR}/Templates/jp-4.tcp.ovpn 
-	${CMAKE_SOURCE_DIR}/Renamer/Template.ini 
+	${CMAKE_SOURCE_DIR}/Templates/us-1.udp.ovpn
+	${CMAKE_SOURCE_DIR}/Templates/uk-2.udp.ovpn
+	${CMAKE_SOURCE_DIR}/Templates/ca-3.tcp.ovpn
+	${CMAKE_SOURCE_DIR}/Templates/jp-4.tcp.ovpn
+	${CMAKE_SOURCE_DIR}/Renamer/Template.ini
 )
 # Version
 set (VERSION "2.2.2")
@@ -28,6 +28,7 @@ project (OpenVPN-Config-Manager VERSION "${VERSION}" LANGUAGES C CXX HOMEPAGE_UR
 
 # CMake deploy argument
 
+set (CMAKE_CONFIGURATION_TYPES "Release;Debug;Test")
 set (CMAKE_CXX_FLAGS_DEBUG "-g")
 set (CMAKE_CXX_FLAGS_TEST "-g -Ofast")
 set (CMAKE_CXX_FLAGS_RELEASE "-Ofast")
