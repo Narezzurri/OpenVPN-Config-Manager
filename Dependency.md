@@ -6,6 +6,8 @@
 
 - [CMake](https://github.com/Kitware/CMake)
 
+- [Ninja](https://github.com/ninja-build/ninja)
+
 - [NSIS](https://nsis.sourceforge.io)
 
 - [Inkscape](https://github.com/inkscape/inkscape)
