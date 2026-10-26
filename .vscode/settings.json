@@ -11,5 +11,6 @@
 	"git.enableCommitSigning": true,
 	"C_Cpp.default.includePath": [
 		"${workspaceFolder}/**"
-	]
+	],
+	"cmake.configureOnEdit": true
 }
