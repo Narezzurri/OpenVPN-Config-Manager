@@ -90,7 +90,8 @@ jobs:
         config-file: .github/codeql/CodeQL-Config.yml
 
     - name: Create an Setup Wizard
-      run: make -C build build
+      working-directory: build
+      run: ninja -j 0 -v build
       
     - name: Deploy
       working-directory: build
