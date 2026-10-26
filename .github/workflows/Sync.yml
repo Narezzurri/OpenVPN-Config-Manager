@@ -17,7 +17,6 @@ jobs:
   inih:
     runs-on: ubuntu-latest
     environment: Signing
-    if: github.event_name != 'pull_request' || startsWith (github.event.pull_request.head.ref, 'bot/')
 
     steps:
       - name: Checkout Code
@@ -34,6 +33,7 @@ jobs:
           echo "sha=$(git -C /tmp/inih rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           echo "date=$(git -C /tmp/inih log -1 --date=iso-local --format=%cs)" >> "$GITHUB_OUTPUT"
           echo "time=$(git -C /tmp/inih log -1 --date=iso-local --format=%cd)" >> "$GITHUB_OUTPUT"
+          echo "url=$(git -C /tmp/inih remote get-url origin | sed 's/\.git$//')" >> "$GITHUB_OUTPUT"
 
       - name: Update Repository
         run: |
@@ -83,8 +83,8 @@ jobs:
 
           - Old version : `${{ steps.fetch.outputs.old_version }}` 
           - New version : `${{ steps.fetch.outputs.new_version }}` 
-          - Commit date : `${{ steps.fetch.outputs.time }}` 
-          - SHA-1 : `${{ steps.fetch.outputs.sha }}`
+          - Commit time : `${{ steps.fetch.outputs.time }}` 
+          - Latest SHA-1 : [`${{ steps.fetch.outputs.sha }}`](${{ steps.fetch.outputs.url }}/commit/${{ steps.fetch.outputs.sha }})
 
           Please inspect the changes manually before merging.
           EOF
@@ -92,7 +92,6 @@ jobs:
   Google-Test:
     runs-on: ubuntu-latest
     environment: Signing
-    if: github.event_name != 'pull_request' || startsWith (github.event.pull_request.head.ref, 'bot/')
 
     steps:
       - name: Checkout Code
@@ -109,7 +108,7 @@ jobs:
           echo "sha=$(git -C googletest rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           echo "date=$(git -C googletest log -1 --date=iso-local --format=%cs)" >> "$GITHUB_OUTPUT"
           echo "time=$(git -C googletest log -1 --date=iso-local --format=%cd)" >> "$GITHUB_OUTPUT"
-          rm -rf googletest/.git
+          echo "url=$(git -C /tmp/inih remote get-url origin | sed 's/\.git$//')" >> "$GITHUB_OUTPUT"
 
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@377dc5d6faebf439805626394e6191cc4ce1b0ba
@@ -148,8 +147,8 @@ jobs:
 
           - Old version : `${{ steps.fetch.outputs.old_version }}` 
           - New version : `${{ steps.fetch.outputs.new_version }}` 
-          - Commit date : `${{ steps.fetch.outputs.time }}` 
-          - SHA-1 : `${{ steps.fetch.outputs.sha }}`
+          - Commit time : `${{ steps.fetch.outputs.time }}` 
+          - Latest SHA-1 : [`${{ steps.fetch.outputs.sha }}`](${{ steps.fetch.outputs.url }}/commit/${{ steps.fetch.outputs.sha }})
 
           Please inspect the changes manually before merging.
           EOF
