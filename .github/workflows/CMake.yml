@@ -35,9 +35,9 @@ jobs:
         run: cmake -B build -DCMAKE_BUILD_TYPE=Test -G "Ninja"
 
       - name: Build
-        run: |
-          set NINJA_STATUS=[%r processes, %f/%t @ %o/s : %es]
-          cmake --build build
+        env:
+          NINJA_STATUS: "[%r processes, %f/%t @ %o/s : %es]"
+        run: cmake --build build --parallel
 
       - name: Create an Setup Wizard
         working-directory: build
