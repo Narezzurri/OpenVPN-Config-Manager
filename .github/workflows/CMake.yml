@@ -2,6 +2,9 @@ name: CMake Creation
 
 permissions: read-all
 
+env:
+  NINJA_STATUS: "[%r processes, %f/%t @ %o/s : %es]"
+
 on:
   push:
     branches:
@@ -28,18 +31,19 @@ jobs:
 
       - name: Configure CMake of Release
         if: github.event_name == 'release'
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -G "Ninja"
 
       - name: Configure CMake of Test
         if: github.event_name != 'release'
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Test -G "MinGW Makefiles"
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Test -G "Ninja"
 
       - name: Build
-        run: cmake --build build
+        working-directory: build
+        run: ninja -j 0 -v
 
       - name: Create an Setup Wizard
         working-directory: build
-        run: make build
+        run: ninja -j 0 -v build
 
       - name: Deploy
         working-directory: build
@@ -61,7 +65,7 @@ jobs:
         working-directory: build
         if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
         run : |
-          make zip
+          ninja -j 0 -v zip
 
       - name: Upload Release Artifacts
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a

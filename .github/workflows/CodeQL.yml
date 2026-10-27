@@ -6,6 +6,9 @@ permissions:
   packages: read
   security-events: write
 
+env:
+  NINJA_STATUS: "[%r processes, %f/%t @ %o/s : %es]"
+
 on:
   push:
     branches: [ "main" ]
@@ -79,7 +82,7 @@ jobs:
         echo "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: Configure CMake
-      run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix['build-type'] }} -G "MinGW Makefiles"
+      run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix['build-type'] }} -G "Ninja"
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@a0cc01096a24026610f4adb239c336ec0a1e4bd2
@@ -90,7 +93,8 @@ jobs:
         config-file: .github/codeql/CodeQL-Config.yml
 
     - name: Create an Setup Wizard
-      run: make -C build build
+      working-directory: build
+      run: ninja -j 0 -v build
       
     - name: Deploy
       working-directory: build
@@ -112,7 +116,7 @@ jobs:
     - name: Create Attachments
       working-directory: build
       run : |
-        make zip
+        ninja -j 0 -v zip
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@a0cc01096a24026610f4adb239c336ec0a1e4bd2
