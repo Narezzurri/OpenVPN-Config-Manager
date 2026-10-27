@@ -208,11 +208,7 @@ int re2string (const INIReader& rule, string s, const smatch& match, map<string,
 		else if (invar)
 			varname += i;
 		else
-		{
-			if (!isalnum (i) && i == '_')
-				ans += '\\';
 			ans += i;
-		}
 	}
 	return 0;
 }
