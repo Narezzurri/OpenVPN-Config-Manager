@@ -6,6 +6,9 @@ permissions:
   packages: read
   security-events: write
 
+env:
+  NINJA_STATUS: "[%r processes, %f/%t @ %o/s : %es]"
+
 on:
   push:
     branches: [ "main" ]
