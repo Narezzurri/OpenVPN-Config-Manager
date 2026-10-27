@@ -2,6 +2,9 @@ name: Build
 
 permissions: read-all
 
+env:
+  NINJA_STATUS: "[%r processes, %f/%t @ %o/s : %es]"
+
 on:
   push:
     branches:
@@ -36,8 +39,6 @@ jobs:
 
       - name: Build
         working-directory: build
-        env:
-          NINJA_STATUS: "[%r processes, %f/%t @ %o/s : %es]"
         run: ninja -j 0 -v
 
       - name: Create an Setup Wizard
