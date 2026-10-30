@@ -29,7 +29,7 @@ This project follows a monthly release cycle with a defined feature freeze and r
 |     Phase      |            Date            |                                              Description                                              |
 | -------------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
 |      RC1       |     24th of each month     |               First release candidate: starts community testing and feedback collection               |
-|      RC2       | 1st of the following month | Second release candidate with **new features frozen**: only bug fixes and security fixes are accepted |
+| RC2 (Optional) | 1st of the following month | Second release candidate with **new features frozen**: only bug fixes and security fixes are accepted |
 | Stable Release | 4th of the following month |       Official stable release, containing accumulated features, fixes, and maintenance updates        |
 
 All release dates are specified in **CST (UTC+8)**.
