@@ -34,7 +34,7 @@ class Dryrun : public testing::Test
 {
 protected:
 	db minthr = 0;
-	db maxthr = 400;
+	db maxthr = 600;
 	steady_clock::time_point birth;
 	void SetUp (void) override
 	{
