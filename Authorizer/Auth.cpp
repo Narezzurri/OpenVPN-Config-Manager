@@ -2,10 +2,12 @@
  * OpenVPN Config Manager - Authorizer utility
  * Copyright (c) 2026 Narezzurri - MIT License
 */
+#include 	<algorithm>
 #include	<iostream>
 #include	<fstream>
 #include	<sstream>
 #include	<vector>
+#include	<cctype>
 #include	"lib.h"
 using namespace std;
 
@@ -22,9 +24,6 @@ int main (int argc, const char* argv[])
 		cout << string {
 			#embed	"Help.txt"
 		};
-#ifndef		DEBUG
-		getchar ();
-#endif
 		return 0;
 	}
 	for (int i = 1; i < argc; i++)
@@ -37,6 +36,7 @@ int main (int argc, const char* argv[])
 			if (i <= argc - 1 && [&] () -> bool
 			{
 				string arg = argv[i] + 1;
+				transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));
 				if (arg == "c" || arg == "cred")
 				{
 					credential = argv[++nxt];
@@ -120,8 +120,8 @@ int main (int argc, const char* argv[])
 					cout << "Appendage on Line " << i + 1 << " : " << remove_end_newline (s) << " -> " << remove_end_newline (t) << endl;
 					if (!dryrun)
 					{
-						cout << "Confirm to append?(Y/n)";
-#ifdef		DEBUG
+						cout << "Confirm to append? [Y/n] ";
+#ifdef		SILENT
 						cout << endl;
 #else
 						if (choice (cin))
@@ -144,12 +144,12 @@ int main (int argc, const char* argv[])
 		}
 		cout << "Assign the output file:(Reserved to skip)";
 		string output_filename;
-#ifndef		DEBUG
+#ifndef		SILENT
 		getline (cin, output_filename);
 		if (output_filename.empty())
 #endif
 			output_filename = filename;
-#ifndef		DEBUG
+#ifndef		SILENT
 		do
 		{
 #endif
@@ -163,11 +163,11 @@ int main (int argc, const char* argv[])
 				fileout.close();
 				cout << "Written into file: " << output_filename << endl;
 				cnt++;
-#ifndef		DEBUG
+#ifndef		SILENT
 				break;
 #endif
 			}
-#ifndef		DEBUG
+#ifndef		SILENT
 			cout << "Assign the output file:(Reserved to skip)";
 			getline (cin, output_filename);
 		}
@@ -175,7 +175,7 @@ int main (int argc, const char* argv[])
 #endif
 	}
 	cout << endl << cnt << " file(s) appended successfully." << endl;
-#ifndef		DEBUG
+#ifndef		SILENT
 	getchar ();
 #endif
 	return 0;

@@ -4,12 +4,17 @@
 #define		MISSING_VARIABLE_BRACKETS	0x02
 #define		DUPLICATE_VARIABLE_NAME		0x03
 #define		INVALID_VARIABLE_TYPE		0x04
+#define		REGEX_FILENAME				R"(([^\\/:*?"<>|]+))"
+#define		REGEX_WEBSITE				R"(([a-z.]+))"
 #include	"INIReader.h"
 #include	<string>
 #include	<regex>
 using namespace std;
 using db = double;
 using pss = pair<string,string>;
+
+vector<string> templates = {"us-1.udp", "uk-2.udp", "ca-3.tcp", "jp-4.tcp"};
+vector<string> templates_address = {"www.github.com", "www.bbc.com", "www.cbc.ca", "ja.wikipedia.org"};
 
 /** @brief Read a non-negative integer from [s] and store it in [ans] */
 int get_int (string s, int &ans);
@@ -42,3 +47,5 @@ int roll_back (map<string,string> mp);
 bool choice (istream &in);
 /** @brief Remove the `\r`(s) and `\\n`(s) in s */
 string remove_end_newline (string s);
+/** @brief Run command cmd */
+int system (string cmd);

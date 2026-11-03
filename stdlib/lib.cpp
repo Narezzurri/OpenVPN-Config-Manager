@@ -1,8 +1,10 @@
 #include	"INIReader.h"
 #include	"resource.h"
+#include	<algorithm>
 #include	<windows.h>
 #include	<iostream>
 #include	<sstream>
+#include	<cctype>
 #include	<format>
 #include	<string>
 #include	<vector>
@@ -83,6 +85,7 @@ int HelpDetected (int argc, const char* argv[])
 	for (int i = 1; i < argc; i++)
 	{
 		string arg = argv[i];
+		transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));
 		if (arg == "--help" || arg == "/?" || arg == "/help")
 			return 1;
 	}
@@ -240,7 +243,7 @@ int roll_back (map<string,string> mp)
 	int error = 0;
 	for (auto [raw, nw] : mp)
 	{
-		if (error |= system (("move " + parse_filepath (raw).first + '\\' + nw + ' ' + raw + " > nul").c_str()))
+		if (error |= system ("move " + parse_filepath (raw).first + '\\' + nw + ' ' + raw + " > nul"))
 			cout << "Roll back failed: " << quote (raw) << " -> " << quote (nw) << endl;
 	}
 	return error;
@@ -258,4 +261,9 @@ string remove_end_newline (string s)
 	while (s.back() == '\r' || s.back() == '\n')
 		s.pop_back();
 	return s;
+}
+
+int system (string cmd)
+{
+	return system (cmd.c_str());
 }

@@ -244,6 +244,9 @@ int ini_parse_stream(ini_reader reader, void* stream, ini_handler handler,
 #if INI_ALLOW_NO_VALUE
                 *end = '\0';
                 name = ini_rstrip(start, end);
+#if INI_ALLOW_MULTILINE
+                ini_strncpy0(prev_name, name, sizeof(prev_name));
+#endif
                 if (!HANDLER(user, section, name, NULL) && !error)
                     error = lineno;
 #else
@@ -269,7 +272,8 @@ int ini_parse_stream(ini_reader reader, void* stream, ini_handler handler,
 /* See documentation in header file. */
 int ini_parse_file(FILE* file, ini_handler handler, void* user)
 {
-    return ini_parse_stream((ini_reader)fgets, file, handler, user);
+    int error = ini_parse_stream((ini_reader)fgets, file, handler, user);
+    return ferror(file) ? -3 : error;
 }
 
 /* See documentation in header file. */

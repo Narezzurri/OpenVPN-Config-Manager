@@ -1,65 +1,87 @@
 #include	<gtest/gtest.h>
 #include	<fstream>
-#ifndef		OVPNS
-#define		OVPNS		""
-#endif
+#include	<chrono>
+#include	"lib.h"
 using namespace std;
+using namespace chrono;
 
-vector<string> templates = {"us-1.udp", "uk-2.udp", "ca-3.tcp", "jp-4.tcp"};
 class Feature : public testing::Test
 {
-public:
+protected:
+	db minthr = 50;
+	db maxthr = 1000;
+	steady_clock::time_point birth;
 	void SetUp (void) override
 	{
-		ASSERT_EQ (0, system ("xcopy ..\\..\\Templates Templates /I /Y"));
+		birth = steady_clock::now();
+		ASSERT_EQ (0, system ("xcopy ..\\Templates Templates /I /Y"));
 	}
 	void TearDown (void) override
 	{
 		for (auto i : templates)
-			EXPECT_EQ (0, system (("fc Templates\\" + i + ".ovpn Templates\\" + i + "-authed.ovpn").c_str()));
+			EXPECT_EQ (0, system ("fc Templates\\" + i + ".ovpn Templates\\" + i + "-authed.ovpn"));
+		db dt = duration_cast<duration<db,milli> > (steady_clock::now() - birth).count();
+		EXPECT_LE (minthr, dt);
+		EXPECT_LE (dt, maxthr);
+	}
+	void SetThr (db min, db max)
+	{
+		minthr = min;
+		maxthr = max;
 	}
 };
 class Dryrun : public testing::Test
 {
-public:
+protected:
+	db minthr = 0;
+	db maxthr = 600;
+	steady_clock::time_point birth;
 	void SetUp (void) override
 	{
-		ASSERT_EQ (0, system ("xcopy ..\\..\\Templates Templates /I /Y"));
+		birth = steady_clock::now();
+		ASSERT_EQ (0, system ("xcopy ..\\Templates Templates /I /Y"));
+	}
+	void TearDown (void) override
+	{
+		db dt = duration_cast<duration<db,milli> > (steady_clock::now() - birth).count();
+		EXPECT_LE (minthr, dt);
+		EXPECT_LE (dt, maxthr);
+	}
+	void SetThr (db min, db max)
+	{
+		minthr = min;
+		maxthr = max;
 	}
 };
 
 TEST (Help, Help)
 {
-	EXPECT_EQ (0, system ("Auth > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Auth --help > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Auth /help > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
-	EXPECT_EQ (0, system ("Auth /? > stdout"));
-	EXPECT_EQ (0, system ("fc stdout Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth			> stdout.Help.Help.1 && fc stdout.Help.Help.1 Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth --help	> stdout.Help.Help.2 && fc stdout.Help.Help.2 Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth /help	> stdout.Help.Help.3 && fc stdout.Help.Help.3 Help.txt /W"));
+	EXPECT_EQ (0, system ("Auth /?		> stdout.Help.Help.4 && fc stdout.Help.Help.4 Help.txt /W"));
 }
 
 TEST_F (Feature, Basic)
 {
-	string cmd = "cd Templates && ..\\Auth ";
+	string cmd = "Auth ";
 	for (auto i : templates)
-		cmd += i + ".ovpn ";
-	EXPECT_EQ (0, system (cmd.c_str()));
+		cmd += "Templates\\" + i + ".ovpn ";
+	EXPECT_EQ (0, system (cmd));
 }
 TEST_F (Feature, Wildcard) { EXPECT_EQ (0, system ("Auth Templates\\*.ovpn")); }
 TEST_F (Feature, Skip_Authed)
 {
 	for (auto i : templates)
-		EXPECT_EQ (0, system (("copy Templates\\" + i + "-authed.ovpn Templates\\" + i + ".ovpn /Y").c_str()));
+		EXPECT_EQ (0, system ("copy Templates\\" + i + "-authed.ovpn Templates\\" + i + ".ovpn /Y"));
 	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn"));
 }
 
 TEST_F (Dryrun, Dryrun)
 {
-	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn /dry-run > stdout"));
+	EXPECT_EQ (0, system ("Auth Templates\\*.ovpn /dry-run > stdout.Dryrun.Dryrun"));
 	vector<int> mark (templates.size());
-	ifstream fin ("stdout");
+	ifstream fin ("stdout.Dryrun.Dryrun");
 	for (int i = 0; i < templates.size() * 2; i++)
 	{
 		vector<string> input;
@@ -70,10 +92,10 @@ TEST_F (Dryrun, Dryrun)
 		}
 		while (input.back() != "");
 		smatch match;
-		regex rgx (R"(^Auth> ([^<]+)Templates\\([^<]+)\.ovpn$)");
+		regex rgx (R"(^Auth> .*Templates\\)" REGEX_FILENAME R"(\.ovpn$)");
 		ASSERT_EQ (1, regex_match (input[0], match, rgx));
 		int authed = 0;
-		string filename = match[2];
+		string filename = match[1];
 		if (filename.length() == 15)
 		{
 			authed = 1;

@@ -3,14 +3,18 @@
  * Copyright (c) 2026 Narezzurri - MIT License
 */
 #include	"resource.h"
+#include	<algorithm>
 #include	<windows.h>
 #include	<iostream>
+#include	<fstream>
 #include	<sstream>
+#include	<cctype>
 #include	<vector>
 #include	"lib.h"
 using namespace std;
 using db = double;
 
+int dryrun = 0;
 int period = -1;
 int ping_cnt = 0;
 db sec_per_wait = 1;
@@ -26,9 +30,6 @@ int main (int argc, const char* argv[])
 		cout << string {
 			#embed	"Help.txt"
 		};
-#ifndef		DEBUG
-		getchar ();
-#endif
 		return 0;
 	}
 	int err = 0;
@@ -42,6 +43,7 @@ int main (int argc, const char* argv[])
 			if (i <= argc - 1 && [&] () -> bool
 			{
 				string arg = argv[i] + 1;
+				transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));
 				if (arg == "t" || arg == "time")
 				{
 					int succeed = get_int (argv[++nxt], period);
@@ -53,6 +55,8 @@ int main (int argc, const char* argv[])
 					return get_float (argv[++nxt], ping_timeout);
 				else if (arg == "n" || arg == "number")
 					return get_int (argv[++nxt], ping_cnt);
+				else if (arg == "dry-run")
+					return dryrun = 1;
 				else
 				{
 					cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
@@ -68,12 +72,9 @@ int main (int argc, const char* argv[])
 			}
 		}
 	} ();
-	int cnt = 0;
 	set<string> address;
 	for (auto filename : files)
 	{
-		if (period > 0 && cnt && !(cnt % period))
-			Sleep (sec_per_wait * 1000);
 		cout << filename << " : ";
 		if (extract_suffix (filename, '.') != ".ovpn")
 			puts ("Unsupported file type.");
@@ -82,8 +83,8 @@ int main (int argc, const char* argv[])
 			cin.clear();
 			string s;
 			set<string> new_address;
-			freopen (filename.c_str(), "r", stdin);
-			while (cin >> s) if (s == "remote" && cin >> s && !address.count(s))
+			ifstream fin (filename);
+			while (fin >> s) if (s == "remote" && fin >> s && !address.count(s))
 				new_address.emplace(s);
 			if (new_address.empty())
 				puts ("None of new server address found.");
@@ -104,25 +105,38 @@ int main (int argc, const char* argv[])
 	else
 	{
 		cout << address.size() << " server address(es) found." << endl;
-		for (auto addr : address)
+		if (!dryrun)
 		{
-			cout << "Launching connection with " << addr << endl;
-			string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
-			if (ping_cnt)
-				ping += " -n " + to_string (ping_cnt);
-			else
-				ping += " -t";
-			string cmd = "start " + quote (addr) + " cmd /c " + quote (ping);
-			if (!~period)
-				cmd = "start /wait" + cmd.substr(5);
-			system (cmd.c_str());
-			cnt++;
-			puts ("Done.");
+			cout << "Test connection with these " << address.size() << " address(es)? [Y/n] ";
+#ifdef		SILENT
+			cout << endl;
+#else
+			if (choice (cin))
+#endif
+			{
+				int cnt = 0;
+				for (auto addr : address)
+				{
+					if (period > 0 && cnt && !(cnt % period))
+						Sleep (sec_per_wait * 1000);
+					cout << "Launching connection with " << addr << " : ";
+					string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
+					if (ping_cnt)
+						ping += " -n " + to_string (ping_cnt);
+					else
+						ping += " -t";
+					string cmd = "start " + quote (addr) + " cmd /c " + quote (ping);
+					if (!~period)
+						cmd = "start /wait" + cmd.substr(5);
+					system (cmd);
+					cnt++;
+					puts ("Done.");
+				}
+				cout << cnt << " address(es) checked successfully." << endl;
+			}
 		}
 	}
-	cout << cnt << " address(es) checked successfully." << endl;
-	freopen ("CON", "r", stdin);
-#ifndef		DEBUG
+#ifndef		SILENT
 	getchar ();
 #endif
 	return err;

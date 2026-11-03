@@ -19,9 +19,6 @@ int main (int argc, const char* argv[])
 		cout << string {
 			#embed	"Help.txt"
 		};
-#ifndef		DEBUG
-		getchar ();
-#endif
 		return 0;
 	}
 	vector<string> files;
@@ -36,7 +33,7 @@ int main (int argc, const char* argv[])
 	if (!~config)
 	{
 		puts ("No config assigned.");
-#ifndef		DEBUG
+#ifndef		SILENT
 		getchar ();
 #endif
 		return 1;
@@ -46,7 +43,7 @@ int main (int argc, const char* argv[])
 	{
 		cout << "Fail to load config file: " << files[config] << endl;
 		cout << "Error message: " << rule.ParseErrorMessage() << endl;
-#ifndef		DEBUG
+#ifndef		SILENT
 		getchar ();
 #endif
 		return 1;
@@ -56,7 +53,7 @@ int main (int argc, const char* argv[])
 	if (pattern.empty())
 	{
 		puts ("Miss or invalid pattern in the config file.");
-#ifndef		DEBUG
+#ifndef		SILENT
 		getchar ();
 #endif
 		return 1;
@@ -64,7 +61,7 @@ int main (int argc, const char* argv[])
 	if (target.empty())
 	{
 		puts ("Miss or invalid target in the config file.");
-#ifndef		DEBUG
+#ifndef		SILENT
 		getchar ();
 #endif
 		return 1;
@@ -72,7 +69,7 @@ int main (int argc, const char* argv[])
 	map<string,int> mp;
 	if (parse_error (string2re (rule, pattern, mp, pattern), "pattern", stdout))
 	{
-#ifndef		DEBUG
+#ifndef		SILENT
 		getchar ();
 #endif
 		return 1;
@@ -89,7 +86,7 @@ int main (int argc, const char* argv[])
 			if (parse_error (re2string (rule, target, match, mp, ans.back().second), "target", stdout))
 			{
 				ans.pop_back();
-#ifndef		DEBUG
+#ifndef		SILENT
 				getchar ();
 #endif
 				return 1;
@@ -99,8 +96,8 @@ int main (int argc, const char* argv[])
 	cout << ans.size() << " file(s) matched." << endl;
 	for (auto [raw, nw] : ans)
 		cout << quote (raw) << " -> " << quote (nw) << endl;
-	cout << "Confirm to rename?(Y/N):";
-#ifdef		DEBUG
+	cout << "Confirm to rename? [Y/n] ";
+#ifdef		SILENT
 	cout << endl;
 #else
 	if (!choice (cin))
@@ -109,11 +106,11 @@ int main (int argc, const char* argv[])
 #endif
 	{
 		map<string,string> succeed;
-		for (auto [raw, nw] : ans) if (!system (("move " + raw + ' ' + parse_filepath (raw).first + '\\' + nw).c_str()))
+		for (auto [raw, nw] : ans) if (!system ("move " + raw + ' ' + parse_filepath (raw).first + '\\' + nw))
 			succeed[raw] = nw;
 		cout << succeed.size() << " file(s) renamed." << endl;
 	}
-#ifndef		DEBUG
+#ifndef		SILENT
 	getchar ();
 #endif
 	return 0;

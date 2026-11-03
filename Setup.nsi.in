@@ -1,6 +1,6 @@
 ﻿!define NAME "OpenVPN Config Manager"
 !define UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}"
-!define DIRMENU_KEY "Directory\shell\OpenVPN Config Manager"
+!define DIRMENU_KEY "Directory\shell\${NAME}"
 !define CMDMENU_KEY "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell"
 
 !addincludedir "@CMAKE_SOURCE_DIR@"
@@ -9,7 +9,7 @@
 !include "lib.nsh"
 
 Name "${NAME}"
-OutFile "OpenVPNConfigManagerSetup-@PROJECT_VERSION@.exe"
+OutFile "OpenVPNConfigManagerSetup-@VERSIONSTR@.exe"
 InstallDir "$PROGRAMFILES32\${NAME}" 
 RequestExecutionLevel "admin"
 
@@ -53,7 +53,7 @@ Section "install"
 	Call AddToPath
 	; Add to right-click menu for directories
 	SetRegView 64
-	WriteRegStr "HKCR" "${DIRMENU_KEY}" "MUIVerb" "OpenVPN Config Manager"
+	WriteRegStr "HKCR" "${DIRMENU_KEY}" "MUIVerb" "${NAME}"
 	WriteRegStr "HKCR" "${DIRMENU_KEY}" "SubCommands" "@APPLIST@"
 	!macro Register APP APP_NAME
 		WriteRegStr "HKLM" "${CMDMENU_KEY}\OCM.${APP}" "" "${APP_NAME}"

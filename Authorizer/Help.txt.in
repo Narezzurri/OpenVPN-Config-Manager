@@ -1,4 +1,4 @@
-OpenVPN Config Authorizer v1.2 (c) 2026 Narezzurri - MIT Licence 
+OpenVPN Config Authorizer v@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@ (c) 2026 Narezzurri - MIT Licence 
 Repository: https://github.com/Narezzurri/OpenVPN-Config-Manager 
 
 Append login credentials to OpenVPN config file(s) (*.ovpn).
@@ -6,6 +6,7 @@ Append login credentials to OpenVPN config file(s) (*.ovpn).
 
 Usage: Auth [/c[red] filename] [/dry-run] config1.ovpn config2.ovpn ...
 
+The arguments are case-insensitive.
 If there are multiple arguments of the same type,only the last one matters.
 
     /c[red] ----------- Assign the credential file
