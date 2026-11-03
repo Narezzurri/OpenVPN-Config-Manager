@@ -1,22 +1,22 @@
 {
-    "buildType": {
-        "default": "Debug",
-        "choices": {
-            "Debug": {
-                "short": "Debug",
-                "long": "Debug version with debug info",
-                "buildType": "Debug"
-            },
-            "Release": {
-                "short": "Release",
-                "long": "Release version with optimizations",
-                "buildType": "Release"
-            },
-            "Test": {
-                "short": "Test",
-                "long": "Automated test version",
-                "buildType": "Test"
-            }
-        }
-    }
+	"buildType": {
+		"default": "Debug",
+		"choices": {
+			"Debug": {
+				"short": "Debug",
+				"long": "Debug version with debug info",
+				"buildType": "Debug"
+			},
+			"Release": {
+				"short": "Release",
+				"long": "Release version with optimizations",
+				"buildType": "Release"
+			},
+			"Test": {
+				"short": "Test",
+				"long": "Automated test version",
+				"buildType": "Test"
+			}
+		}
+	}
 }

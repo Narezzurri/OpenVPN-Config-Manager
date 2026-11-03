@@ -6,7 +6,7 @@
 			"name": "GDB Launcher",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${fileDirname}\\build\\Checker\\${fileBasenameNoExtension}.exe",
+			"program": "${workspaceFolder}\\build\\install\\${fileBasenameNoExtension}.exe",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
