@@ -18,8 +18,8 @@ Tired of deploying for dozens of configs one by one, or adding login credentials
 
 This tool automates both tasks, making bulk OpenVPN deployment simple and reliable.
 
-> ## IMPORTANT
-> **Project temporarily paused and planned to resume on Jan 10'2027 (at the earliest)**
+> [!IMPORTANT]
+> **Project temporarily paused and planned to resume on 2027-01-10 (at the earliest)**
 >
 > Due to academic commitment, the development is paused until early 2027.
 >
@@ -41,7 +41,7 @@ If you're new to open source, look for issues tagged [`good first issue`](https:
 
 # Maintenance & Release Cadence
 
-> **Note:** The cadence below is **currently suspended** and is planned to resume on **Jan 10'2027 (at the earliest)**.
+> **Note:** The cadence below is **currently suspended** and is planned to resume on **2027-01-10 (at the earliest)**.
 > 
 > No RC or stable releases will be published until then.
 > 
@@ -67,12 +67,12 @@ Critical bug fixes and security issues will always take priority over the regula
 
 ### **Resumption plan:**
 
-- Maintenance is planned to resume on **Jan 10'2027 (at the earliest)**.
+- Maintenance is planned to resume on **2027-01-10 (at the earliest)**.
 
 - The `v2.5` cycle will then follow the regular cadence: 
-	- **Jan 24'2027** : RC1
-	- **Feb 01'2027** : RC2 (if needed)
-	- **Feb 04'2027** : stable release
+	- **2027-01-24** : RC1
+	- **2027-02-01** : RC2 (if needed)
+	- **2027-02-04** : stable release
 
 # Legal Statement
 
