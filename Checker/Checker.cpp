@@ -6,6 +6,7 @@
 #include	<algorithm>
 #include	<windows.h>
 #include	<iostream>
+#include	<fstream>
 #include	<sstream>
 #include	<cctype>
 #include	<vector>
@@ -82,8 +83,8 @@ int main (int argc, const char* argv[])
 			cin.clear();
 			string s;
 			set<string> new_address;
-			freopen (filename.c_str(), "r", stdin);
-			while (cin >> s) if (s == "remote" && cin >> s && !address.count(s))
+			ifstream fin (filename);
+			while (fin >> s) if (s == "remote" && fin >> s && !address.count(s))
 				new_address.emplace(s);
 			if (new_address.empty())
 				puts ("None of new server address found.");
@@ -135,7 +136,6 @@ int main (int argc, const char* argv[])
 			}
 		}
 	}
-	freopen ("CON", "r", stdin);
 #ifndef		SILENT
 	getchar ();
 #endif
