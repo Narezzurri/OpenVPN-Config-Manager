@@ -1,3 +1,5 @@
+![STATUS](https://img.shields.io/badge/STATUS-PAUSED%20UNTIL%202027--01--10-lightgrey)
+
 [![CMake Creation](https://github.com/Narezzurri/OpenVPN-Config-Manager/actions/workflows/CMake.yml/badge.svg)](https://github.com/Narezzurri/OpenVPN-Config-Manager/actions/workflows/CMake.yml)
 [![License](https://img.shields.io/github/license/Narezzurri/OpenVPN-Config-Manager)](https://github.com/Narezzurri/OpenVPN-Config-Manager/blob/main/LICENSE)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-orange)](https://github.com/Narezzurri/OpenVPN-Config-Manager/issues)
@@ -16,13 +18,34 @@ Tired of deploying for dozens of configs one by one, or adding login credentials
 
 This tool automates both tasks, making bulk OpenVPN deployment simple and reliable.
 
+> ## IMPORTANT
+> **Project temporarily paused and planned to resume on Jan 10'2027 (at the earliest)**
+>
+> Due to academic commitment, the development is paused until early 2027.
+>
+> - **v2.5 and later releases are postponed** until maintenance resumes.
+> - **Bug reports and feature requests are still welcome**, but responses may be delayed.
+> - **Security issues** will be reviewed as soon as possible, but non-critical issues may wait until maintenance resumes.
+>
+> Thanks for your understanding.
+
 # Contributing
 
 Contributions, bug reports, and feature requests are all welcome.
 
+> While the project is paused, PR reviews and issue responses may be delayed.
+> 
+> Please see the pause notice at the top of this `README` for details.
+
 If you're new to open source, look for issues tagged [`good first issue`](https://github.com/Narezzurri/OpenVPN-Config-Manager/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22) 
 
 # Maintenance & Release Cadence
+
+> **Note:** The cadence below is **currently suspended** and is planned to resume on **Jan 10'2027 (at the earliest)**.
+> 
+> No RC or stable releases will be published until then.
+> 
+> The `v2.5` cycle will start after maintenance resumes.
 
 This project follows a monthly release cycle with a defined feature freeze and release candidate phase:
 
@@ -41,6 +64,15 @@ I aim to keep this schedule, but it is a best-effort commitment, not a legal gua
 If the release date falls on a weekend or holiday, it may be shifted by 1–2 days.
 
 Critical bug fixes and security issues will always take priority over the regular cadence.
+
+### **Resumption plan:**
+
+- Maintenance is planned to resume on **Jan 10'2027 (at the earliest)**.
+
+- The `v2.5` cycle will then follow the regular cadence: 
+	- **Jan 24'2027** : RC1
+	- **Feb 01'2027** : RC2 (if needed)
+	- **Feb 04'2027** : stable release
 
 # Legal Statement
 
