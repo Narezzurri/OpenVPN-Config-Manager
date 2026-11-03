@@ -12,5 +12,6 @@
 	"C_Cpp.default.includePath": [
 		"${workspaceFolder}/**"
 	],
-	"cmake.configureOnEdit": true
+	"cmake.configureOnEdit": true,
+	"cmake.automaticReconfigure": true
 }
