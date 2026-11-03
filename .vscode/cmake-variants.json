@@ -4,17 +4,17 @@
         "choices": {
             "Debug": {
                 "short": "Debug",
-                "long": "调试版本，包含调试信息",
+                "long": "Debug version with debug info",
                 "buildType": "Debug"
             },
             "Release": {
                 "short": "Release",
-                "long": "发布版本，开启优化",
+                "long": "Release version with optimizations",
                 "buildType": "Release"
             },
             "Test": {
                 "short": "Test",
-                "long": "自动化测试版本",
+                "long": "Automated test version",
                 "buildType": "Test"
             }
         }
