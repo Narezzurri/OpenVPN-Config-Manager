@@ -27,7 +27,7 @@ This tool automates both tasks, making bulk OpenVPN deployment simple and reliab
 > - **Bug reports and feature requests are still welcome**, but responses may be delayed.
 > - **Security issues** will be reviewed as soon as possible, but non-critical issues may wait until maintenance resumes.
 >
-> Thanks for your understanding.
+> Thank you for your understanding.
 
 # Contributing
 
