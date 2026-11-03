@@ -21,7 +21,7 @@ This tool automates both tasks, making bulk OpenVPN deployment simple and reliab
 > [!IMPORTANT]
 > **Project temporarily paused and planned to resume on 2027-01-10 (at the earliest)**
 >
-> Due to academic commitment, the development is paused until early 2027.
+> Due to academic commitment, development is paused until early 2027.
 >
 > - **v2.5 and later releases are postponed** until maintenance resumes.
 > - **Bug reports and feature requests are still welcome**, but responses may be delayed.
@@ -65,7 +65,7 @@ If the release date falls on a weekend or holiday, it may be shifted by 1–2 da
 
 Critical bug fixes and security issues will always take priority over the regular cadence.
 
-### **Resumption plan:**
+### Resumption plan:
 
 - Maintenance is planned to resume on **2027-01-10 (at the earliest)**.
 
