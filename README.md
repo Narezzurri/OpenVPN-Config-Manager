@@ -29,7 +29,7 @@ This project follows a monthly release cycle with a defined feature freeze and r
 |     Phase      |            Date            |                                              Description                                              |
 | -------------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
 |      RC1       |     24th of each month     |               First release candidate: starts community testing and feedback collection               |
-|      RC2       | 1st of the following month | Second release candidate with **new features frozen**: only bug fixes and security fixes are accepted |
+| RC2 (Optional) | 1st of the following month | Second release candidate with **new features frozen**: only bug fixes and security fixes are accepted |
 | Stable Release | 4th of the following month |       Official stable release, containing accumulated features, fixes, and maintenance updates        |
 
 All release dates are specified in **CST (UTC+8)**.
@@ -44,8 +44,11 @@ Critical bug fixes and security issues will always take priority over the regula
 
 # Legal Statement
 
-This tool is designed for educational and administrative purposes only. It is intended to help users manage OpenVPN configurations they are legally authorized to use.We guarantee that we will not collect,transmit or upload any information from the configuration files to any remote server.
+This tool is designed for educational and administrative purposes only.
+It is intended to help users manage OpenVPN configurations they are legally authorized to use.
+We guarantee that we will not collect, transmit or upload any information from the configuration files to any remote server.
 
-Users are solely responsible for ensuring their use of this software and any associated VPN services complies with all applicable local laws and regulations. The author assumes no liability for any misuse of this tool.
+Users are solely responsible for ensuring their use of this software and any associated VPN services complies with all applicable local laws and regulations.
+The author assumes no liability for any misuse of this tool.
 
 For details on third-party components and their licenses, please refer to the [`NOTICE`](NOTICE) file.
