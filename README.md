@@ -19,7 +19,7 @@ Tired of deploying for dozens of configs one by one, or adding login credentials
 This tool automates both tasks, making bulk OpenVPN deployment simple and reliable.
 
 > [!IMPORTANT]
-> **Project temporarily paused and planned to resume on 2027-01-10 (at the earliest)**
+> **Project temporarily paused - planned to resume on 2027-01-10 (at the earliest)**
 >
 > Due to academic commitment, development is paused until early 2027.
 >
