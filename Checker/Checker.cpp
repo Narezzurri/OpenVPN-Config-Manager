@@ -5,6 +5,7 @@
 #include	"resource.h"
 #include	<windows.h>
 #include	<iostream>
+#include	<fstream>
 #include	<sstream>
 #include	<vector>
 #include	"lib.h"
@@ -80,10 +81,10 @@ int main (int argc, const char* argv[])
 		else
 		{
 			cin.clear();
-			freopen (filename.c_str(), "r", stdin);
+			ifstream fin (filename);
 			string addr;
-			cin >> addr;
-			while (cin >> addr && addr != "remote");
+			fin >> addr;
+			while (fin >> addr && addr != "remote");
 			if (addr != "remote")
 				puts ("Server ip address not found.");
 			else
@@ -106,7 +107,6 @@ int main (int argc, const char* argv[])
 		}
 	}
 	cout << cnt << " files checked successfully." << endl;
-	freopen ("CON", "r", stdin);
 #ifndef		SILENT
 	getchar ();
 #endif
