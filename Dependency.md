@@ -1,5 +1,13 @@
 # Environmental Dependencies
 
+- [Git for Windows](https://github.com/git-for-windows/git)
+
+- [MinGW64](https://github.com/niXman/mingw-builds-binaries)
+
+- [CMake](https://github.com/Kitware/CMake)
+
+- [Ninja](https://github.com/ninja-build/ninja)
+
 - [NSIS](https://nsis.sourceforge.io)
 
 - [Inkscape](https://github.com/inkscape/inkscape)
