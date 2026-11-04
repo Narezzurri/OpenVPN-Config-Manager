@@ -82,15 +82,19 @@ jobs:
         run : |
           ninja -j 0 -v zip
 
-      - name: Upload Release Artifacts
+      - name: Upload Setup Wizard
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: github.event_name == 'workflow_dispatch'
         with:
-          name: OpenVPN-Config-Manager-Release
-          path: |
-            build/OpenVPNConfigManagerSetup-*.exe
-            build/OpenVPNConfigManagerSetup-*.zip
-          compression-level: 9
+          path: build/OpenVPNConfigManagerSetup-*.exe
+          archive: false
+
+      - name: Upload Zip File
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          path: build/OpenVPNConfigManagerSetup-*.zip
+          archive: false
 
       - name: Upload to Release
         uses: svenstaro/upload-release-action@29e53e917877a24fad85510ded594ab3c9ca12de
