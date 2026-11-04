@@ -6,8 +6,11 @@
 			"name": "GDB Launcher",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}\\build\\install\\${fileBasenameNoExtension}.exe",
-			"args": [],
+			// "program": "${workspaceFolder}\\build\\install\\${fileBasenameNoExtension}.exe",
+			"program": "${workspaceFolder}\\build\\Checker\\Test.exe",
+			"args": [
+				"C:\\Program Files (x86)\\OpenVPN Config Manager\\Templates\\*"
+			],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
 			"environment": [],
