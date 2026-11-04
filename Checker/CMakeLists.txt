@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.12)
 
 set (NAME "Checker")
-set (VERSION "1.5.0")
+set (VERSION "1.5.1")
 set (FULLNAME "Checker")
 
 project (OpenVPN-Config-${FULLNAME} VERSION ${VERSION} LANGUAGES C CXX HOMEPAGE_URL https://github.com/Narezzurri/OpenVPN-Config-Manager)
