@@ -70,14 +70,14 @@ int main (int argc, const char* argv[])
 			puts ("Unsupported file type.");
 			continue;
 		}
-		cout << "Auth> " << filename << endl;
+		cerr << "Auth> " << filename << endl;
 		ifstream filein (filename, ios::binary);
 		if (!filein.is_open())
 		{
 			puts ("Cannot open file.");
 			continue;
 		}
-		cout << "Auth> " << filename << endl;
+		cerr << "Auth> " << filename << endl;
 		stringstream ss;
 		ss << filein.rdbuf();
 		filein.close();
@@ -89,7 +89,7 @@ int main (int argc, const char* argv[])
 			line.emplace_back(cfg.substr(0, idx + 1));
 			cfg = cfg.substr(idx + 1);
 		}
-		cout << "Auth> " << filename << endl;
+		cerr << "Auth> " << filename << endl;
 		line.emplace_back(cfg);
 		int file_updated = 0;
 		for (int i = 0; i < line.size(); i++)
