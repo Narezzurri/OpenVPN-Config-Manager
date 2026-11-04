@@ -13,6 +13,16 @@ on:
   release:
     types: [ published ]
   workflow_dispatch:
+    inputs:
+      type:
+        description: 'Construction Type'
+        required: true
+        default: 'Test'
+        type: choice
+        options:
+          - Release
+          - Debug
+          - Test
 
 jobs:
   build:
@@ -30,11 +40,15 @@ jobs:
           echo "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Configure CMake of Release
-        if: github.event_name == 'release'
+        if: github.event_name == 'release' || github.event_name == 'workflow_dispatch' && inputs.type == 'Release'
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release -G "Ninja"
 
+      - name: Configure CMake of Debug
+        if: github.event_name == 'workflow_dispatch' && inputs.type == 'Debug'
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "Ninja"
+
       - name: Configure CMake of Test
-        if: github.event_name != 'release'
+        if: github.event_name != 'release' && (github.event_name != 'workflow_dispatch' || inputs.type == 'Test')
         run: cmake -B build -DCMAKE_BUILD_TYPE=Test -G "Ninja"
 
       - name: Build
@@ -58,6 +72,7 @@ jobs:
           echo "C:\Program Files (x86)\OpenVPN Config Manager" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Test
+        if: github.event_name != 'release' && (github.event_name != 'workflow_dispatch' || inputs.type == 'Test')
         working-directory: build
         run: ctest --output-on-failure --verbose
 
