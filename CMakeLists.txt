@@ -20,7 +20,7 @@ set (ALL_DEPENDS
 )
 # Version
 set (VERSION "2.4.0")
-set (VERSIONSTR "2.4rc1")
+set (VERSIONSTR "2.4.0")
 set (CMAKE_CXX_STANDARD 23)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
