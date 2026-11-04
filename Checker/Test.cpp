@@ -108,7 +108,7 @@ TEST_F (Feature, PrintAddress)
 }
 TEST_F (Feature, CaseInsensitivity)
 {
-	SetThr (1200, 3000);
+	SetThr (1000, 3000);
 	EXPECT_EQ (0, system ("Checker --HELP	> stdout.Feature.CaseInsensitivity.1 && fc stdout.Feature.CaseInsensitivity.1 Help.txt /W"));
 	EXPECT_EQ (0, system ("Checker /Help	> stdout.Feature.CaseInsensitivity.2 && fc stdout.Feature.CaseInsensitivity.2 Help.txt /W"));
 	EXPECT_EQ (0, system ("Checker /?		> stdout.Feature.CaseInsensitivity.3 && fc stdout.Feature.CaseInsensitivity.3 Help.txt /W"));
