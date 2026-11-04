@@ -65,11 +65,9 @@ void Search (string filename, vector<string> &ans)
 			{
 				ans.emplace_back(string (MAX_PATH, '\0'));
 				if (dir.empty())
-					GetFullPathNameA (file.cFileName, MAX_PATH, ans.back().c_str(), NULL);
+					ans.back().resize(GetFullPathNameA (file.cFileName, MAX_PATH, &ans.back()[0], NULL));
 				else
-					GetFullPathNameA ((dir + '\\' + file.cFileName).c_str(), MAX_PATH, ans.back().c_str(), NULL);
-				if (int idx = ans.back().find_first_of('\0'); idx != string::npos)
-					ans.back().resize(idx);
+					ans.back().resize(GetFullPathNameA ((dir + '\\' + file.cFileName).c_str(), MAX_PATH, &ans.back()[0], NULL));
 			}
 		}
 		while (FindNextFileA (handle, &file));
