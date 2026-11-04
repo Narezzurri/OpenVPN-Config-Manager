@@ -70,6 +70,8 @@ int main (int argc, const char* argv[])
 			puts ("Unsupported file type.");
 			continue;
 		}
+		cerr << filename.size() << endl;
+		cerr << filename.capacity() << endl;
 		for (auto i : filename)
 			cerr << (int) i << " : " << i << endl;
 		ifstream filein (filename, ios::binary);
