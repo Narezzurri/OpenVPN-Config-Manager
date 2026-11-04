@@ -71,7 +71,7 @@ int main (int argc, const char* argv[])
 			continue;
 		}
 		for (auto i : filename)
-			cerr << (int) i << endl;
+			cerr << (int) i << " : " << i << endl;
 		ifstream filein (filename, ios::binary);
 		if (!filein.is_open())
 		{
