@@ -39,8 +39,13 @@ int main (int argc, const char* argv[])
 				transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));
 				if (arg == "c" || arg == "cred")
 				{
-					credential = argv[++nxt];
-					return 1;
+					if (i == argc - 1)
+						return 0;
+					else
+					{
+						credential = argv[++nxt];
+						return 1;
+					}
 				}
 				else if (arg == "dry-run")
 				{
