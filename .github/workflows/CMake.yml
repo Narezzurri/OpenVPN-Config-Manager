@@ -11,7 +11,7 @@ on:
   pull_request:
     types: [ opened ]
   release:
-    types: [ published,edited ]
+    types: [ published ]
   workflow_dispatch:
 
 jobs:
