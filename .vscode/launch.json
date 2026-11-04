@@ -7,7 +7,9 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}\\build\\install\\${fileBasenameNoExtension}.exe",
-			"args": [],
+			"args": [
+				"C:\\Program Files (x86)\\OpenVPN Config Manager\\Templates\\*"
+			],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
 			"environment": [],
