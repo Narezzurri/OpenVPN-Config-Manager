@@ -71,8 +71,8 @@ void Search (string filename, vector<string> &ans)
 			}
 		}
 		while (FindNextFileA (handle, &file));
+		FindClose (handle);
 	}
-	FindClose (handle);
 	return ;
 }
 
