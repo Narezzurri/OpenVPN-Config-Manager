@@ -33,29 +33,28 @@ int main (int argc, const char* argv[])
 		else
 		{
 			int nxt = i;
-			if (i <= argc - 1 && [&] () -> bool
+			string arg = argv[i] + 1;
+			transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));
+			if (arg == "c" || arg == "cred")
 			{
-				string arg = argv[i] + 1;
-				transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));
-				if (arg == "c" || arg == "cred")
-				{
-					credential = argv[++nxt];
-					return 1;
-				}
-				else if (arg == "dry-run")
-				{
-					dryrun = 1;
-					return 1;
-				}
+				if (i == argc - 1)
+					cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip." << endl;
 				else
 				{
-					cout << "Unrecognized argument : " << argv[i] << ".Skip." << endl;
-					return 1;
+					credential = argv[++nxt];
+					i = nxt;
 				}
-			}())
+			}
+			else if (arg == "dry-run")
+			{
+				dryrun = 1;
 				i = nxt;
+			}
 			else
-				cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip." << endl;
+			{
+				cout << "Unrecognized argument : " << argv[i] << ".Skip." << endl;
+				i = nxt;
+			}
 		}
 	}
 	int cnt = 0;
@@ -65,22 +64,29 @@ int main (int argc, const char* argv[])
 			puts ("");
 		string filename = files[i];
 		cout << "Auth> " << filename << endl;
-		if (filename.substr(filename.find_last_of('.')) != ".ovpn")
+		if (int pos = filename.find_last_of('.'); pos != string::npos && filename.substr(pos) != ".ovpn")
 		{
 			puts ("Unsupported file type.");
 			continue;
 		}
+		cerr << filename.size() << endl;
+		cerr << filename.capacity() << endl;
+		for (auto i : filename)
+			cerr << (int) i << " : " << i << endl;
 		ifstream filein (filename, ios::binary);
+		cerr << 'a' << endl;
 		if (!filein.is_open())
 		{
 			puts ("Cannot open file.");
 			continue;
 		}
+		cerr << 'b' << endl;
 		stringstream ss;
 		ss << filein.rdbuf();
 		filein.close();
 		vector<string> line;
 		string cfg = ss.str();
+		cerr << 'c' << endl;
 		while (cfg.find('\n') != string::npos)
 		{
 			int idx = cfg.find('\n');

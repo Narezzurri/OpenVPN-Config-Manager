@@ -40,7 +40,7 @@ int main (int argc, const char* argv[])
 		else
 		{
 			int nxt = i;
-			if (i <= argc - 1 && [&] () -> bool
+			if (i < argc - 1 && [&] () -> bool
 			{
 				string arg = argv[i] + 1;
 				transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));

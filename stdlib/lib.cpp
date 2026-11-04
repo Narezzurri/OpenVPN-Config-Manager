@@ -1,5 +1,6 @@
 #include	"INIReader.h"
 #include	"resource.h"
+#include	<filesystem>
 #include	<algorithm>
 #include	<windows.h>
 #include	<iostream>
@@ -11,6 +12,7 @@
 #include	<regex>
 #include	"lib.h"
 using namespace std;
+using namespace filesystem;
 
 int get_int (string s, int &ans)
 {
@@ -52,29 +54,11 @@ pss parse_filepath (string filepath)
 
 void Search (string filename, vector<string> &ans)
 {
-	string dir = "";
+	string dir = ".";
 	if (int idx = filename.find_last_of('\\'); idx != string::npos)
 		dir = filename.substr(0, idx);
-	WIN32_FIND_DATAA file;
-	HANDLE handle = FindFirstFileA (filename.c_str(), &file);
-	if (handle != INVALID_HANDLE_VALUE)
-	{
-		do
-		{
-			if (!(file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
-			{
-				ans.emplace_back(string (MAX_PATH, '\0'));
-				if (dir.empty())
-					GetFullPathNameA (file.cFileName, MAX_PATH, ans.back().data(), NULL);
-				else
-					GetFullPathNameA ((dir + '\\' + file.cFileName).c_str(), MAX_PATH, ans.back().data(), NULL);
-				if (int idx = ans.back().find_first_of('\0'); idx != string::npos)
-					ans.back().resize(idx);
-			}
-		}
-		while (FindNextFileA (handle, &file));
-	}
-	FindClose (handle);
+	for (auto file : directory_iterator (dir))
+		ans.emplace_back(file.path().string());
 	return ;
 }
 
