@@ -76,26 +76,29 @@ TEST_F (Feature, PrintAddress)
 	ifstream fin ("stdout.Feature.PrintAddress");
 	string input;
 	vector<int> mark (templates.size());
-	for (int i = 0; i < 8; i++) [&] ()
+	for (int i = 0; i < 8; i++)
 	{
 		getline (fin, input);
 		smatch match;
 		ASSERT_EQ (1, regex_match (input, match, regex (R"(^.*Templates\\)" REGEX_FILENAME R"(\.ovpn : (.*)$)")));
 		string output = match[2];
-		for (int i = 0; i < templates.size(); i++) if (match[1] == templates[i] || match[1] == templates[i] + "-authed")
+		[&] ()
 		{
-			if (mark[i])
-				EXPECT_EQ (output, "None of new server address found.");
-			else
+			for (int i = 0; i < templates.size(); i++) if (match[1] == templates[i] || match[1] == templates[i] + "-authed")
 			{
-				mark[i] = 1;
-				ASSERT_EQ (1, regex_match (output, match, regex (R"(^1 New address\(es\) found: )" REGEX_WEBSITE " $")));
-				EXPECT_EQ (match[1], templates_address[i]);
+				if (mark[i])
+					EXPECT_EQ (output, "None of new server address found.");
+				else
+				{
+					mark[i] = 1;
+					ASSERT_EQ (1, regex_match (output, match, regex (R"(^1 New address\(es\) found: )" REGEX_WEBSITE " $")));
+					EXPECT_EQ (match[1], templates_address[i]);
+				}
+				return ;
 			}
-			return ;
-		}
-		EXPECT_EQ ("", "Illegal filename output : " + output);
-	} ();
+			EXPECT_EQ ("", "Illegal filename output : " + output);
+		} ();
+	}
 	for (auto i : mark)
 		EXPECT_EQ (i, 1);
 	getline (fin, input); EXPECT_EQ (input, "4 server address(es) found.");
