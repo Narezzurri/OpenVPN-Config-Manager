@@ -77,7 +77,7 @@ Critical bug fixes and security issues will always take priority over the regula
 
 	- **2027-02-04** : stable release
 
-	> Dates above are subject to the weekend/holiday shift rule described in the cadence section.
+	Dates above are subject to the weekend/holiday shift rule described in the cadence section.
 
 # Legal Statement
 
