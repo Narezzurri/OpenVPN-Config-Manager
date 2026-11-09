@@ -1,3 +1,5 @@
+![STATUS](https://img.shields.io/badge/STATUS-PAUSED%20UNTIL%202027--01--10-lightgrey)
+
 [![CMake Creation](https://github.com/Narezzurri/OpenVPN-Config-Manager/actions/workflows/CMake.yml/badge.svg)](https://github.com/Narezzurri/OpenVPN-Config-Manager/actions/workflows/CMake.yml)
 [![License](https://img.shields.io/github/license/Narezzurri/OpenVPN-Config-Manager)](https://github.com/Narezzurri/OpenVPN-Config-Manager/blob/main/LICENSE)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-orange)](https://github.com/Narezzurri/OpenVPN-Config-Manager/issues)
@@ -16,6 +18,37 @@ Tired of deploying for dozens of configs one by one, or adding login credentials
 
 This tool automates both tasks, making bulk OpenVPN deployment simple and reliable.
 
+> [!IMPORTANT]
+> 
+> **Project temporarily paused - planned to resume on 2027-01-10 (at the earliest)**
+>
+> Due to academic commitment, development is paused until early 2027.
+> 
+> **During the pause:**
+>
+> - **v2.5 and later releases are postponed** until maintenance resumes.
+> - **Bug reports and feature requests are still welcome**, but responses may be delayed.
+> - **Security issues** will be reviewed as soon as possible, but non-critical issues may wait until maintenance resumes.
+> - The **monthly release cadence is suspended**, no RC or stable releases will be published on schedule during this period.
+> 
+> **Resumption plan:**
+> 
+> - Maintenance is planned to resume on **2027-01-10 (at the earliest)**.
+> 
+> - The `v2.5` cycle will then follow the regular cadence:
+> 
+> 	- **2027-01-24** : RC1
+> 
+> 	- **2027-02-01** : RC2 (if needed)
+> 
+> 	- **2027-02-04** : stable release
+> 
+> 	Dates above are subject to the weekend/holiday shift rule described in the cadence section.
+> 
+> 	All dates are in **CST (UTC+8)**.
+> 
+> Thank you for your understanding.
+
 # Contributing
 
 Contributions, bug reports, and feature requests are all welcome.
@@ -23,6 +56,8 @@ Contributions, bug reports, and feature requests are all welcome.
 If you're new to open source, look for issues tagged [`good first issue`](https://github.com/Narezzurri/OpenVPN-Config-Manager/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22) 
 
 # Maintenance & Release Cadence
+
+> **Note:** The cadence below is **currently suspended** and is planned to resume on **2027-01-10 (at the earliest)**.
 
 This project follows a monthly release cycle with a defined feature freeze and release candidate phase:
 
