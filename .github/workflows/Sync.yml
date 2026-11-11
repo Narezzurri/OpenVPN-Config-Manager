@@ -108,7 +108,7 @@ jobs:
           echo "sha=$(git -C googletest rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           echo "date=$(git -C googletest log -1 --date=iso-local --format=%cs)" >> "$GITHUB_OUTPUT"
           echo "time=$(git -C googletest log -1 --date=iso-local --format=%cd)" >> "$GITHUB_OUTPUT"
-          echo "url=$(git -C /tmp/inih remote get-url origin | sed 's/\.git$//')" >> "$GITHUB_OUTPUT"
+          echo "url=$(git -C googletest remote get-url origin | sed 's/\.git$//')" >> "$GITHUB_OUTPUT"
 
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@v7.0.0
