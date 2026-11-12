@@ -6,7 +6,7 @@
 			"name": "GDB Launcher",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}\\build\\install\\${fileBasenameNoExtension}.exe",
+			"program": "${workspaceFolder}\\build\\${fileDirnameBasename}\\${fileDirnameBasename}.exe",
 			"args": [
 				"..\\Templates\\us-1.udp.ovpn",
 				"..\\Templates\\uk-2.udp.ovpn",
@@ -21,7 +21,7 @@
 				"2"
 			],
 			"stopAtEntry": false,
-			"cwd": "${fileDirname}",
+			"cwd": "${workspaceFolder}\\build\\${fileDirnameBasename}",
 			"environment": [],
 			"externalConsole": true,
 			"MIMode": "gdb",

@@ -56,10 +56,18 @@ void Search (string filename, vector<string> &ans)
 	string dir = ".";
 	if (int idx = filename.find_last_of('\\'); idx != string::npos)
 		dir = filename.substr(0, idx);
-	system ("cd");
-	cout << dir << endl;
-	for (auto file : directory_iterator (dir))
-		ans.emplace_back(file.path().string());
+	// system ("cd");
+	// cout << dir << endl;
+	try
+	{
+		auto d = directory_iterator (dir);
+		for (auto file : directory_iterator (dir))
+			ans.emplace_back(file.path().string());
+	}
+	catch (filesystem_error &e)
+	{
+		cerr << e.what() << endl;
+	}
 	return ;
 }
 

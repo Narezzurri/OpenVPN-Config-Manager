@@ -16,6 +16,7 @@ TEST (Feature, Basic)
 	for (auto i : templates)
 		cmd += "..\\Templates\\" + i + ".ovpn ";
 	cmd += "/w 0.8 /t 2 1 /n 2";
+	cout << cmd << endl;
 	EXPECT_EQ (0, system (cmd.c_str()));
 }
 TEST (Feature, Wildcard) { EXPECT_EQ (0, system ("Checker ..\\Templates\\*.ovpn /w 0.8 /t 2 1 /n 2")); }
