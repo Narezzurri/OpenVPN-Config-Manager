@@ -72,7 +72,7 @@ int main (int argc, const char* argv[])
 			Sleep (sec_per_wait * 1000);
 		string filename = files[i];
 		cout << filename << " : ";
-		if (extract_suffix (filename, '.') != ".ovpn")
+		if (string suffix = extract_suffix (filename, '.'); suffix != ".ovpn")
 			puts ("Unsupported file type.");
 		else
 		{

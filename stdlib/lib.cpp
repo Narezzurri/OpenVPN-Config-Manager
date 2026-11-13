@@ -34,10 +34,10 @@ string quote (string s)
 
 string extract_suffix (string s, char c)
 {
-	if (int idx = s.find_last_of (c); idx == string::npos)
+	if (int idx = s.find_last_of(c); idx == string::npos)
 		return "";
 	else
-		return s.substr (idx);
+		return s.substr(idx);
 }
 
 pss parse_filepath (string filepath)
@@ -66,7 +66,7 @@ void Search (string filename, vector<string> &ans)
 			else
 				GetFullPathNameA ((dir + '\\' + file.cFileName).c_str(), MAX_PATH, ans.back().data(), NULL);
 			if (int idx = ans.back().find_first_of('\0'); idx != string::npos)
-				ans.back().resize(idx + 1);
+				ans.back().resize(idx);
 		}
 		while (FindNextFileA (handle, &file));
 		FindClose (handle);
