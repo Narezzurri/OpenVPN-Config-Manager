@@ -11,7 +11,7 @@ using namespace std;
 using db = double;
 using pss = pair<string,string>;
 
-static constexpr array<string,4> templates = {"us-1.udp", "uk-2.udp", "ca-3.tcp", "jp-4.tcp"};
+inline constexpr array<string,4> templates = {"us-1.udp", "uk-2.udp", "ca-3.tcp", "jp-4.tcp"};
 
 /** @brief Read a non-negative integer from [s] and store it in [ans] */
 int get_int (string s, int &ans);

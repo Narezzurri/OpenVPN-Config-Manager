@@ -1,6 +1,5 @@
 #include	"INIReader.h"
 #include	"resource.h"
-#include	<filesystem>
 #include	<algorithm>
 #include	<windows.h>
 #include	<iostream>
@@ -11,7 +10,6 @@
 #include	<regex>
 #include	"lib.h"
 using namespace std;
-using namespace filesystem;
 
 int get_int (string s, int &ans)
 {
@@ -53,20 +51,25 @@ pss parse_filepath (string filepath)
 
 void Search (string filename, vector<string> &ans)
 {
-	string dir = ".";
-	if (int idx = filename.find_last_of('\\'); idx != string::npos)
-		dir = filename.substr(0, idx);
-	// system ("cd");
-	// cout << dir << endl;
-	try
+	WIN32_FIND_DATAA file;
+	HANDLE handle = FindFirstFileA (filename.c_str(), &file);
+	if (handle != INVALID_HANDLE_VALUE)
 	{
-		auto d = directory_iterator (dir);
-		for (auto file : directory_iterator (dir))
-			ans.emplace_back(file.path().string());
-	}
-	catch (filesystem_error &e)
-	{
-		cerr << e.what() << endl;
+		string dir = "";
+		if (int idx = filename.find_last_of('\\'); idx != string::npos)
+			dir = filename.substr(0, idx);
+		do if (!(file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+		{
+			ans.emplace_back(string (MAX_PATH, '\0'));
+			if (dir.empty())
+				GetFullPathNameA (file.cFileName, MAX_PATH, ans.back().data(), NULL);
+			else
+				GetFullPathNameA ((dir + '\\' + file.cFileName).c_str(), MAX_PATH, ans.back().data(), NULL);
+			if (int idx = ans.back().find_first_of('\0'); idx != string::npos)
+				ans.back().resize(idx + 1);
+		}
+		while (FindNextFileA (handle, &file));
+		FindClose (handle);
 	}
 	return ;
 }
@@ -78,6 +81,7 @@ int HelpDetected (int argc, const char* argv[])
 	for (int i = 1; i < argc; i++)
 	{
 		string arg = argv[i];
+		transform (arg.begin(), arg.end(), arg.begin(), static_cast<int(*)(int)> (tolower));
 		if (arg == "--help" || arg == "/?" || arg == "/help")
 			return 1;
 	}
