@@ -33,14 +33,11 @@ int main (int argc, const char* argv[])
 		else
 		{
 			int nxt = i;
-			if (i <= argc - 1 && [&] () -> bool
+			if ([&] () -> bool
 			{
 				string arg = argv[i] + 1;
 				if (arg == "c" || arg == "cred")
-				{
-					credential = argv[++nxt];
-					return 1;
-				}
+					return nxt + 1 < argc && (credential = argv[++nxt], true);
 				else
 				{
 					cout << "Unrecognized argument : " << argv[i] << ".Skip." << endl;

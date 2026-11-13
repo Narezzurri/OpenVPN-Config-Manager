@@ -11,14 +11,7 @@
 				"..\\Templates\\us-1.udp.ovpn",
 				"..\\Templates\\uk-2.udp.ovpn",
 				"..\\Templates\\ca-3.tcp.ovpn",
-				"..\\Templates\\jp-4.tcp.ovpn",
-				"/w",
-				"0.8",
-				"/t",
-				"2",
-				"1",
-				"/n",
-				"2"
+				"..\\Templates\\jp-4.tcp.ovpn"
 			],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}\\build\\${fileDirnameBasename}",
