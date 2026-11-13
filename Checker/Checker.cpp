@@ -37,36 +37,32 @@ int main (int argc, const char* argv[])
 	{
 		if (argv[i][0] != '/')
 			Search (argv[i], files);
-		else
+		else if (int nxt = i; [&] () -> bool
 		{
-			int nxt = i;
-			if (i <= argc - 1 && [&] () -> bool
+			string arg = argv[i] + 1;
+			if (arg == "t" || arg == "time")
 			{
-				string arg = argv[i] + 1;
-				if (arg == "t" || arg == "time")
-				{
-					int succeed = get_int (argv[++nxt], period);
-					if (nxt == argc - 1 || !get_float (argv[++nxt], sec_per_wait))
-						nxt--;
-					return succeed;
-				}
-				else if (arg == "w" || arg == "wait")
-					return get_float (argv[++nxt], ping_timeout);
-				else if (arg == "n" || arg == "number")
-					return get_int (argv[++nxt], ping_cnt);
-				else
-				{
-					cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
-					err = 1;
-					return 0;
-				}
-			}())
-				i = nxt;
+				int succeed = get_int (argv[++nxt], period);
+				if (nxt < argc - 1 && !get_float (argv[++nxt], sec_per_wait))
+					nxt--;
+				return succeed;
+			}
+			else if (arg == "w" || arg == "wait")
+				return nxt + 1 < argc && get_float (argv[++nxt], ping_timeout);
+			else if (arg == "n" || arg == "number")
+				return nxt + 1 < argc && get_int (argv[++nxt], ping_cnt);
 			else
 			{
-				cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip" << endl;
+				cout << "Unrecognized argument : " << argv[i] << ".Skip" << endl;
 				err = 1;
+				return 0;
 			}
+		}())
+			i = nxt;
+		else
+		{
+			cout << "Miss or Invalid argument for argument " << i << " : " << argv[i] << ".Skip" << endl;
+			err = 1;
 		}
 	} ();
 	int cnt = 0;
@@ -89,7 +85,7 @@ int main (int argc, const char* argv[])
 				puts ("Server ip address not found.");
 			else
 			{
-				cin >> addr;				// Server address
+				fin >> addr;				// Server address
 				string ping = "ping " + addr + " -w " + to_string ((int) (ping_timeout * 1e3));	// Complete ping command
 				if (ping_cnt)
 					ping += " -n " + to_string (ping_cnt);
