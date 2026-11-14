@@ -23,6 +23,7 @@ target_link_libraries (${NAME} PRIVATE stdlib)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Test")
 	# Program
+	target_compile_definitions (Auth PRIVATE AUTH_TRACE)
 	add_executable (AuthTest Test.cpp)
 	add_dependencies (AuthTest Auth)
 	target_link_libraries (AuthTest PRIVATE gtest gtest_main stdlib)
