@@ -6,7 +6,7 @@
 			"name": "GDB Launcher",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}\\build\\install\\${fileBasenameNoExtension}.exe",
+			"program": "${workspaceFolder}\\build\\${fileDirnameBasename}\\${fileBasenameNoExtension}.exe",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
@@ -14,7 +14,6 @@
 			"externalConsole": true,
 			"MIMode": "gdb",
 			"miDebuggerPath": "gdb",
-			"preLaunchTask": "Compile File",
 			"setupCommands": 
 			[
 				{

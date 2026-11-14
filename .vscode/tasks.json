@@ -7,9 +7,9 @@
 			"command": "cmake",
 			"args": [
 				"--build",
-				"${workspaceFolder}/build",
+				"${workspaceFolder}\\build",
 				"--target",
-				"deploy"
+				"${fileBasenameNoExtension}"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
