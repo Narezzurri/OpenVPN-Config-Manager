@@ -70,6 +70,27 @@ jobs:
             exit 1
           }
           Start-Process -FilePath $setup.FullName -ArgumentList "/S" -Wait
+          $runtimeDir = "$env:GITHUB_WORKSPACE\build\auth-runtime"
+          New-Item -ItemType Directory -Force -Path $runtimeDir | Out-Null
+          $runtimeFiles = @()
+          foreach ($name in @("libstdc++-6.dll", "libgcc_s_seh-1.dll", "libwinpthread-1.dll"))
+          {
+            $runtime = $env:PATH -split ';' |
+              ForEach-Object { if ($_ -and (Test-Path -LiteralPath (Join-Path $_ $name))) { Join-Path $_ $name } } |
+              Select-Object -First 1
+            if ($runtime)
+            {
+              Write-Output "Runner runtime: $runtime"
+              Copy-Item -LiteralPath $runtime -Destination "$runtimeDir\$name" -Force
+              $runtimeFiles += "$runtimeDir\$name"
+              Get-FileHash -LiteralPath "$runtimeDir\$name" -Algorithm SHA256
+            }
+          }
+          if ($runtimeFiles.Count -eq 0)
+          {
+            "No MinGW runtime DLLs were found on the runner PATH." | Out-File -FilePath "$runtimeDir\README.txt" -Encoding utf8
+          }
+          Compress-Archive -Path "$runtimeDir\*" -DestinationPath "$env:GITHUB_WORKSPACE\build\auth-runtime.zip" -Force
           $authPaths = @(
             "$env:GITHUB_WORKSPACE\build\install\Auth.exe",
             "C:\Program Files (x86)\OpenVPN Config Manager\Auth.exe"
@@ -113,6 +134,14 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         with:
           path: build/OpenVPNConfigManagerSetup-*.zip
+          archive: false
+
+      - name: Upload Auth Runtime
+        uses: actions/upload-artifact@v7.0.2
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          name: Auth-runtime-diagnostics
+          path: build/auth-runtime.zip
           archive: false
 
       - name: Upload to Release
