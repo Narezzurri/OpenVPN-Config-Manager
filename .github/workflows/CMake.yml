@@ -70,6 +70,24 @@ jobs:
             exit 1
           }
           Start-Process -FilePath $setup.FullName -ArgumentList "/S" -Wait
+          $authPaths = @(
+            "$env:GITHUB_WORKSPACE\build\install\Auth.exe",
+            "C:\Program Files (x86)\OpenVPN Config Manager\Auth.exe"
+          )
+          foreach ($path in $authPaths)
+          {
+            if (-not (Test-Path -LiteralPath $path))
+            {
+              throw "Auth.exe not found: $path"
+            }
+            Get-Item -LiteralPath $path | Select-Object FullName, Length
+            Get-FileHash -LiteralPath $path -Algorithm SHA256
+          }
+          $hashes = @($authPaths | ForEach-Object { (Get-FileHash -LiteralPath $_ -Algorithm SHA256).Hash })
+          if ($hashes[0] -ne $hashes[1])
+          {
+            throw "Packaged and installed Auth.exe hashes do not match."
+          }
           echo "C:\Program Files (x86)\OpenVPN Config Manager" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Test
