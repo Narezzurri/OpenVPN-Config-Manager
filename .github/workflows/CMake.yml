@@ -35,6 +35,34 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v7.0.1
 
+      - name: Install MinGW 16.2.0
+        shell: pwsh
+        run: |
+          $toolchainRoot = Join-Path $env:RUNNER_TEMP "mingw-16.2.0"
+          $archive = Join-Path $env:RUNNER_TEMP "mingw-16.2.0.7z"
+          $url = "https://github.com/niXman/mingw-builds-binaries/releases/download/16.2.0-rt_v14-rev1/x86_64-16.2.0-release-win32-seh-ucrt-rt_v14-rev1.7z"
+          $expectedHash = "c9ae8e4a3afa667b3301dd28c567109d174a0fa0856a2eeaa85a91b89569a50b"
+          curl.exe --fail --location --retry 3 --output $archive $url
+          $actualHash = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash
+          if ($actualHash -ne $expectedHash)
+          {
+            throw "MinGW archive SHA-256 mismatch: $actualHash"
+          }
+          $sevenZip = "C:\Program Files\7-Zip\7z.exe"
+          & $sevenZip x $archive "-o$toolchainRoot" -y
+          if ($LASTEXITCODE -ne 0)
+          {
+            throw "Failed to extract MinGW archive."
+          }
+          $compilerBin = Join-Path $toolchainRoot "mingw64\bin"
+          if (-not (Test-Path -LiteralPath "$compilerBin\g++.exe"))
+          {
+            throw "MinGW compiler was not found after extraction: $compilerBin"
+          }
+          "MINGW_ROOT=$toolchainRoot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          $compilerBin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          & "$compilerBin\g++.exe" --version
+
       - name: Install NSIS
         run: |
           choco install nsis -y
@@ -42,15 +70,15 @@ jobs:
 
       - name: Configure CMake of Release
         if: github.event_name == 'release' || github.event_name == 'workflow_dispatch' && inputs.type == 'Release'
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -G "Ninja"
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -G "Ninja" "-DCMAKE_C_COMPILER=$env:MINGW_ROOT\mingw64\bin\gcc.exe" "-DCMAKE_CXX_COMPILER=$env:MINGW_ROOT\mingw64\bin\g++.exe"
 
       - name: Configure CMake of Debug
         if: github.event_name == 'workflow_dispatch' && inputs.type == 'Debug'
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "Ninja"
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "Ninja" "-DCMAKE_C_COMPILER=$env:MINGW_ROOT\mingw64\bin\gcc.exe" "-DCMAKE_CXX_COMPILER=$env:MINGW_ROOT\mingw64\bin\g++.exe"
 
       - name: Configure CMake of Test
         if: github.event_name != 'release' && (github.event_name != 'workflow_dispatch' || inputs.type == 'Test')
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Test -G "Ninja"
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Test -G "Ninja" "-DCMAKE_C_COMPILER=$env:MINGW_ROOT\mingw64\bin\gcc.exe" "-DCMAKE_CXX_COMPILER=$env:MINGW_ROOT\mingw64\bin\g++.exe"
 
       - name: Build
         working-directory: build
