@@ -71,6 +71,17 @@ set (CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
 install (TARGETS Checker Auth Renamer stdlib inih
 		 RUNTIME DESTINATION .
 		 LIBRARY DESTINATION .)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+	get_filename_component (CXX_COMPILER_DIR "${CMAKE_CXX_COMPILER}" DIRECTORY)
+	file (GLOB MINGW_RUNTIME_DLLS
+		"${CXX_COMPILER_DIR}/libstdc++-6.dll"
+		"${CXX_COMPILER_DIR}/libgcc_s_*.dll"
+		"${CXX_COMPILER_DIR}/libwinpthread-1.dll")
+	if (MINGW_RUNTIME_DLLS)
+		list (APPEND ALL_DEPENDS ${MINGW_RUNTIME_DLLS})
+		install (FILES ${MINGW_RUNTIME_DLLS} DESTINATION .)
+	endif ()
+endif ()
 # License
 install (FILES	"${CMAKE_SOURCE_DIR}/LICENSE"
 				"${CMAKE_SOURCE_DIR}/NOTICE"
