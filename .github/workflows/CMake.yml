@@ -39,6 +39,10 @@ jobs:
         shell: pwsh
         run: |
           choco install mingw --version=16.2.0 -y
+
+      - name: Test MinGW 16.2.0
+        shell: pwsh
+        run: |
           g++ --version
 
       - name: Install NSIS
