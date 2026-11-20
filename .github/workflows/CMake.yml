@@ -43,6 +43,7 @@ jobs:
       - name: Test MinGW 16.2.0
         shell: pwsh
         run: |
+          where g++
           g++ --version
 
       - name: Install NSIS
