@@ -44,6 +44,9 @@ jobs:
         shell: pwsh
         run: |
           where g++
+          which g++
+          where gcc
+          which gcc
 
       - name: Test MinGW 16.2.0
         shell: pwsh
