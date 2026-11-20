@@ -36,8 +36,9 @@ jobs:
         uses: actions/checkout@v7.0.1
 
       - name: Install MinGW 16.2.0
-        shell: pwsh
+        shell: bash
         run: |
+          rm -rf /c/mingw64
           choco install mingw --version=16.2.0 -y
 
       - name: Find MinGW 16.2.0
